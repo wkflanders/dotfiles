@@ -2,24 +2,27 @@ hs.window.animationDuration = 0
 
 local SUPER = { "shift", "ctrl", "alt" }
 
--- Config
-local PSEUDO_FULLSCREEN_GAP = 30 -- your Rectangle gap
-local EDGE_TOLERANCE = 4 -- fuzz for off-by-few-pixels
-
--- Behavior toggles
-local HIDE_ON_SAME_KEY = false -- press same key to hide that app
--- (we never auto-hide on normal switches unless target is pseudo-fullscreen)
+local PSEUDO_FULLSCREEN_GAP = 30
+local EDGE_TOLERANCE = 4
+local HIDE_ON_SAME_KEY = true
+local DEBOUNCE_MS = 120
 
 local apps = {
 	["1"] = { name = "Alacritty", id = "org.alacritty" },
 	["2"] = { name = "Zen", id = "app.zen-browser.zen" },
 	["3"] = { name = "Messages", id = "com.apple.iChat" },
 	["4"] = { name = "Spotify", id = "com.spotify.client" },
-	["5"] = { name = "Preview", id = "com.apple.Preview" },
-	["6"] = { name = "Safari", id = "com.apple.Safari" },
+	["5"] = { name = "Obsidian", id = "md.obsidian" },
+	["6"] = { name = "Preview", id = "com.apple.Preview" },
 }
 
--- ───────────────────────── helpers ─────────────────────────
+local pending = {}
+local lastPressAt = {}
+
+local function now_ms()
+	return hs.timer.absoluteTime() / 1e6
+end
+
 local function getApp(target)
 	return target.id and hs.application.get(target.id) or hs.appfinder.appFromName(target.name)
 end
@@ -49,16 +52,18 @@ local function waitForApp(app, timeoutSec, cb)
 		return
 	end
 	local deadline = hs.timer.absoluteTime() + (timeoutSec * 1e9)
-	local ticker
-	ticker = hs.timer.doEvery(0.02, function()
+	local t
+	t = hs.timer.doEvery(0.02, function()
 		if isAppReady(app) or hs.timer.absoluteTime() > deadline then
-			ticker:stop()
+			if t then
+				t:stop()
+				t = nil
+			end
 			cb()
 		end
 	end)
 end
 
--- Return true if win fills the screen except for Rectangle-style margins
 local function isPseudoFullscreen(win, gap, tol)
 	if not win then
 		return false
@@ -67,18 +72,15 @@ local function isPseudoFullscreen(win, gap, tol)
 	if not screen then
 		return false
 	end
-	local sf = screen:frame() -- visible frame (excludes menu bar/dock)
+	local sf = screen:frame()
 	local wf = win:frame()
-
 	local leftOK = (wf.x - sf.x) <= (gap + tol)
 	local topOK = (wf.y - sf.y) <= (gap + tol)
 	local rightOK = ((sf.x + sf.w) - (wf.x + wf.w)) <= (gap + tol)
 	local bottomOK = ((sf.y + sf.h) - (wf.y + wf.h)) <= (gap + tol)
-
 	return leftOK and topOK and rightOK and bottomOK
 end
 
--- Hide all other mapped apps that have a visible standard window on the same screen
 local function hidePeersOnSameScreen(targetApp)
 	local tWin = mainWin(targetApp)
 	if not tWin then
@@ -96,47 +98,93 @@ local function hidePeersOnSameScreen(targetApp)
 	end
 end
 
--- ───────────────────────── logic ─────────────────────────
-local function focusApp(target)
-	local prev = hs.application.frontmostApplication()
-	local prevId = prev and prev:bundleID()
+local function focusApp(target, hotkey)
+	local t0 = lastPressAt[hotkey] or 0
+	local t1 = now_ms()
+	if (t1 - t0) < DEBOUNCE_MS then
+		return
+	end
+	lastPressAt[hotkey] = t1
 
-	if HIDE_ON_SAME_KEY and prev and (prevId == target.id or prev:name() == target.name) then
-		prev:hide()
+	local prevTimer = pending[hotkey]
+	if prevTimer then
+		prevTimer:stop()
+		pending[hotkey] = nil
+	end
+
+	local front = hs.application.frontmostApplication()
+	local frontId = front and front:bundleID()
+
+	if HIDE_ON_SAME_KEY and front and (frontId == target.id or front:name() == target.name) then
+		front:hide()
 		return
 	end
 
-	if target.id then
-		hs.application.launchOrFocusByBundleID(target.id)
+	local app = getApp(target)
+	if app and app:isRunning() then
+		app:unhide()
+		app:activate(false)
 	else
-		hs.application.launchOrFocus(target.name)
+		if target.id then
+			hs.application.launchOrFocusByBundleID(target.id)
+		else
+			hs.application.launchOrFocus(target.name)
+		end
 	end
 
-	hs.timer.doAfter(0.01, function()
-		local app = getApp(target)
-		if not app then
+	local timer = hs.timer.delayed.new(0.03, function()
+		pending[hotkey] = nil
+		local a = getApp(target)
+		if not a then
 			return
 		end
-		app:activate(true)
-
-		waitForApp(app, 0.6, function()
-			local tw = mainWin(app)
+		waitForApp(a, 0.6, function()
+			local tw = mainWin(a)
 			if tw then
 				tw:focus()
 			end
-
-			-- Key bit: if the target is Rectangle-"maximized" (with gaps),
-			-- hide other mapped apps on the SAME SCREEN so nothing peeks in the margins.
 			if isPseudoFullscreen(tw, PSEUDO_FULLSCREEN_GAP, EDGE_TOLERANCE) then
-				hidePeersOnSameScreen(app)
+				hidePeersOnSameScreen(a)
 			end
-			-- Otherwise: focus-only, keep everything else visible (Rectangle handles layout)
 		end)
 	end)
+
+	pending[hotkey] = timer
+	timer:start()
 end
 
 for key, target in pairs(apps) do
 	hs.hotkey.bind(SUPER, key, function()
-		focusApp(target)
+		focusApp(target, key)
 	end)
 end
+
+local function hideAllExcept(app)
+	for _, a in ipairs(hs.application.runningApplications()) do
+		if a ~= app and a:isRunning() and not a:isHidden() then
+			a:hide()
+		end
+	end
+end
+
+local rectMaxHotkey
+rectMaxHotkey = hs.hotkey.bind(SUPER, "f", function()
+	local front = hs.application.frontmostApplication()
+	if front then
+		hideAllExcept(front)
+	end
+	rectMaxHotkey:disable()
+	hs.eventtap.keyStroke(SUPER, "f", 0)
+	rectMaxHotkey:enable()
+end)
+
+hs.hotkey.bind(SUPER, "R", function()
+	for k, t in pairs(pending) do
+		if t then
+			t:stop()
+		end
+		pending[k] = nil
+	end
+	hs.reload()
+	hs.alert.show("Config reloaded")
+end)
