@@ -1,0 +1,28 @@
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Cache/config noise
+.cache/
+.config/**/logs/
+.config/**/backup/
+.config/**/sessions/
+.config/**/undo/
+.config/**/plugin/
+.config/**/plugged/
+.config/**/packer_compiled.lua
+
+# Editor/terminal temp
+nvim/.netrwhist
+nvim/shada/
+nvim/swap/
+nvim/undo/
+*.swp
+*.swo
+
+# Misc personal
+.macos/
+.local/
+.trash/
+.history
+.zsh_history
