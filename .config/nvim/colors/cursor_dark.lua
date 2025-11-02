@@ -1,0 +1,281 @@
+-- -- Palette
+-- local p = {
+--   bg = "#1a1a1a",
+--   bg_alt = "#141414",
+--   fg = "#D6D6DD",
+--   fg_soft = "#CCCCCC",
+--   fg_weak = "#6d6d6d",
+--   border = "#2A2A2A",
+--
+--   cyan = "#88C0D0",
+--   blue = "#81A1C1",
+--   link_blue = "#4c9df3",
+--   green = "#A3BE8C",
+--   red = "#BF616A",
+--   yellow = "#EBCB8B",
+--   magenta = "#B48EAD",
+--   purple = "#AA9BF5",
+--   number_orange = "#EBC88D",
+--   string_pink = "#E394DC",
+--   tag_blue = "#87C3FF",
+--   func_tan = "#EFB080",
+--
+--   sel_bg = "#404040",
+--   line = "#292929",
+--   cursor = "#FFFFFF",
+--
+--   diag_err = "#BF616A",
+--   diag_warn = "#EBCB8B",
+--   diag_info = "#88C0D0",
+--   diag_hint = "#83D6C5",
+--
+--   git_add = "#15ac91",
+--   git_mod = "#e5b95c",
+--   git_del = "#f14c4c",
+--
+--   pmenu_bg = "#141414",
+--   pmenu_sel = "#404040",
+-- }
+--
+-- -- Helpers
+-- local function hex_to_rgb(hex)
+--   hex = hex:gsub("#", "")
+--   return tonumber(hex:sub(1, 2), 16), tonumber(hex:sub(3, 4), 16), tonumber(hex:sub(5, 6), 16)
+-- end
+--
+-- local function rgb_to_hex(r, g, b)
+--   return string.format("#%02x%02x%02x", r, g, b)
+-- end
+--
+-- local function blend_over(fg, bg, a)
+--   local fr, fg_, fb = hex_to_rgb(fg)
+--   local br, bg_, bb = hex_to_rgb(bg)
+--   local r = math.floor(a * fr + (1 - a) * br + 0.5)
+--   local g = math.floor(a * fg_ + (1 - a) * bg_ + 0.5)
+--   local b = math.floor(a * fb + (1 - a) * bb + 0.5)
+--   return rgb_to_hex(r, g, b)
+-- end
+--
+-- local function A(hex)
+--   if type(hex) ~= "string" then
+--     return hex
+--   end
+--   if #hex == 9 then
+--     local a = tonumber(hex:sub(8, 9), 16) / 255
+--     return blend_over(hex:sub(1, 7), p.bg, a)
+--   end
+--   return hex
+-- end
+--
+-- local function hi(grp, opts)
+--   vim.api.nvim_set_hl(0, grp, opts or {})
+-- end
+--
+-- -- ANSI terminal
+-- vim.g.colors_name = "cursor_dark"
+-- vim.opt.termguicolors = true
+--
+-- vim.g.terminal_color_0 = "#2A2A2A"
+-- vim.g.terminal_color_8 = "#505050"
+-- vim.g.terminal_color_1 = p.red
+-- vim.g.terminal_color_9 = p.red
+-- vim.g.terminal_color_2 = p.green
+-- vim.g.terminal_color_10 = p.green
+-- vim.g.terminal_color_3 = p.yellow
+-- vim.g.terminal_color_11 = p.yellow
+-- vim.g.terminal_color_4 = p.blue
+-- vim.g.terminal_color_12 = p.blue
+-- vim.g.terminal_color_5 = p.magenta
+-- vim.g.terminal_color_13 = p.magenta
+-- vim.g.terminal_color_6 = p.cyan
+-- vim.g.terminal_color_14 = p.cyan
+-- vim.g.terminal_color_7 = "#FFFFFF"
+-- vim.g.terminal_color_15 = "#FFFFFF"
+--
+-- -- Core UI
+-- hi("Normal", { fg = p.fg, bg = p.bg })
+-- hi("NormalNC", { fg = p.fg, bg = p.bg })
+-- hi("SignColumn", { bg = p.bg })
+-- hi("LineNr", { fg = "#505050", bg = p.bg })
+-- hi("CursorLineNr", { fg = "#FFFFFF", bold = true, bg = p.bg })
+-- hi("Cursor", { fg = p.bg, bg = p.cursor })
+-- hi("CursorLine", { bg = p.line })
+-- hi("CursorColumn", { bg = p.line })
+-- hi("ColorColumn", { bg = p.bg_alt })
+-- hi("FoldColumn", { fg = "#CCCCCC", bg = p.bg })
+-- hi("Folded", { fg = "#CCCCCC", bg = p.bg_alt })
+--
+-- -- Splits / borders
+-- hi("WinSeparator", { fg = p.border, bg = p.bg })
+--
+-- -- Statusline / tabline
+-- hi("StatusLine", { fg = "#cccccc", bg = p.bg_alt })
+-- hi("StatusLineNC", { fg = "#aaaaaa", bg = p.bg_alt })
+-- hi("TabLine", { fg = "#505050", bg = p.bg_alt })
+-- hi("TabLineSel", { fg = "#FFFFFF", bg = p.bg })
+-- hi("TabLineFill", { fg = p.fg_soft, bg = p.bg_alt })
+--
+-- -- Search / visual / matches (alpha blended)
+-- hi("Search", { bg = A("#88C0D066"), fg = p.bg })
+-- hi("IncSearch", { bg = A("#88C0D044"), fg = p.fg })
+-- hi("MatchParen", { bg = A("#FFFFFF22"), bold = true })
+-- hi("Visual", { bg = A("#404040CC") })
+--
+-- -- Menus / popups
+-- hi("Pmenu", { bg = p.pmenu_bg, fg = "#FFFFFF" })
+-- hi("PmenuSel", { bg = p.pmenu_sel, fg = "#FFFFFF" })
+-- hi("PmenuSbar", { bg = p.bg_alt })
+-- hi("PmenuThumb", { bg = "#606060" })
+--
+-- -- Diagnostics
+-- hi("DiagnosticError", { fg = p.diag_err })
+-- hi("DiagnosticWarn", { fg = p.diag_warn })
+-- hi("DiagnosticInfo", { fg = p.diag_info })
+-- hi("DiagnosticHint", { fg = p.diag_hint })
+-- hi("DiagnosticUnderlineError", { undercurl = true, sp = p.diag_err })
+-- hi("DiagnosticUnderlineWarn", { undercurl = true, sp = p.diag_warn })
+-- hi("DiagnosticUnderlineInfo", { undercurl = true, sp = p.diag_info })
+-- hi("DiagnosticUnderlineHint", { undercurl = true, sp = p.diag_hint })
+--
+-- -- Diffs (alpha)
+-- hi("DiffAdd", { bg = A("#A3BE8C4D") })
+-- hi("DiffChange", { bg = A("#88C0D04D") })
+-- hi("DiffDelete", { bg = A("#BF616A4D") })
+-- hi("DiffText", { bg = A("#88C0D066") })
+--
+-- -- Misc text
+-- hi("Title", { fg = "#FFFFFF", bold = true })
+-- hi("Comment", { fg = p.fg_weak, italic = true })
+-- hi("Todo", { fg = p.yellow, bold = true })
+-- hi("Error", { fg = p.red })
+-- hi("WarningMsg", { fg = p.yellow })
+-- hi("MoreMsg", { fg = p.green })
+-- hi("NonText", { fg = "#505050" })
+-- hi("Whitespace", { fg = A("#505050B3") })
+-- hi("SpecialKey", { fg = "#505050" })
+-- hi("Directory", { fg = p.blue })
+-- hi("EndOfBuffer", { fg = p.bg })
+--
+-- -- Links / spelling
+-- hi("Underlined", { underline = true })
+-- hi("SpellBad", { undercurl = true, sp = p.red })
+-- hi("SpellCap", { undercurl = true, sp = p.blue })
+-- hi("SpellLocal", { undercurl = true, sp = p.cyan })
+-- hi("SpellRare", { undercurl = true, sp = p.purple })
+--
+-- -- ===== Syntax (legacy) =======================================================
+-- hi("Constant", { fg = p.number_orange })
+-- hi("String", { fg = p.string_pink })
+-- hi("Character", { fg = p.string_pink })
+-- hi("Number", { fg = p.number_orange })
+-- hi("Boolean", { fg = p.cyan })
+-- hi("Float", { fg = p.number_orange })
+--
+-- hi("Identifier", { fg = p.fg })
+-- hi("Function", { fg = p.func_tan })
+-- hi("Statement", { fg = p.cyan })
+-- hi("Conditional", { fg = p.cyan })
+-- hi("Repeat", { fg = p.cyan })
+-- hi("Label", { fg = p.purple })
+-- hi("Operator", { fg = p.fg })
+-- hi("Keyword", { fg = p.cyan })
+-- hi("Exception", { fg = p.cyan })
+--
+-- hi("PreProc", { fg = p.purple })
+-- hi("Include", { fg = p.green })
+-- hi("Define", { fg = p.purple })
+-- hi("Macro", { fg = p.purple })
+-- hi("Type", { fg = p.tag_blue })
+-- hi("StorageClass", { fg = p.cyan })
+-- hi("Structure", { fg = p.tag_blue })
+-- hi("Typedef", { fg = p.tag_blue })
+-- hi("Special", { fg = p.purple })
+-- hi("Tag", { fg = p.tag_blue })
+-- hi("Delimiter", { fg = p.fg })
+-- hi("SpecialComment", { fg = p.fg_weak, italic = true })
+-- hi("Debug", { fg = p.cyan })
+--
+-- -- ===== Treesitter (safe core set) ===========================================
+-- hi("@comment", { link = "Comment" })
+-- hi("@punctuation", { fg = p.fg })
+-- hi("@punctuation.bracket", { fg = p.fg })
+-- hi("@punctuation.delimiter", { fg = p.fg })
+-- hi("@operator", { fg = p.fg })
+--
+-- hi("@string", { link = "String" })
+-- hi("@string.regex", { fg = p.fg })
+-- hi("@string.escape", { fg = p.fg })
+-- hi("@character", { link = "Character" })
+-- hi("@boolean", { link = "Boolean" })
+-- hi("@number", { link = "Number" })
+-- hi("@float", { link = "Float" })
+--
+-- hi("@type", { fg = p.tag_blue })
+-- hi("@type.builtin", { fg = p.cyan })
+-- hi("@type.qualifier", { fg = p.cyan })
+-- hi("@attribute", { fg = p.purple })
+-- hi("@property", { fg = p.purple })
+-- hi("@field", { fg = p.purple })
+--
+-- hi("@variable", { fg = p.fg })
+-- hi("@variable.builtin", { fg = p.cyan })
+-- hi("@constant", { fg = p.number_orange })
+-- hi("@constant.builtin", { fg = p.cyan })
+-- hi("@namespace", { fg = p.fg })
+--
+-- hi("@function", { fg = p.func_tan })
+-- hi("@function.call", { fg = p.func_tan })
+-- hi("@function.builtin", { fg = p.cyan })
+-- hi("@method", { fg = p.func_tan })
+-- hi("@constructor", { fg = p.tag_blue })
+-- hi("@parameter", { fg = p.number_orange })
+-- hi("@keyword", { fg = p.cyan })
+-- hi("@keyword.return", { fg = p.cyan })
+-- hi("@keyword.operator", { fg = p.fg })
+-- hi("@keyword.import", { fg = p.tag_blue })
+-- hi("@conditional", { fg = p.cyan })
+-- hi("@repeat", { fg = p.cyan })
+-- hi("@exception", { fg = p.cyan })
+--
+-- hi("@tag", { fg = p.tag_blue })
+-- hi("@tag.attribute", { fg = p.purple })
+-- hi("@tag.delimiter", { fg = "#898989" })
+--
+-- -- ===== LSP / Plugins (guarded) ==============================================
+-- -- Inlay hints (exists in 0.10+; harmless to set on older)
+-- hi("LspInlayHint", { fg = "#505050", bg = "NONE" })
+--
+-- -- Signature help current param (many UIs link to this)
+-- hi("LspSignatureActiveParameter", { bg = A("#FFFFFF33") })
+--
+-- -- nvim-cmp
+-- hi("CmpItemAbbr", { fg = p.fg })
+-- hi("CmpItemAbbrDeprecated", { fg = p.fg_weak, strikethrough = true })
+-- hi("CmpItemAbbrMatch", { fg = "#FFFFFF", bold = true })
+-- hi("CmpItemKind", { fg = p.cyan })
+-- hi("CmpItemMenu", { fg = p.fg_soft })
+-- hi("CmpPmenu", { bg = p.pmenu_bg })
+--
+-- -- Telescope
+-- hi("TelescopeNormal", { bg = p.bg_alt, fg = "#FFFFFF" })
+-- hi("TelescopeBorder", { fg = p.border, bg = p.bg_alt })
+-- hi("TelescopeSelection", { bg = p.pmenu_sel })
+-- hi("TelescopeMatching", { fg = "#FFFFFF", bold = true })
+-- hi("TelescopePromptTitle", { fg = "#FFFFFF", bg = p.bg_alt, bold = true })
+-- hi("TelescopeResultsTitle", { fg = "#FFFFFF", bg = p.bg_alt, bold = true })
+-- hi("TelescopePreviewTitle", { fg = "#FFFFFF", bg = p.bg_alt, bold = true })
+--
+-- -- Gitsigns
+-- hi("GitSignsAdd", { fg = p.git_add })
+-- hi("GitSignsChange", { fg = p.git_mod })
+-- hi("GitSignsDelete", { fg = p.git_del })
+--
+-- -- Indent guides (ibl)
+-- hi("IblIndent", { fg = A("#404040B3") })
+-- hi("IblScope", { fg = "#505050" })
+--
+-- -- Treesitter context
+-- hi("TreesitterContext", { bg = A("#40404052") })
+--
+-- -- Quickfix highlight (soft)
+-- hi("QuickFixLine", { bg = A("#FFFFFF1d") })

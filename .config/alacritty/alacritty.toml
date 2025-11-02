@@ -1,0 +1,224 @@
+[general]
+import = ["~/.config/alacritty/rose-pine.toml"]
+live_config_reload = true
+
+[window]
+padding.x = 10
+padding.y = 10
+decorations = "buttonless"
+dynamic_title = true
+# opacity = 0.99
+
+[font]
+size = 12
+offset = { x = 1, y = 8 }
+glyph_offset = { x = 0, y = 1 }
+
+# [font.normal]
+# family = "JetBrainsMono Nerd Font"
+# style = "Regular"
+
+[font.normal]
+family = "CaskaydiaCove Nerd Font"
+style = "Regular"
+
+[colors.primary]
+background = "#141415"
+
+[env]
+# TERM = "xterm-256color"   # Good default outside tmux
+option_as_alt = "both"
+
+[[keyboard.bindings]]
+key = "Left"
+mods = "Alt"
+chars = "\u001bb"  # ESC + b (backward word)
+
+[[keyboard.bindings]]
+key = "Right"
+mods = "Alt"
+chars = "\u001bf"  # ESC + f (forward word)
+
+[[keyboard.bindings]]
+key = "Up"
+mods = "Alt"
+action = "ScrollPageUp"
+
+[[keyboard.bindings]]
+key = "Down"
+mods = "Alt"
+action = "ScrollPageDown"
+
+[[keyboard.bindings]]
+key = "M"
+mods = "Command"
+chars = "\u001bm"
+
+# --- WezTerm-like "tabs" (tmux windows) ---
+[[keyboard.bindings]]
+key = "T"
+mods = "Command"
+chars = "\u0014"  # C-t
+
+[[keyboard.bindings]]
+key = "W"
+mods = "Command"
+chars = "\u0017"  # C-w
+
+# ⌘1..⌘9/⌘0 -> M-1..M-0
+[[keyboard.bindings]]
+key = "Key1"
+mods = "Command"
+chars = "\u001b1"
+
+[[keyboard.bindings]]
+key = "Key2"
+mods = "Command"
+chars = "\u001b2"
+
+[[keyboard.bindings]]
+key = "Key3"
+mods = "Command"
+chars = "\u001b3"
+
+[[keyboard.bindings]]
+key = "Key4"
+mods = "Command"
+chars = "\u001b4"
+
+[[keyboard.bindings]]
+key = "Key5"
+mods = "Command"
+chars = "\u001b5"
+
+[[keyboard.bindings]]
+key = "Key6"
+mods = "Command"
+chars = "\u001b6"
+
+[[keyboard.bindings]]
+key = "Key7"
+mods = "Command"
+chars = "\u001b7"
+
+[[keyboard.bindings]]
+key = "Key8"
+mods = "Command"
+chars = "\u001b8"
+
+[[keyboard.bindings]]
+key = "Key9"
+mods = "Command"
+chars = "\u001b9"
+
+[[keyboard.bindings]]
+key = "Key0"
+mods = "Command"
+chars = "\u001b0"
+
+# ⌘⇧] / ⌘⇧[
+[[keyboard.bindings]]
+key = "]"
+mods = "Command|Shift"
+chars = "\u001bn"
+
+[[keyboard.bindings]]
+key = "["
+mods = "Command|Shift"
+chars = "\u001bp"
+
+# ⌘H/J/K/L -> vim-aware navigation
+[[keyboard.bindings]]
+key = "H"
+mods = "Command"
+chars = "\u0008"  # C-h
+
+[[keyboard.bindings]]
+key = "J"
+mods = "Command"
+chars = "\u000A"  # C-j
+
+[[keyboard.bindings]]
+key = "K"
+mods = "Command"
+chars = "\u000B"  # C-k
+
+[[keyboard.bindings]]
+key = "L"
+mods = "Command"
+chars = "\u000C"  # C-l
+
+# Session tree / reload / command prompt / detach
+[[keyboard.bindings]]
+key = "S"
+mods = "Command"
+chars = "\u001bs"
+
+[[keyboard.bindings]]
+key = "I"
+mods = "Command"
+chars = "\u001bi"
+
+[[keyboard.bindings]]
+key = "O"
+mods = "Command"
+chars = "\u001bo"
+
+[[keyboard.bindings]]
+key = "N"
+mods = "Command|Shift"
+chars = "\u001b[78;6u"
+
+[[keyboard.bindings]]
+key = "R"
+mods = "Command"
+chars = "\u001br"
+
+[[keyboard.bindings]]
+key = "Semicolon"
+mods = "Command"
+chars = "\u001b:"
+
+[[keyboard.bindings]]
+key = "D"
+mods = "Command"
+chars = "\u001bd"
+
+# Splits (send M-\ and M--)
+[[keyboard.bindings]]
+key = "Backslash"
+mods = "Command"
+chars = "\u001b|"  # ESC + |
+
+# Meta + MINUS for ⌘-
+[[keyboard.bindings]]
+key = "Minus"
+mods = "Command"
+chars = "\u001b-"
+
+# TOP split (new): ⌘⇧-
+[[keyboard.bindings]]
+key = "Minus"
+mods = "Command|Shift"
+chars = "\u001b_"
+
+# Resizing with ⌘⇧H/J/K/L (send M-H/J/K/L)
+[[keyboard.bindings]]
+key = "H"
+mods = "Command|Shift"
+chars = "\u001bH"
+
+[[keyboard.bindings]]
+key = "J"
+mods = "Command|Shift"
+chars = "\u001bJ"
+
+[[keyboard.bindings]]
+key = "K"
+mods = "Command|Shift"
+chars = "\u001bK"
+
+[[keyboard.bindings]]
+key = "L"
+mods = "Command|Shift"
+chars = "\u001bL"

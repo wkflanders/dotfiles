@@ -1,0 +1,31 @@
+[default_session]
+preview_command = "eza --all --git --icons --color=always {}"
+
+[[session]]
+name = "phyt"
+path = "~/Developer/phyt.fun"
+startup_command = "nvim ."
+
+[[session]]
+name = "lattica"
+path = "~/Developer/lattica/lattica-core"
+startup_command = "nvim ."
+windows = ["frontend"]
+
+[[session]]
+name = "nvim"
+path = "~/.config/nvim"
+startup_command = "nvim ."
+
+[[session]]
+name = "anysphere"
+path = "~/Developer/anysphere-dark.nvim"
+startup_command = "nvim ."
+
+[[session]]
+name = "voyager-1"
+startup_command = "ssh voyager-1 tmux new-session -A -s main"
+
+[[window]]
+name = "frontend"
+path = "~/Developer/lattica/lattica-frontend"
