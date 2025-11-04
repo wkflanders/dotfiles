@@ -2,15 +2,19 @@
 preview_command = "eza --all --git --icons --color=always {}"
 
 [[session]]
+name = "Developer"
+path = "~/Developer"
+
+[[session]]
 name = "phyt"
 path = "~/Developer/phyt.fun"
 startup_command = "nvim ."
 
 [[session]]
 name = "lattica"
-path = "~/Developer/lattica/lattica-core"
-startup_command = "nvim ."
-windows = ["frontend"]
+path = "~/Developer/lattica/core"
+startup_command = "tmux rename-window core && nvim ."
+windows = ["frontend", "polymorph"]
 
 [[session]]
 name = "nvim"
@@ -28,4 +32,8 @@ startup_command = "ssh voyager-1 tmux new-session -A -s main"
 
 [[window]]
 name = "frontend"
-path = "~/Developer/lattica/lattica-frontend"
+path = "~/Developer/lattica/frontend"
+
+[[window]]
+name = "polymorph"
+path = "~/Developer/lattica/polymorph"

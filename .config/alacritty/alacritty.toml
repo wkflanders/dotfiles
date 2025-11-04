@@ -10,7 +10,7 @@ dynamic_title = true
 # opacity = 0.99
 
 [font]
-size = 12
+size = 11.5
 offset = { x = 1, y = 8 }
 glyph_offset = { x = 0, y = 1 }
 
@@ -222,3 +222,8 @@ chars = "\u001bK"
 key = "L"
 mods = "Command|Shift"
 chars = "\u001bL"
+
+[[keyboard.bindings]]
+key = "S"
+mods = "Shift|Control|Alt"
+chars = "__SUPER_S__"
