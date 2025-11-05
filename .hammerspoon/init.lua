@@ -161,14 +161,16 @@ local function focusApp(target, hotkey)
 		pending[hotkey] = nil
 	end
 	local front = hs.application.frontmostApplication()
-	local frontId = front and front:bundleID()
+
+	-- Get the target app
+	local app = getApp(target)
 
 	-- Only trigger group behavior if this target is a group_leader
 	local groupActive = target.group_leader and target.group and isGroupActive(target.group)
 	local groupApps = groupActive and getGroupApps(target.group) or {}
 
-	-- Check if the TARGET APP ITSELF is frontmost (not just any app in the group)
-	local targetIsFront = front and (frontId == target.id or front:name() == target.name)
+	-- Check if the TARGET APP ITSELF is frontmost (not just any group member)
+	local targetIsFront = app and front and (app == front)
 
 	if HIDE_ON_SAME_KEY and targetIsFront then
 		if groupActive then
@@ -177,25 +179,34 @@ local function focusApp(target, hotkey)
 				gApp:hide()
 			end
 		else
-			front:hide()
+			app:hide()
 		end
 		return
 	end
 
 	-- Show/activate apps
 	if groupActive then
-		-- Unhide and activate ALL group apps
+		-- FIRST: Unhide all group apps
 		for _, gApp in ipairs(groupApps) do
 			gApp:unhide()
-			gApp:activate(false)
 		end
-		-- Focus the target app last
-		local app = getApp(target)
+
+		-- SECOND: Raise all windows together
+		for _, gApp in ipairs(groupApps) do
+			local gWin = mainWin(gApp)
+			if gWin then
+				gWin:raise()
+			end
+		end
+
+		-- THIRD: Activate only the target app for focus
 		if app then
-			app:activate(false)
+			app:activate(true)
 		end
+
+		-- FOURTH: NOW hide other apps (after new apps are visible)
+		hideOthersForGroup(groupApps, target.group)
 	else
-		local app = getApp(target)
 		if app and app:isRunning() then
 			app:unhide()
 			app:activate(false)
@@ -216,15 +227,12 @@ local function focusApp(target, hotkey)
 		end
 
 		if groupActive then
-			-- Wait for the target app to be ready, then handle group behavior
+			-- Just focus the target window
 			waitForApp(a, 0.6, function()
 				local tw = mainWin(a)
 				if tw then
 					tw:focus()
 				end
-
-				-- ALWAYS hide other apps when the group is brought up together
-				hideOthersForGroup(groupApps, target.group)
 			end)
 		else
 			waitForApp(a, 0.6, function()
