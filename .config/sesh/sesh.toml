@@ -2,38 +2,46 @@
 preview_command = "eza --all --git --icons --color=always {}"
 
 [[session]]
-name = "Developer"
-path = "~/Developer"
+name = " NEOVIM"
+path = "~/"
+windows = ["nvim", "anysphere"]
 
 [[session]]
-name = "phyt"
+name = "󰍩 PHYT.FUN"
 path = "~/Developer/phyt.fun"
 startup_command = "nvim ."
 
 [[session]]
-name = "lattica"
+name = "󰒠 LATTICA"
 path = "~/Developer/lattica/core"
 startup_command = "tmux rename-window core && nvim ."
 windows = ["frontend", "polymorph"]
 
 [[session]]
-name = "nvim"
-path = "~/.config/nvim"
+name = " LATEX"
+path = "~/Papers/"
 startup_command = "nvim ."
 
 [[session]]
-name = "anysphere"
-path = "~/Developer/anysphere-dark.nvim"
-startup_command = "nvim ."
-
-[[session]]
-name = "voyager-1"
+name = "󰣀 VOYAGER-1"
 startup_command = "ssh voyager-1 tmux new-session -A -s main"
 
 [[window]]
 name = "frontend"
 path = "~/Developer/lattica/frontend"
+startup_script = "nvim ."
 
 [[window]]
 name = "polymorph"
 path = "~/Developer/lattica/polymorph"
+startup_script = "nvim ."
+
+[[window]]
+name = "anysphere"
+path = "~/Developer/anysphere-dark.nvim"
+startup_script = "nvim ."
+
+[[window]]
+name = "nvim"
+path = "~/.config/nvim"
+startup_script = "nvim ."
