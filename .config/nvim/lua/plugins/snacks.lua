@@ -139,7 +139,7 @@ return {
           layout = {
             auto_hide = { "input" },
             layout = {
-              width = 40,
+              width = 0.2,
               height = 100,
             },
           },

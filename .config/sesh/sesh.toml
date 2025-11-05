@@ -3,8 +3,8 @@ preview_command = "eza --all --git --icons --color=always {}"
 
 [[session]]
 name = " NEOVIM"
-path = "~/"
-windows = ["nvim", "anysphere"]
+path = "~/.config/nvim"
+startup_command = "nvim ."
 
 [[session]]
 name = "󰍩 PHYT.FUN"
