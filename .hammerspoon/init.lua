@@ -12,8 +12,8 @@ local apps = {
 	["2"] = { name = "Zen", id = "app.zen-browser.zen" },
 	["3"] = { name = "Messages", id = "com.apple.iChat" },
 	["4"] = { name = "Spotify", id = "com.spotify.client" },
-	["5"] = { name = "Obsidian", id = "md.obsidian" },
-	["6"] = { name = "Preview", id = "com.apple.Preview" },
+	["5"] = { name = "Sioyek", id = "com.github.ahrm.sioyek" },
+	["6"] = { name = "Safari", id = "com.apple.Safari" },
 }
 
 local pending = {}
