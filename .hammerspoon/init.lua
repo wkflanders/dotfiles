@@ -97,6 +97,17 @@ local function isInGroup(targetApp)
 	end
 	return nil
 end
+local function focusNextVisibleApp()
+	-- Get all visible windows ordered by recency
+	local allWindows = hs.window.orderedWindows()
+	for _, win in ipairs(allWindows) do
+		local app = win:application()
+		if app and not app:isHidden() and win:isStandard() then
+			win:focus()
+			return
+		end
+	end
+end
 local function hidePeersOnSameScreen(targetApp)
 	local tWin = mainWin(targetApp)
 	if not tWin then
@@ -181,6 +192,8 @@ local function focusApp(target, hotkey)
 		else
 			app:hide()
 		end
+		-- Focus the next visible app after hiding
+		focusNextVisibleApp()
 		return
 	end
 
