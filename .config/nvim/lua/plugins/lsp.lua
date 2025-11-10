@@ -80,7 +80,6 @@ return {
         "yamlls",
         "ts_ls",
         "pyright",
-        "ruff",
       },
     },
   },
