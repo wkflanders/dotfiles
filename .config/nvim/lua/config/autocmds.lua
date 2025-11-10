@@ -39,13 +39,23 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
   end,
 })
 
-vim.api.nvim_create_autocmd({ "BufEnter" }, {
-  pattern = { "*.vy" },
-  callback = function()
-    vim.lsp.start({
-      name = "vyper-lsp",
-      cmd = { "vyper-lsp" },
-      root_dir = vim.fs.dirname(vim.fs.find({ ".git" }, { upward = true })[1]),
-    })
+-- Override diagnostic handler to filter ModuleNotFound
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client and client.name == "vyper-lsp" then
+      -- Store original handler
+      local original_handler = vim.lsp.handlers["textDocument/publishDiagnostics"]
+
+      -- Override with filtering handler
+      vim.lsp.handlers["textDocument/publishDiagnostics"] = function(err, result, ctx, config)
+        if result and result.diagnostics then
+          result.diagnostics = vim.tbl_filter(function(diagnostic)
+            return not diagnostic.message:match("ModuleNotFound")
+          end, result.diagnostics)
+        end
+        original_handler(err, result, ctx, config)
+      end
+    end
   end,
 })
