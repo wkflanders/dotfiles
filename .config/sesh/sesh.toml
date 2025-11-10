@@ -2,6 +2,14 @@
 preview_command = "eza --all --git --icons --color=always {}"
 
 [[session]]
+name = " HOME"
+path = "~/"
+
+[[session]]
+name = "󰹡 RUST KILLER"
+startup_command = "ssh rust-killer tmux new-session -A -s main"
+
+[[session]]
 name = " NEOVIM"
 path = "~/.config/nvim"
 startup_command = "nvim ."
@@ -15,7 +23,12 @@ startup_command = "nvim ."
 name = "󰒠 LATTICA"
 path = "~/Developer/lattica/core"
 startup_command = "tmux rename-window core && nvim ."
-windows = ["frontend", "polymorph"]
+windows = ["frontend", "polymorph", "amm", "vy-ctf"]
+
+[[session]]
+name = "󰢛 ANVIL"
+path = "~/Developer/lattica/"
+startup_command = "anvil"
 
 [[session]]
 name = " LATEX"
@@ -34,6 +47,16 @@ startup_script = "nvim ."
 [[window]]
 name = "polymorph"
 path = "~/Developer/lattica/polymorph"
+startup_script = "nvim ."
+
+[[window]]
+name = "amm"
+path = "~/Developer/lattica/amm"
+startup_script = "nvim ."
+
+[[window]]
+name = "vy-ctf"
+path = "~/Developer/lattica/vy-ctf/"
 startup_script = "nvim ."
 
 [[window]]
