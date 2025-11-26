@@ -1,0 +1,108 @@
+# Palette
+# bg0 = "#191719",
+# bg1 = "#252326",
+# bg2 = "#2f2b30",
+# bg3 = "#5a525b",
+
+# vs0 = "#362e35",
+# vs1 = "#221f21",
+
+# fg0 = "#ffafc0",
+# fg1 = "#e196a5",
+# fg8 = "#be939a",
+# fg9 = "#977d82",
+
+# er0 = "#b55c65",
+# er9 = "#3f2b2d",
+
+# yl0 = "#a68b7c",
+# yl8 = "#4c4542",
+# yl9 = "#32302e",
+
+# sr0 = "#c885d5",
+# sr1 = "#a372ad",
+# sr9 = "#3e2942",
+
+# gr0 = "#7c9789",
+# gr9 = "#2e312f",
+
+# gb0 = "#808dcd",
+# gb1 = "#6974aa",
+# gb9 = "#2a2f48",
+
+# gp0 = "#9f87ff",
+# gp1 = "#8476da",
+# gp9 = "#312b51",
+
+# sa0 = "#d784ad",
+# sa1 = "#b46e90",
+# sa2 = "#8e5c73",
+
+# pi0 = "#a289a1",
+# pi1 = "#786577",
+
+[colors.primary]
+background = "#191719"  # bg0
+foreground = "#a289a1"  # fg0
+
+[colors.cursor]
+text = "#191719"  # bg0
+cursor = "#a289a1"  # fg0
+
+[colors.vi_mode_cursor]
+text = "#191719"
+cursor = "#a289a1"  # pi0
+
+[colors.selection]
+text = "#ffafc0"  # fg0
+background = "#362e35"  # vs0
+
+[colors.search.matches]
+foreground = "#191719"  # bg0
+background = "#ffafc0"  # sr1
+
+[colors.search.focused_match]
+foreground = "#191719"  # bg0
+background = "#ffafc0"  # sr0
+
+[colors.footer_bar]
+foreground = "#ffafc0"  # fg0
+background = "#252326"  # bg1
+
+[colors.hints.start]
+foreground = "#191719"  # bg0
+background = "#d784ad"  # sa0
+
+[colors.hints.end]
+foreground = "#191719"  # bg0
+background = "#9f87ff"  # gp0
+
+[colors.normal]
+black = "#191719"  # bg0
+red = "#b55c65"  # er0
+green = "#7c9789"  # gr0
+yellow = "#a68b7c"  # yl0
+blue = "#808dcd"  # gb0
+magenta = "#d784ad"  # sa0
+cyan = "#9f87ff"  # gp0
+white = "#786577"  # fg1
+
+[colors.bright]
+black = "#252326"  # bg1
+red = "#3f2b2d"  # er9
+green = "#2e312f"  # gr9
+yellow = "#32302e"  # yl9
+blue = "#2a2f48"  # gb9
+magenta = "#3e2942"  # sr9
+cyan = "#312b51"  # gp9
+white = "#ffafc0"  # fg0
+
+[colors.dim]
+black = "#2f2b30"  # bg2
+red = "#b55c65"  # er0
+green = "#7c9789"  # gr0
+yellow = "#a68b7c"  # yl0
+blue = "#6974aa"  # gb1
+magenta = "#b46e90"  # sa1
+cyan = "#8476da"  # gp1
+white = "#be939a"  # fg8

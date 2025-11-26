@@ -1,0 +1,57 @@
+[colors.primary]
+background = "#191719"
+foreground = "#d6c1c5"
+
+[colors.cursor]
+text = "#191719"
+cursor = "#d6c1c5"
+
+[colors.selection]
+text = "#d6c1c5"
+background = "#2f2b30"
+
+[colors.normal]
+black = "#191719"
+red = "#c5505e"  # DiagnosticError
+green = "#759886"  # DiagnosticOk
+yellow = "#b0886f"  # DiagnosticWarn
+blue = "#878fb9"  # String / Info
+magenta = "#c58ea7"  # Type / accents
+cyan = "#a289a1"  # PreProc / hints
+white = "#d6c1c5"  # Identifier / Normal-ish
+
+[colors.bright]
+black = "#5a525b"  # Comment
+red = "#c5505e"
+green = "#759886"
+yellow = "#b0886f"
+blue = "#9e97d0"  # Number
+magenta = "#bc8ec6"  # CurSearch / TelescopeMatching
+cyan = "#c5a3a9"  # fields / tags
+white = "#e0e2ea"  # Todo / lighter fg
+
+[colors.dim]
+black = "#07080d"  # WinBar bg
+red = "#933c46"  # darker error diag
+green = "#25332c"  # DiffAdd bg-ish
+yellow = "#3d2d23"  # DiffChange bg-ish
+blue = "#2e3448"
+magenta = "#3e2942"
+cyan = "#312b51"
+white = "#9b9ea4"
+
+[colors.search]
+matches = { foreground = "#191719", background = "#a372ad" }  # Search
+focused_match = { foreground = "#191719", background = "#bc8ec6" }  # CurSearch
+
+[colors.footer_bar]
+foreground = "#d6c1c5"
+background = "#2f2b30"
+
+[colors.hints]
+start = { foreground = "#191719", background = "#b46e90" }  # LeapLabel
+end = { foreground = "#191719", background = "#a289a1" }
+
+[colors.vi_mode_cursor]
+text = "#191719"
+cursor = "#878fb9"  # visual mode accent

@@ -1,6 +1,5 @@
 [general]
-import = ["~/.config/alacritty/rose-pine.toml"]
-# import = ["~/.config/alacritty/thorn.toml"]
+import = ["~/.config/alacritty/anysphere.toml"]
 live_config_reload = true
 
 [window]
@@ -8,15 +7,19 @@ padding.x = 10
 padding.y = 10
 decorations = "buttonless"
 dynamic_title = true
-# opacity = 0.99
+# opacity = 0.95
 
 [font]
-size = 12
-offset = { x = 1, y = 10 }
+size = 13
+# offset = { x = 0, y = 10 }
 # glyph_offset = { x = 0, y = 0 }
+offset = { x = 1, y = 8 }
 
 [font.normal]
-family = "JetBrainsMono Nerd Font"
+family = "BlexMono Nerd Font Propo"
+# style = "Regular"
+
+# family = "JetBrainsMono Nerd Font"
 # style = "Regular"
 
 # [font.normal]
@@ -27,11 +30,11 @@ family = "JetBrainsMono Nerd Font"
 # family = "SauceCodePro Nerd Font"
 # style = "ExtraLight"
 
-[colors.primary]
-background = "#141415"
+# [colors.primary]
+# background = "#141415"
 
 [env]
-# TERM = "xterm-256color"   # Good default outside tmux
+TERM = "xterm-256color"
 option_as_alt = "both"
 
 [[keyboard.bindings]]
@@ -70,7 +73,7 @@ key = "W"
 mods = "Command"
 chars = "\u0017"  # C-w
 
-# ⌘1..⌘9/⌘0 -> M-1..M-0
+# ⌘ 1..⌘ 9/⌘ 0 -> M-1..M-0
 [[keyboard.bindings]]
 key = "Key1"
 mods = "Command"
@@ -121,7 +124,7 @@ key = "Key0"
 mods = "Command"
 chars = "\u001b0"
 
-# ⌘⇧] / ⌘⇧[
+# ⌘ ⇧ ] / ⌘ ⇧ [
 [[keyboard.bindings]]
 key = "]"
 mods = "Command|Shift"
@@ -132,7 +135,7 @@ key = "["
 mods = "Command|Shift"
 chars = "\u001bp"
 
-# ⌘H/J/K/L -> vim-aware navigation
+# ⌘H/J/K/L + U/D -> vim-aware navigation
 [[keyboard.bindings]]
 key = "H"
 mods = "Command"
@@ -152,6 +155,16 @@ chars = "\u000B"  # C-k
 key = "L"
 mods = "Command"
 chars = "\u000C"  # C-l
+
+[[keyboard.bindings]]
+key = "U"
+mods = "Command"
+chars = "\u0015"  # C-u
+
+[[keyboard.bindings]]
+key = "D"
+mods = "Command"
+chars = "\u000C"  # C-d
 
 # Session tree / reload / command prompt / detach
 [[keyboard.bindings]]
@@ -184,10 +197,17 @@ key = "Semicolon"
 mods = "Command"
 chars = "\u001b:"
 
+# Deprecated tmux detach keybind
+# [[keyboard.bindings]]
+# key = "D"
+# mods = "Command"
+# chars = "\u001bd"
+
+# New tmux detach keybind
 [[keyboard.bindings]]
-key = "D"
+key = "X"
 mods = "Command"
-chars = "\u001bd"
+chars = "\u001bx"
 
 # Splits (send M-\ and M--)
 [[keyboard.bindings]]
@@ -195,13 +215,13 @@ key = "Backslash"
 mods = "Command"
 chars = "\u001b|"  # ESC + |
 
-# Meta + MINUS for ⌘-
+# Meta + MINUS for ⌘ -
 [[keyboard.bindings]]
 key = "Minus"
 mods = "Command"
 chars = "\u001b-"
 
-# TOP split (new): ⌘⇧-
+# TOP split (new): ⌘ ⇧ -
 [[keyboard.bindings]]
 key = "Minus"
 mods = "Command|Shift"
@@ -228,6 +248,7 @@ key = "L"
 mods = "Command|Shift"
 chars = "\u001bL"
 
+# Outside of tmux, send '__SUPER_S__' to open sesh fzf
 [[keyboard.bindings]]
 key = "S"
 mods = "Shift|Control|Alt"
