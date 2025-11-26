@@ -1,29 +1,62 @@
 [default_session]
 preview_command = "eza --all --git --icons --color=always {}"
+# 
+# 󰹡
+# 󰍩
+# 󰒠
+# 
+# 󰢛
+# 
+# 󰣀
 
 [[session]]
 name = " HOME"
 path = "~/"
 
 [[session]]
-name = "󰹡 RUST KILLER"
-startup_command = "ssh rust-killer tmux new-session -A -s main"
+name = "󰍩 PHYT.FUN"
+path = "~/Developer/phyt.fun"
+startup_command = "nvim"
+
+[[session]]
+name = "󰁰 LATTICA"
+path = "~/Developer/lattica/core"
+# startup_command = "tmux rename-window core && nvim"
+# windows = ["frontend", "polymorph", "amm", "vy-ctf"]
+
+[[session]]
+name = "├──  CORE"
+path = "~/Developer/lattica/core/"
+startup_command = "tmux rename-session ' CORE' && nvim"
+
+[[session]]
+name = "├──  FRONTEND"
+path = "~/Developer/lattica/frontend/"
+startup_command = "tmux rename-session ' FRONTEND' && nvim"
+
+[[session]]
+name = "├── 󰟥 POLYMORPH"
+path = "~/Developer/lattica/polymorph/"
+startup_command = "tmux rename-session '󰟥 POLYMORPH' && nvim"
+
+[[session]]
+name = "├── 𝐀𝐯󰁕λ𝐯 AMM"
+path = "~/Developer/lattica/amm/"
+startup_command = "tmux rename-session '𝐀𝐯󰁕λ𝐯 AMM' && nvim"
+
+[[session]]
+name = "╰──  CTF"
+path = "~/Developer/lattica/vy-ctf/"
+startup_command = "tmux rename-session ' CTF' && nvim"
 
 [[session]]
 name = " NEOVIM"
 path = "~/.config/nvim"
-startup_command = "nvim ."
+startup_command = "nvim"
 
 [[session]]
-name = "󰍩 PHYT.FUN"
-path = "~/Developer/phyt.fun"
-startup_command = "nvim ."
-
-[[session]]
-name = "󰒠 LATTICA"
-path = "~/Developer/lattica/core"
-startup_command = "tmux rename-window core && nvim ."
-windows = ["frontend", "polymorph", "amm", "vy-ctf"]
+name = "󰹡 RUST KILLER"
+startup_command = "ssh rust-killer tmux new-session -A -s main"
 
 [[session]]
 name = "󰢛 ANVIL"
@@ -33,38 +66,42 @@ startup_command = "anvil"
 [[session]]
 name = " LATEX"
 path = "~/Papers/"
-startup_command = "nvim ."
+# startup_command = "nvim"
 
 [[session]]
 name = "󰣀 VOYAGER-1"
 startup_command = "ssh voyager-1 tmux new-session -A -s main"
 
+[[session]]
+name = "󰣀 PM-PROM-GRAF"
+startup_command = "ssh polymorph-pm-gr tmux new-session -A -s main"
+
 [[window]]
 name = "frontend"
 path = "~/Developer/lattica/frontend"
-startup_script = "nvim ."
+startup_script = "nvim"
 
 [[window]]
 name = "polymorph"
 path = "~/Developer/lattica/polymorph"
-startup_script = "nvim ."
+startup_script = "nvim"
 
 [[window]]
 name = "amm"
 path = "~/Developer/lattica/amm"
-startup_script = "nvim ."
+startup_script = "nvim"
 
 [[window]]
 name = "vy-ctf"
 path = "~/Developer/lattica/vy-ctf/"
-startup_script = "nvim ."
+startup_script = "nvim"
 
 [[window]]
 name = "anysphere"
 path = "~/Developer/anysphere-dark.nvim"
-startup_script = "nvim ."
+startup_script = "nvim"
 
 [[window]]
 name = "nvim"
 path = "~/.config/nvim"
-startup_script = "nvim ."
+startup_script = "nvim"
