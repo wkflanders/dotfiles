@@ -1,0 +1,252 @@
+-- return {}
+
+-- return {
+--   "anAcc22/sakura.nvim",
+--   dependencies = "rktjmp/lush.nvim",
+--   config = function()
+--     vim.opt.background = "dark"
+--     vim.cmd("colorscheme sakura")
+--     vim.api.nvim_set_hl(0, "NormalNC", { bg = "NONE" })
+--     vim.api.nvim_set_hl(0, "Normal", { bg = "NONE" })
+--   end,
+-- }
+
+return {
+  dir = "~/Developer/anysphere-dark.nvim/",
+  -- "wkflanders/anysphere-dark.nvim",
+  name = "anysphere",
+  lazy = false,
+  priority = 1000,
+  config = function()
+    -- vim.api.nvim_set_hl(0, "NormalNC", { bg = "#1b1d2b" })
+    -- vim.api.nvim_set_hl(0, "Normal", { bg = "#1f2233" })
+    vim.cmd.colorscheme("anysphere")
+  end,
+}
+--
+-- return {
+-- 	{
+-- 		"catppuccin/nvim",
+-- 		lazy = false,
+-- 		name = "catppuccin",
+-- 		priority = 1000,
+-- 		config = function()
+-- 			require("catppuccin").setup({
+-- 				custom_highlights = function(colors)
+-- 					return {
+-- 						WinSeparator = { fg = colors.overlay1 },
+-- 						BlinkCmpDocBorder = { fg = colors.blue },
+-- 						BlinkCmpKind = { fg = colors.blue },
+-- 						BlinkCmpMenu = { fg = colors.text },
+-- 						BlinkCmpMenuBorder = { fg = colors.blue, bg = colors.base },
+-- 						BlinkCmpSignatureHelpActiveParameter = { fg = colors.mauve },
+-- 						BlinkCmpSignatureHelpBorder = { fg = colors.blue },
+-- 					}
+-- 				end,
+-- 				floating_border = "on",
+-- 				integrations = {
+-- 					blink_cmp = true,
+-- 				},
+-- 				color_overrides = {
+-- 					mocha = {
+-- 						base = "#000000",
+-- 						mantle = "#000000",
+-- 						-- crust = "#000000",
+-- 					},
+-- 				},
+-- 				transparent_background = true,
+-- 			})
+-- 			vim.cmd.colorscheme("catppuccin")
+-- 		end,
+-- 	},
+-- }
+
+-- return {
+--   "Ronxvier/ymir.nvim",
+--   name = "ymir",
+--   lazy = false,
+--   priority = 1000,
+--   config = function()
+--     vim.cmd.colorscheme("ymir")
+--   end,
+-- }
+
+-- return {
+--   "ramojus/mellifluous.nvim",
+--   name = "mellifluous",
+--   lazy = false,
+--   priority = 1000,
+--   config = function()
+--     vim.cmd.colorscheme("mellifluous")
+--   end,
+-- }
+
+-- return {
+--   "zenbones-theme/zenbones.nvim",
+--   name = "zenbones",
+--   -- dependencies = "rktjmp/lush.nvim",
+--   lazy = true,
+--   -- priority = 1000,
+--   config = function()
+--     -- vim.g.zenbones_compat = 1 -- Optional: for better compatibility
+--     -- vim.cmd.colorscheme("rosebones")
+--   end,
+-- }
+
+-- return {
+--   "datsfilipe/vesper.nvim",
+--   name = "vesper",
+--   lazy = true,
+--   -- lazy = false,
+--   -- priority = 1000,
+--   config = function()
+--     require("vesper").setup({
+--       italics = {
+--         comments = false, -- Boolean: Italicizes comments
+--         keywords = false, -- Boolean: Italicizes keywords
+--         functions = false, -- Boolean: Italicizes functions
+--         strings = false, -- Boolean: Italicizes strings
+--         variables = false, -- Boolean: Italicizes variables
+--       },
+--     })
+--     -- vim.cmd.colorscheme("vesper")
+--   end,
+-- }
+
+-- return {
+--   "jpwol/thorn.nvim",
+--   name = "thorn",
+--   lazy = true,
+--   -- lazy = false,
+--   -- priority = 1000,
+--   -- config = function()
+--   --   require("thorn").setup({
+--   --     theme = "dark",
+--   --     background = "warm",
+--   --     -- transparent = true,
+--   --   })
+--   --   vim.cmd.colorscheme("thorn")
+--   --
+--   --   local function transparent()
+--   --     local groups = {
+--   --       "Normal",
+--   --       "NormalNC",
+--   --       "NormalFloat",
+--   --       "FloatBorder",
+--   --       "SignColumn",
+--   --       "LineNr",
+--   --       "FoldColumn",
+--   --       "StatusLine",
+--   --       "StatusLineNC",
+--   --       "WinSeparator",
+--   --       "CursorLine",
+--   --       "CursorLineNr",
+--   --       "Pmenu",
+--   --       "PmenuSel",
+--   --       "PmenuSbar",
+--   --       "PmenuThumb",
+--   --       "TelescopeNormal",
+--   --       "TelescopeBorder",
+--   --       "SnacksNormal",
+--   --       "SnacksNormalNC",
+--   --       "SnacksBorder",
+--   --       "SnacksPanelBorder",
+--   --       "NeoTreeNormal",
+--   --       "NvimTreeNormal",
+--   --     }
+--   --     for _, g in ipairs(groups) do
+--   --       vim.api.nvim_set_hl(0, g, { bg = "NONE", ctermbg = "NONE" })
+--   --     end
+--   --     -- if you also wanted no separator color:
+--   --     vim.api.nvim_set_hl(0, "WinSeparator", { fg = "NONE", bg = "NONE" })
+--   --   end
+--   --
+--   --   transparent()
+--   --   vim.api.nvim_create_autocmd("ColorScheme", { callback = transparent })
+--   -- end,
+-- }
+
+-- return {
+--   "nyoom-engineering/oxocarbon.nvim",
+--   lazy = true,
+--   -- priority = 1000,
+--
+--   config = function()
+--     -- vim.opt.background = "dark"
+--     -- vim.cmd.colorscheme("oxocarbon")
+--   end,
+-- }
+
+-- return {
+--   "AlexvZyl/nordic.nvim",
+--   name = "nordic",
+--   lazy = true,
+--   -- priorty = 1000,
+--   config = function()
+--     -- vim.cmd.colorscheme("nordic")
+--   end,
+-- }
+
+-- return {
+--   {
+--     "EdenEast/nightfox.nvim",
+--     name = "nightfox",
+--     lazy = true,
+--     -- priority = 1000,
+--     config = function()
+--       require("nightfox").setup({
+--         italics = false,
+--         options = {
+--           colorblind = {
+--             enable = true,
+--             simulate_only = true,
+--             severity = {
+--               tritan = 1,
+--             },
+--           },
+--         },
+--       })
+--       -- vim.cmd.colorscheme("nightfox")
+--     end,
+--   },
+-- }
+--
+-- return {
+--   "miikanissi/modus-themes.nvim",
+--   name = "modus-themes",
+--   lazy = true,
+--   -- priority = 1000,
+--   config = function()
+--     require("modus-themes").setup({
+--       styles = { italic = false },
+--     })
+--     -- vim.cmd.colorscheme("modus_vivendi")
+--   end,
+-- }
+--
+-- return {
+--   "rebelot/kanagawa.nvim",
+--   name = "kanagawa",
+--   lazy = true,
+--   -- priority = 1005,
+--   config = function()
+--     require("kanagawa").setup({
+--       styles = { italic = false },
+--     })
+--   end,
+-- }
+--
+-- return {
+--   "ribru17/bamboo.nvim",
+--   name = "bamboo",
+--   lazy = true,
+--   -- priority = 1000,
+--   config = function()
+--     require("bamboo").setup({
+--       -- theme = "dark",
+--       -- background = "warm",
+--       transparent = true,
+--     })
+--     -- vim.cmd.colorscheme("bamboo")
+--   end,
+-- }

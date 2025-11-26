@@ -43,6 +43,7 @@ return {
         ts_ls = {},
         ruff = { filetypes = { "python" } },
         vyper = { mason = false, filetypes = { "vyper", "vy" } },
+        custom_elements_ls = false, -- EDIT: disable crashing custom_elements_ls client
       })
 
       opts.setup = opts.setup or {}

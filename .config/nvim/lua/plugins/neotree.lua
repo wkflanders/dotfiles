@@ -1,0 +1,56 @@
+return {
+  -- {
+  --   "nvim-neo-tree/neo-tree.nvim",
+  --   branch = "v3.x",
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --     "MunifTanjim/nui.nvim",
+  --     "nvim-mini/mini.icons",
+  --   },
+  --   lazy = false,
+  --   keys = {
+  --     { "<leader>e", "<cmd>Neotree toggle<cr>", desc = "Neo-tree" },
+  --   },
+  --   config = function()
+  --     require("mini.icons").setup()
+  --
+  --     -- Override mini.icons to use white color
+  --     MiniIcons.mock_nvim_web_devicons()
+  --
+  --     local neotree = require("neo-tree")
+  --     neotree.setup({
+  --       window = {
+  --         position = "right",
+  --         width = 30,
+  --       },
+  --       filesystem = {
+  --         filtered_items = {
+  --           visible = true,
+  --           hide_dotfiles = false,
+  --           hide_gitignored = false,
+  --           hide_hidden = false,
+  --         },
+  --       },
+  --     })
+  --
+  --     -- Set highlights AFTER neo-tree setup
+  --     vim.api.nvim_set_hl(0, "MiniIconsAzure", { fg = "#ffffff" })
+  --     vim.api.nvim_set_hl(0, "MiniIconsBlue", { fg = "#ffffff" })
+  --     vim.api.nvim_set_hl(0, "MiniIconsCyan", { fg = "#ffffff" })
+  --     vim.api.nvim_set_hl(0, "MiniIconsGreen", { fg = "#ffffff" })
+  --     vim.api.nvim_set_hl(0, "MiniIconsGrey", { fg = "#ffffff" })
+  --     vim.api.nvim_set_hl(0, "MiniIconsOrange", { fg = "#ffffff" })
+  --     vim.api.nvim_set_hl(0, "MiniIconsPurple", { fg = "#ffffff" })
+  --     vim.api.nvim_set_hl(0, "MiniIconsRed", { fg = "#ffffff" })
+  --     vim.api.nvim_set_hl(0, "MiniIconsYellow", { fg = "#ffffff" })
+  --
+  --     vim.api.nvim_set_hl(0, "NeoTreeFileName", { fg = "#ffffff" })
+  --     vim.api.nvim_set_hl(0, "NeoTreeDirectoryName", { fg = "#ffffff" })
+  --     vim.api.nvim_set_hl(0, "NeoTreeDirectoryIcon", { fg = "#ffffff" })
+  --     vim.api.nvim_set_hl(0, "NeoTreeFileIcon", { fg = "#ffffff" })
+  --
+  --     -- Remove the vertical separator
+  --     vim.opt.fillchars:append({ vert = " " })
+  --   end,
+  -- },
+}

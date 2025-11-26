@@ -28,11 +28,13 @@ return {
       "vim",
       "vimdoc",
       "yaml",
-      "gomod",
       "templ",
-      "toml",
+      "latex",
     },
-    highlight = { enable = true },
+    highlight = {
+      enable = true,
+      additional_vim_regex_highlighting = { "latex" },
+    },
     indent = { enable = true },
   },
 }

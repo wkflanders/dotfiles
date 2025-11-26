@@ -1,6 +1,8 @@
 -- bootstrap lazy.nvim, LazyVim and your plugins
 require("config.lazy")
 
+vim.g.python3_host_prog = vim.fn.expand("~/.config/nvim/python/env/bin/python3")
+
 vim.filetype.add({
   extension = {
     ctmpl = "gotmpl",

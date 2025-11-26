@@ -1,6 +1,8 @@
 return {
   "folke/snacks.nvim",
   opts = {
+    explorer = { enabled = false },
+    dashboard = { enabled = true },
     indent = {
       indent = { enabled = false },
       chunk = { enabled = false },
@@ -32,8 +34,18 @@ return {
     --   },
     -- },
     picker = {
+      win = {
+        input = {
+          keys = {
+            ["<Esc>"] = { "close", mode = { "n", "i" } },
+          },
+        },
+      },
       sources = {
         explorer = {
+          enabled = false,
+          auto_open = false,
+          replace_netrw = false,
           win = {
             list = {
               keys = {
@@ -89,7 +101,6 @@ return {
               last = "  ",
             },
           },
-          replace_netrw = true,
           auto_jump = false,
           lines = false,
           hidden = true,
@@ -137,9 +148,10 @@ return {
           --   },
           -- },
           layout = {
+            box = "vertical",
             auto_hide = { "input" },
             layout = {
-              width = 0.2,
+              width = 30,
               height = 100,
             },
           },
