@@ -3,17 +3,15 @@ obj.__index = obj
 
 obj.name = "SuperAppSwitcher"
 obj.version = "0.1"
-obj.author = "You"
+obj.author = "wkflanders"
 obj.license = "MIT"
 
--- Config / constants
 local SUPER = { "shift", "ctrl", "alt" }
 local PSEUDO_FULLSCREEN_GAP = 30
 local EDGE_TOLERANCE = 4
 local HIDE_ON_SAME_KEY = true
 local DEBOUNCE_MS = 120
 
--- App map (exactly original)
 local apps = {
 	["1"] = { name = "Alacritty", id = "org.alacritty", group = "latex", group_leader = true },
 	["2"] = { name = "Zen", id = "app.zen-browser.zen" },
@@ -26,14 +24,12 @@ local apps = {
 	["O"] = { name = "Obsidian", id = "md.obsidian" },
 }
 
--- State
 local pending = {}
 local lastPressAt = {}
 local rectMaxHotkey = nil
 
 obj.hotkeys = {}
 
--- Helpers (original functions, just localized)
 local function now_ms()
 	return hs.timer.absoluteTime() / 1e6
 end
@@ -206,6 +202,68 @@ local function hideAllExcept(app)
 	end
 end
 
+local function getAlphabeticalApps()
+	local running = hs.application.runningApplications()
+	local list = {}
+	for _, app in ipairs(running) do
+		if app:bundleID() and app:name() and app:name() ~= "" then
+			local w = app:mainWindow()
+			if w then
+				table.insert(list, app)
+			end
+		end
+	end
+	table.sort(list, function(a, b)
+		return a:name() < b:name()
+	end)
+	return list
+end
+
+local function cycleGlobalApp(offset, keyId)
+	local candidates = getAlphabeticalApps()
+	local n = #candidates
+	if n == 0 then
+		return
+	end
+
+	local t0 = lastPressAt[keyId] or 0
+	local t1 = now_ms()
+	if (t1 - t0) < DEBOUNCE_MS then
+		return
+	end
+	lastPressAt[keyId] = t1
+
+	local front = hs.application.frontmostApplication()
+	local currentIndex = 1
+	if front then
+		for i, app in ipairs(candidates) do
+			if app == front then
+				currentIndex = i
+				break
+			end
+		end
+	end
+
+	local newIndex = ((currentIndex - 1 + offset) % n) + 1
+	local targetApp = candidates[newIndex]
+	if not targetApp then
+		return
+	end
+
+	targetApp:unhide()
+	targetApp:activate(false)
+
+	hs.timer.doAfter(0.03, function()
+		local win = mainWin(targetApp)
+		if win then
+			win:focus()
+			if isPseudoFullscreen(win, PSEUDO_FULLSCREEN_GAP, EDGE_TOLERANCE) then
+				hidePeersOnSameScreen(targetApp)
+			end
+		end
+	end)
+end
+
 local function focusApp(target, hotkey)
 	local t0 = lastPressAt[hotkey] or 0
 	local t1 = now_ms()
@@ -301,25 +359,28 @@ local function focusApp(target, hotkey)
 	timer:start()
 end
 
--- Spoon lifecycle
 function obj:start()
-	-- App hotkeys (1,2,3,4,5,6,9,0,O)
 	for key, target in pairs(apps) do
 		self.hotkeys[key] = hs.hotkey.bind(SUPER, key, function()
 			focusApp(target, key)
 		end)
 	end
 
-	-- Rectangle passthrough (SUPER+f) - OPTIMIZED VERSION
+	self.hotkeys["cyclePrev"] = hs.hotkey.bind(SUPER, "Q", function()
+		cycleGlobalApp(-1, "Q")
+	end)
+
+	self.hotkeys["cycleNext"] = hs.hotkey.bind(SUPER, "E", function()
+		cycleGlobalApp(1, "E")
+	end)
+
 	rectMaxHotkey = hs.hotkey.bind(SUPER, "f", function()
 		local front = hs.application.frontmostApplication()
 
-		-- Send keystroke immediately for instant response
 		rectMaxHotkey:disable()
 		hs.eventtap.keyStroke(SUPER, "f", 0)
 		rectMaxHotkey:enable()
 
-		-- Hide other apps asynchronously after a short delay
 		if front then
 			hs.timer.doAfter(0.1, function()
 				hideAllExcept(front)
@@ -328,29 +389,15 @@ function obj:start()
 	end)
 	self.hotkeys["rectMax"] = rectMaxHotkey
 
-	-- Reload (SUPER+R)
-	-- self.hotkeys["reload"] = hs.hotkey.bind(SUPER, "R", function()
-	-- 	for k, t in pairs(pending) do
-	-- 		if t then
-	-- 			t:stop()
-	-- 		end
-	-- 		pending[k] = nil
-	-- 	end
-	-- 	hs.reload()
-	-- 	hs.alert.show("Config reloaded")
-	-- end)
-
 	return self
 end
 
 function obj:stop()
-	-- delete hotkeys
 	for _, hk in pairs(self.hotkeys) do
 		hk:delete()
 	end
 	self.hotkeys = {}
 
-	-- clear pending timers
 	for k, t in pairs(pending) do
 		if t then
 			t:stop()
