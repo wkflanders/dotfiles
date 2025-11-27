@@ -203,7 +203,7 @@
 
     },
     "manualSpecs" : {
-      "string" : "[{\"w\":\"1410\",\"y\":\"30\",\"otherAppOperation\":1,\"display\":-3,\"shortcut\":{\"keyCode\":0,\"modifierFlags\":917504},\"x\":\"30\",\"displayFrame\":[[0,0],[1470,956]],\"id\":19,\"name\":\"minmax alacritty\",\"h\":\"864\",\"loc\":9,\"title\":\"RQQdsJHrwiuMKdbfeDx20ZbzwSjCtp86qTzfaEhPeTrJF+uZJQ==\"}]"
+      "string" : "[{\"h\":\"804\",\"displayFrame\":[[0,0],[1710,1112]],\"x\":\"227\",\"y\":\"135\",\"shortcut\":{\"keyCode\":0,\"modifierFlags\":917504},\"w\":\"1257\",\"display\":-3,\"title\":\"nrdyRB4V+F9Yfstbrlw53D3o4dxCqyMSQvcWuMAQGPcb54d6jw==\",\"id\":171,\"loc\":9,\"otherAppOperation\":1,\"name\":\"alacritty screenshots\"}]"
     },
     "maximizeAcrossDisplays" : {
       "int" : 0
@@ -305,7 +305,7 @@
       "int" : 2
     },
     "reticleColor" : {
-      "string" : "{\"red\":0.8,\"alpha\":0.5,\"blue\":0.2,\"green\":0.3}"
+      "string" : "{\"red\":0.8,\"green\":0.3,\"alpha\":0.5,\"blue\":0.2}"
     },
     "reticleDisplayMinDist" : {
       "float" : 0
@@ -625,6 +625,6 @@
       "modifierFlags" : 917504
     }
   },
-  "timestamp" : 785912177.032308,
+  "timestamp" : 785919096.612336,
   "version" : "205"
 }

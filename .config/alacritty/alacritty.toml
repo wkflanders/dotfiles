@@ -11,13 +11,16 @@ dynamic_title = true
 
 [font]
 size = 13
+# size = 10  # For ss's
 # offset = { x = 0, y = 10 }
 # glyph_offset = { x = 0, y = 0 }
 offset = { x = 1, y = 8 }
 
 [font.normal]
 family = "BlexMono Nerd Font Propo"
-# style = "Regular"
+style = "Regular"
+
+# family = "Maple Mono NF"
 
 # family = "JetBrainsMono Nerd Font"
 # style = "Regular"
