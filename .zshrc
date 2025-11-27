@@ -138,8 +138,14 @@ function nix-clean-backups() {
 eval "$(uv generate-shell-completion zsh)"
 
 # dotfiles
-alias dotfiles='git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"'
-compdef dotfiles=git
+dotfiles() {
+  git --git-dir="$HOME/.dotfiles" --work-tree="$HOME" "$@"
+}
+compdef _git dotfiles=git
+# alias dotfiles='git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"'
+# compdef dotfiles=git
+
+compdef _git dotfiles=git
 
 lazydot() {
   lazygit --git-dir="$HOME/.dotfiles" --work-tree="$HOME"
