@@ -20,10 +20,16 @@ nvim/undo/
 *.swp
 *.swo
 
+# Zsh
+.zsh_history
+.zsh/env.local.zsh
+
+# Karabiner
+.config/karabiner/automatic_backups/*
+.config/karabiner/assets/*
+
 # Misc personal
 .macos/
 .local/
 .trash/
 .history
-.zsh_history
-.zsh/env.local.zsh
