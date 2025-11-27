@@ -1,14 +1,6 @@
 -- Global config
 hs.window.animationDuration = 0
 
--- Menu Bar Transparency Spoon
-local okMenuBar = pcall(hs.loadSpoon, "MenuBarTransparency")
-if okMenuBar and spoon.MenuBarTransparency then
-	-- 	spoon.MenuBarTransparency:start()
-	-- else
-	-- 	hs.alert.show("MenuBarTransparency.spoon not found")
-end
-
 -- Super App Switcher Spoon
 local okSuper = pcall(hs.loadSpoon, "SuperAppSwitcher")
 if okSuper and spoon.SuperAppSwitcher then
