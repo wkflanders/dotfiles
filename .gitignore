@@ -26,3 +26,4 @@ nvim/undo/
 .trash/
 .history
 .zsh_history
+.zsh/env.local.zsh
