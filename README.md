@@ -1,6 +1,8 @@
 # dotfiles
 
-Configs and dotfiles for neovim (lazyvim), alacrity,
+![preview](assets/preview.png)
+
+Configs and dotfiles for neovim (lazyvim), alacritty,
 tmux + sesh, hammerspoon, and whatever other
 miscellaneous stuff + keybinds for my setup
 
