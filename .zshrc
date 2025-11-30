@@ -271,6 +271,24 @@ function y() {
 # export VISUAL="nvim"
 
 # starship
+set_git_remote_icon() {
+  local icon=""
+  if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    if git rev-parse --abbrev-ref --symbolic-full-name '@{upstream}' >/dev/null 2>&1; then
+      icon=" "
+    else
+      icon=" "
+    fi
+  fi
+  export STARSHIP_GIT_REMOTE_ICON="$icon"
+}
+
+autoload -Uz add-zsh-hook
+add-zsh-hook chpwd  set_git_remote_icon
+add-zsh-hook precmd set_git_remote_icon
+
+# Initialize once for the first prompt
+set_git_remote_icon
 eval "$(starship init zsh)"
 
 # zsh syntax highlighting
