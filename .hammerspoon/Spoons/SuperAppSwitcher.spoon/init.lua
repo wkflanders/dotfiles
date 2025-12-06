@@ -21,7 +21,9 @@ local apps = {
 	["6"] = { name = "Safari", id = "com.apple.Safari" },
 	["9"] = { name = "Stickies", id = "com.apple.Stickies" },
 	["0"] = { name = "Zotero", id = "org.zotero.zotero" },
+	["`"] = { name = "Finder", id = "com.apple.finder" },
 	["O"] = { name = "Obsidian", id = "md.obsidian" },
+	["P"] = { name = "Orbstack", id = "dev.kdrag0n.MacVirt" },
 }
 
 local pending = {}
