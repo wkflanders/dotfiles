@@ -5,8 +5,8 @@
 # my configs are a house of cards
 
 # Load per-machine / private env vars
-if [ -f "$HOME/.config/zsh/env.local.zsh" ]; then
-  source "$HOME/.config/zsh/env.local.zsh"
+if [ -f "$HOME/.zsh/env.local.zsh" ]; then
+  source "$HOME/.zsh/env.local.zsh"
 fi
 
 # pnpm
@@ -192,6 +192,7 @@ bindkey -M vicmd '__SUPER_S__' sesh-sessions
 bindkey -M viins '__SUPER_S__' sesh-sessions
 
 # aliases
+alias pm="polymorph"
 alias nv='nvim'                                                                                                          # Open neovim (alternative)
 alias z-='z -'                                                                                                           # Navigate to previous directory using zoxide
 alias cd..='z ..'                                                                                                        # Go up one directory using zoxide
