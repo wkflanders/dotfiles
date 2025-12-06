@@ -10,15 +10,19 @@ dynamic_title = true
 # opacity = 0.95
 
 [font]
-size = 13
+size = 15
 # size = 10  # For ss's
 # offset = { x = 0, y = 10 }
 # glyph_offset = { x = 0, y = 0 }
-offset = { x = 1, y = 8 }
+offset = { x = 1, y = 6 }
 
 [font.normal]
-family = "BlexMono Nerd Font Propo"
-style = "Regular"
+# family = "BlexMono Nerd Font Propo"
+# style = "Regular"
+
+family = "MesloLGL Nerd Font Mono"
+
+# family = "Hack Nerd Font"
 
 # family = "Maple Mono NF"
 
@@ -128,14 +132,14 @@ mods = "Command"
 chars = "\u001b0"
 
 # ⌘ ⇧ ] / ⌘ ⇧ [
-[[keyboard.bindings]]
-key = "]"
-mods = "Command|Shift"
-chars = "\u001bn"
+# [[keyboard.bindings]]
+# key = "]"
+# mods = "Command|Shift"
+# chars = "\u001bn"
 
 [[keyboard.bindings]]
 key = "["
-mods = "Command|Shift"
+mods = "Command"
 chars = "\u001bp"
 
 # ⌘H/J/K/L + U/D -> vim-aware navigation
