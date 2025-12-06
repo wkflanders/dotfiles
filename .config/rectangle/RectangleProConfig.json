@@ -146,10 +146,10 @@
       "int" : 0
     },
     "gapSize" : {
-      "double" : 30
+      "double" : 20
     },
     "gestures" : {
-      "string" : "[35,{\"flags\":0,\"trail\":0}]"
+      "string" : "[35,{\"trail\":0,\"flags\":0}]"
     },
     "hapticFeedbackOnSnap" : {
       "int" : 0
@@ -185,7 +185,7 @@
 
     },
     "launchOnLogin" : {
-      "bool" : true
+      "bool" : false
     },
     "layoutSaveType" : {
       "int" : 1
@@ -305,7 +305,7 @@
       "int" : 2
     },
     "reticleColor" : {
-      "string" : "{\"red\":0.8,\"green\":0.3,\"alpha\":0.5,\"blue\":0.2}"
+      "string" : "{\"blue\":0.2,\"alpha\":0.5,\"red\":0.8,\"green\":0.3}"
     },
     "reticleDisplayMinDist" : {
       "float" : 0
@@ -625,6 +625,6 @@
       "modifierFlags" : 917504
     }
   },
-  "timestamp" : 785919096.612336,
+  "timestamp" : 786747447.805139,
   "version" : "205"
 }
