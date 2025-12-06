@@ -42,10 +42,32 @@ return {
         },
       },
       sources = {
+        files = {
+          layout = {
+            layout = {
+              -- backdrop = false,
+              row = 1,
+              width = 0.5,
+              min_width = 60,
+              height = 0.9,
+              border = "none",
+              box = "vertical",
+              { win = "preview", title = "{preview}", height = 0.45, border = true },
+              {
+                box = "vertical",
+                border = true,
+                title = "{title} {live} {flags}",
+                title_pos = "center",
+                { win = "input", height = 1, border = "bottom" },
+                { win = "list", border = "none" },
+              },
+            },
+          },
+        },
         explorer = {
           enabled = false,
           auto_open = false,
-          replace_netrw = false,
+          replace_netrw = true,
           win = {
             list = {
               keys = {
@@ -157,9 +179,9 @@ return {
           },
         },
         -- The settings below apply to the file picker (<leader>ff)
-        files = {
-          hidden = true,
-        },
+        -- files = {
+        --   hidden = true,
+        -- },
       },
     },
   },
