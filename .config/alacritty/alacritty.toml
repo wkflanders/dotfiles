@@ -14,13 +14,13 @@ size = 15
 # size = 10  # For ss's
 # offset = { x = 0, y = 10 }
 # glyph_offset = { x = 0, y = 0 }
-offset = { x = 1, y = 6 }
+offset = { x = 0, y = 2 }
 
 [font.normal]
 # family = "BlexMono Nerd Font Propo"
 # style = "Regular"
 
-family = "MesloLGL Nerd Font Mono"
+family = "MesloLGL Nerd Font"
 
 # family = "Hack Nerd Font"
 
