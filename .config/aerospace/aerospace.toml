@@ -131,16 +131,16 @@ ctrl-alt-shift-0 = "workspace 0"
 ctrl-alt-shift-o = "workspace O"
 ctrl-alt-shift-p = "workspace P"
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
-cmd-shift-cmd-1 = "move-node-to-workspace 1"
-cmd-shift-cmd-2 = "move-node-to-workspace 2"
-cmd-shift-cmd-3 = "move-node-to-workspace 3"
-cmd-shift-cmd-4 = "move-node-to-workspace 4"
-cmd-shift-cmd-5 = "move-node-to-workspace 5"
-cmd-shift-cmd-6 = "move-node-to-workspace 6"
-cmd-shift-cmd-9 = "move-node-to-workspace 9"
-cmd-shift-cmd-0 = "move-node-to-workspace 0"
-cmd-shift-cmd-o = "move-node-to-workspace O"
-cmd-shift-cmd-p = "move-node-to-workspace P"
+ctrl-alt-shift-cmd-1 = "move-node-to-workspace 1"
+ctrl-alt-shift-cmd-2 = "move-node-to-workspace 2"
+ctrl-alt-shift-cmd-3 = "move-node-to-workspace 3"
+ctrl-alt-shift-cmd-4 = "move-node-to-workspace 4"
+ctrl-alt-shift-cmd-5 = "move-node-to-workspace 5"
+ctrl-alt-shift-cmd-6 = "move-node-to-workspace 6"
+ctrl-alt-shift-cmd-9 = "move-node-to-workspace 9"
+ctrl-alt-shift-cmd-0 = "move-node-to-workspace 0"
+ctrl-alt-shift-cmd-o = "move-node-to-workspace O"
+ctrl-alt-shift-cmd-p = "move-node-to-workspace P"
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 ctrl-alt-shift-tab = "workspace-back-and-forth"
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-workspace-to-monitor
@@ -166,6 +166,10 @@ ctrl-alt-shift-k = ["join-with up", "mode main"]
 ctrl-alt-shift-l = ["join-with right", "mode main"]
 
 [[on-window-detected]]
+if.app-id = "com.apple.finder"
+run = "layout floating"
+
+[[on-window-detected]]
 if.app-id = "org.alacritty"
 run = "move-node-to-workspace 1"
 
@@ -174,13 +178,34 @@ if.app-id = "app.zen-browser.zen"
 run = "move-node-to-workspace 2"
 
 [[on-window-detected]]
-if.app-id = "com.apple.iChat"
-run = "move-node-to-workspace 3"
+if.app-id = "com.apple.MobileSMS"
+# run = ["layout floating", "move-node-to-workspace 4"]
+run = ["move-node-to-workspace 3", "move left", "resize smart -250"]
 
 [[on-window-detected]]
 if.app-id = "com.spotify.client"
 run = "move-node-to-workspace 3"
 
 [[on-window-detected]]
-if.app-id = "com.spotify.client"
-run = "move-node-to-workspace 3"
+if.app-id = "net.sourceforge.skim-app.skim"
+run = "move-node-to-workspace 4"
+
+[[on-window-detected]]
+if.app-id = "com.apple.Safari"
+run = "move-node-to-workspace 6"
+
+[[on-window-detected]]
+if.app-id = "com.apple.Stickies"
+run = "move-node-to-workspace 9"
+
+[[on-window-detected]]
+if.app-id = "org.zotero.zotero"
+run = "move-node-to-workspace 0"
+
+[[on-window-detected]]
+if.app-id = "md.obsidian"
+run = "move-node-to-workspace O"
+
+[[on-window-detected]]
+if.app-id = "dev.kdrag0n.MacVirt"
+run = "move-node-to-workspace P"
