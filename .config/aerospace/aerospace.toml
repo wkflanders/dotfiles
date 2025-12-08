@@ -64,8 +64,8 @@ preset = "qwerty"
 #                 See:
 #                 https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [gaps]
-inner.horizontal = 15
-inner.vertical = 15
+inner.horizontal = 5
+inner.vertical = 5
 outer.left = 15
 outer.bottom = 15
 outer.top = 15
@@ -170,6 +170,14 @@ if.app-id = "com.apple.finder"
 run = "layout floating"
 
 [[on-window-detected]]
+if.app-id = "com.apple.ActivityMonitor"
+run = "layout floating"
+
+[[on-window-detected]]
+if.app-id = "com.apple.Preview"
+run = "layout floating"
+
+[[on-window-detected]]
 if.app-id = "org.alacritty"
 run = "move-node-to-workspace 1"
 
@@ -196,7 +204,7 @@ run = "move-node-to-workspace 6"
 
 [[on-window-detected]]
 if.app-id = "com.apple.Stickies"
-run = "move-node-to-workspace 9"
+run = ["move-node-to-workspace 9", "layout floating"]
 
 [[on-window-detected]]
 if.app-id = "org.zotero.zotero"
