@@ -9,6 +9,8 @@ if [ -f "$HOME/.zsh/env.local.zsh" ]; then
   source "$HOME/.zsh/env.local.zsh"
 fi
 
+export GPG_TTY=$(tty)
+
 # pnpm
 export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
