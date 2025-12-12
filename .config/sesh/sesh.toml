@@ -14,9 +14,8 @@ name = " HOME"
 path = "~/"
 
 [[session]]
-name = "󰍩 PHYT.FUN"
-path = "~/Developer/phyt.fun"
-startup_command = "nvim"
+name = "󰹡 RUST KILLER"
+startup_command = "ssh rust-killer tmux new-session -A -s main"
 
 [[session]]
 name = "󰁰 LATTICA"
@@ -55,8 +54,9 @@ path = "~/.config/nvim"
 startup_command = "nvim"
 
 [[session]]
-name = "󰹡 RUST KILLER"
-startup_command = "ssh rust-killer tmux new-session -A -s main"
+name = "󰍩 PHYT.FUN"
+path = "~/Developer/phyt.fun"
+startup_command = "nvim"
 
 [[session]]
 name = "󰢛 ANVIL"
