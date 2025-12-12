@@ -178,6 +178,10 @@ if.app-id = "com.apple.ActivityMonitor"
 run = "layout floating"
 
 [[on-window-detected]]
+if.app-id = "org.pqrs.Karabiner-Elements.Settings"
+run = "layout floating"
+
+[[on-window-detected]]
 if.app-id = "net.freemacsoft.AppCleaner"
 run = "layout floating"
 
