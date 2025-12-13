@@ -40,6 +40,7 @@ persistent-workspaces = [
   "4",
   "5",
   "6",
+  "7",
   "9",
   "0",
   "O",
@@ -126,6 +127,7 @@ ctrl-alt-shift-3 = "workspace 3"
 ctrl-alt-shift-4 = "workspace 4"
 ctrl-alt-shift-5 = "workspace 5"
 ctrl-alt-shift-6 = "workspace 6"
+ctrl-alt-shift-7 = "workspace 7"
 ctrl-alt-shift-9 = "workspace 9"
 ctrl-alt-shift-0 = "workspace 0"
 ctrl-alt-shift-o = "workspace O"
@@ -137,6 +139,7 @@ ctrl-alt-shift-cmd-3 = "move-node-to-workspace 3"
 ctrl-alt-shift-cmd-4 = "move-node-to-workspace 4"
 ctrl-alt-shift-cmd-5 = "move-node-to-workspace 5"
 ctrl-alt-shift-cmd-6 = "move-node-to-workspace 6"
+ctrl-alt-shift-cmd-7 = "move-node-to-workspace 7"
 ctrl-alt-shift-cmd-9 = "move-node-to-workspace 9"
 ctrl-alt-shift-cmd-0 = "move-node-to-workspace 0"
 ctrl-alt-shift-cmd-o = "move-node-to-workspace O"
