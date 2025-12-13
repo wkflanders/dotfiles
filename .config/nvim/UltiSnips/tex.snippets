@@ -642,7 +642,7 @@ snippet "([a-zA-Z])bar" "bar" riA
 \overline{`!p snip.rv=match.group(1)`}
 endsnippet
 
-priority 10
+priority 100
 context "math()"
 snippet "hat" "hat" riA
 \hat{$1}$0
@@ -650,10 +650,45 @@ endsnippet
 
 priority 100
 context "math()"
-snippet "([a-zA-Z])hat" "hat" riA
+snippet "(?<!wid)([a-zA-Z])hat" "hat" riA
 \hat{`!p snip.rv=match.group(1)`}
 endsnippet
 
+priority 100
+context "math()"
+snippet "what" "widehat" riA
+\widehat{$1}$0
+endsnippet
+
+priority 100
+context "math()"
+snippet "([a-zA-Z])what" "widehat" riA
+\widehat{`!p snip.rv=match.group(1)`}
+endsnippet
+
+priority 100
+context "math()"
+snippet "vec" "vector" riA
+\vec{\text{$1}}$0
+endsnippet
+
+priority 100
+context "math()"
+snippet "([a-zA-Z])vec" "vector" riA
+\vec{\text{`!p snip.rv=match.group(1)`}}
+endsnippet
+
+priority 100
+context "math()"
+snippet "text" "text" riA
+\text{$1}$0
+endsnippet
+
+priority 100
+context "math()"
+snippet "([a-zA-Z]+)text" "text" riA
+\text{`!p snip.rv=match.group(1)`}
+endsnippet
 snippet letw "let omega" iA
 Let $\Omega \subset \C$ be open.
 endsnippet
@@ -692,10 +727,10 @@ snippet @e "epsilon" iA
 \epsilon
 endsnippet
 
-context "math()"
-snippet ve "varepsilon" iA
-\varepsilon
-endsnippet
+#context "math()"
+#snippet ve "varepsilon" iA
+#\varepsilon
+#endsnippet
 
 context "math()"
 snippet @z "zeta" iA
