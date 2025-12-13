@@ -24,6 +24,11 @@ path = "~/Developer/lattica/core"
 # windows = ["frontend", "polymorph", "amm", "vy-ctf"]
 
 [[session]]
+name = "├── 󰈙 WHITEPAPER"
+path = "~/Developer/lattica/docs/"
+startup_command = "tmux rename-session '󰈙 WHITEPAPER'"
+
+[[session]]
 name = "├──  CORE"
 path = "~/Developer/lattica/core/"
 startup_command = "tmux rename-session ' CORE' && nvim"
