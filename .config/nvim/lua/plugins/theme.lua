@@ -20,6 +20,9 @@ return {
   config = function()
     -- vim.api.nvim_set_hl(0, "NormalNC", { bg = "#1b1d2b" })
     -- vim.api.nvim_set_hl(0, "Normal", { bg = "#1f2233" })
+    require("anysphere").setup({
+      transparent = true,
+    })
     vim.cmd.colorscheme("anysphere")
   end,
 }
