@@ -7,10 +7,11 @@ padding.x = 10
 padding.y = 10
 decorations = "buttonless"
 dynamic_title = true
-opacity = 0.95
+opacity = 0.9
+blur = true
 
 [font]
-size = 15
+size = 16
 # size = 10  # For ss's
 # offset = { x = 0, y = 10 }
 # glyph_offset = { x = 0, y = 0 }
@@ -20,14 +21,14 @@ offset = { x = 0, y = 2 }
 # family = "BlexMono Nerd Font Propo"
 # style = "Regular"
 
-family = "MesloLGL Nerd Font"
+# family = "MesloLGL Nerd Font"
 
 # family = "Hack Nerd Font"
 
 # family = "Maple Mono NF"
 
-# family = "JetBrainsMono Nerd Font"
-# style = "Regular"
+family = "JetBrainsMono Nerd Font"
+style = "Regular"
 
 # [font.normal]
 # family = "CaskaydiaCove Nerd Font"
