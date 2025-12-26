@@ -1,15 +1,6 @@
--- return {}
+-- Yes its cancer how I did this - will rewrite some other day
 
--- return {
---   "anAcc22/sakura.nvim",
---   dependencies = "rktjmp/lush.nvim",
---   config = function()
---     vim.opt.background = "dark"
---     vim.cmd("colorscheme sakura")
---     vim.api.nvim_set_hl(0, "NormalNC", { bg = "NONE" })
---     vim.api.nvim_set_hl(0, "Normal", { bg = "NONE" })
---   end,
--- }
+-- return {}
 
 return {
   dir = "~/Developer/anysphere-dark.nvim/",
@@ -26,7 +17,36 @@ return {
     vim.cmd.colorscheme("anysphere")
   end,
 }
---
+
+-- return {
+--   "anAcc22/sakura.nvim",
+--   dependencies = "rktjmp/lush.nvim",
+--   config = function()
+--     vim.opt.background = "dark"
+--     vim.cmd("colorscheme sakura")
+--     vim.api.nvim_set_hl(0, "NormalNC", { bg = "NONE" })
+--     vim.api.nvim_set_hl(0, "Normal", { bg = "NONE" })
+--   end,
+-- }
+
+-- return {
+--   "nyngwang/nvimgelion",
+--   name = "nvimgelion",
+--   lazy = false,
+--   priority = 1000,
+--   config = function()
+--     vim.api.nvim_set_hl(0, "Normal", { bg = "NONE" })
+--     vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE" })
+--     vim.api.nvim_set_hl(0, "NormalNC", { bg = "NONE" })
+--     vim.cmd.colorscheme("nvimgelion")
+--     -- vim.api.nvim_set_hl(0, "WinSeparator", { fg = "NONE", bg = "NONE" })
+--     -- vim.api.nvim_set_hl(0, "SnacksNormal", { bg = "NONE" })
+--     -- vim.api.nvim_set_hl(0, "SnacksNormalNC", { bg = "NONE" })
+--     -- vim.api.nvim_set_hl(0, "SnacksBorder", { bg = "NONE", fg = "NONE" })
+--     -- vim.api.nvim_set_hl(0, "SnacksPanelBorder", { bg = "NONE", fg = "NONE" })
+--   end,
+-- }
+
 -- return {
 -- 	{
 -- 		"catppuccin/nvim",
