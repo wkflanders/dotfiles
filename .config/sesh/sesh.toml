@@ -31,37 +31,37 @@ startup_command = "tmux rename-session '󰈙 WHITEPAPER'"
 [[session]]
 name = "├──  CORE"
 path = "~/Developer/lattica/core/"
-startup_command = "tmux rename-session ' CORE' && nvim"
+startup_command = "tmux rename-session ' CORE'"
 
 [[session]]
 name = "├──  FRONTEND"
 path = "~/Developer/lattica/frontend/"
-startup_command = "tmux rename-session ' FRONTEND' && nvim"
+startup_command = "tmux rename-session ' FRONTEND'"
 
 [[session]]
 name = "├── 󰟥 POLYMORPH"
 path = "~/Developer/lattica/polymorph/"
-startup_command = "tmux rename-session '󰟥 POLYMORPH' && nvim"
+startup_command = "tmux rename-session '󰟥 POLYMORPH'"
 
 [[session]]
 name = "├── 𝐀𝐯󰁕λ𝐯 AMM"
 path = "~/Developer/lattica/amm/"
-startup_command = "tmux rename-session '𝐀𝐯󰁕λ𝐯 AMM' && nvim"
+startup_command = "tmux rename-session '𝐀𝐯󰁕λ𝐯 AMM'"
 
 [[session]]
 name = "╰──  CTF"
 path = "~/Developer/lattica/vy-ctf/"
-startup_command = "tmux rename-session ' CTF' && nvim"
+startup_command = "tmux rename-session ' CTF'"
 
 [[session]]
 name = " NEOVIM"
 path = "~/.config/nvim"
-startup_command = "nvim"
+# startup_command = "nvim"
 
 [[session]]
 name = "󰍩 PHYT.FUN"
 path = "~/Developer/phyt.fun"
-startup_command = "nvim"
+# startup_command = "nvim"
 
 [[session]]
 name = "󰢛 ANVIL"
@@ -77,9 +77,9 @@ path = "~/Papers/"
 name = "󰣀 VOYAGER-1"
 startup_command = "ssh voyager-1 tmux new-session -A -s main"
 
-[[session]]
-name = "󰣀 PM-PROM-GRAF"
-startup_command = "ssh polymorph-pm-gr tmux new-session -A -s main"
+# [[session]]
+# name = "󰣀 PM-PROM-GRAF"
+# startup_command = "ssh polymorph-pm-gr tmux new-session -A -s main"
 
 [[window]]
 name = "frontend"
