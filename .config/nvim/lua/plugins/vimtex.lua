@@ -18,7 +18,8 @@ return {
       out_dir = "build",
       aux_dir = "build",
       options = {
-        "-xelatex",
+        -- pdflatex instead
+        -- "-xelatex",
         "-interaction=nonstopmode",
         "-file-line-error",
         "-synctex=1",
