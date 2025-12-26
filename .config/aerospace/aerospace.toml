@@ -65,12 +65,12 @@ preset = "qwerty"
 #                 See:
 #                 https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [gaps]
-inner.horizontal = 5
-inner.vertical = 5
-outer.left = 7
-outer.bottom = 7
-outer.top = 7
-outer.right = 7
+inner.horizontal = 9
+inner.vertical = 9
+outer.left = 18
+outer.bottom = 15
+outer.top = 15
+outer.right = 18
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -145,7 +145,7 @@ ctrl-alt-shift-cmd-0 = "move-node-to-workspace 0"
 ctrl-alt-shift-cmd-o = "move-node-to-workspace O"
 ctrl-alt-shift-cmd-p = "move-node-to-workspace P"
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
-ctrl-alt-shift-tab = "workspace-back-and-forth"
+# ctrl-alt-shift-tab = "workspace-back-and-forth"
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-workspace-to-monitor
 # ctrl-alt-shift-shift-tab = "move-workspace-to-monitor --wrap-around next"
 # See: https://nikitabobko.github.io/AeroSpace/commands#mode
