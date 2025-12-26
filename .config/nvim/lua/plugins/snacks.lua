@@ -43,6 +43,7 @@ return {
       },
       sources = {
         files = {
+          hidden = true,
           layout = {
             layout = {
               -- backdrop = false,
