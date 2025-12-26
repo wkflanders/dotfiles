@@ -7,15 +7,15 @@ padding.x = 10
 padding.y = 10
 decorations = "buttonless"
 dynamic_title = true
-opacity = 0.9
+opacity = 0.85
 blur = true
 
 [font]
-size = 16
+size = 15.5
 # size = 10  # For ss's
 # offset = { x = 0, y = 10 }
 # glyph_offset = { x = 0, y = 0 }
-offset = { x = 0, y = 2 }
+offset = { x = 1, y = 2 }
 
 [font.normal]
 # family = "BlexMono Nerd Font Propo"
@@ -25,16 +25,18 @@ offset = { x = 0, y = 2 }
 
 # family = "Hack Nerd Font"
 
-# family = "Maple Mono NF"
-
-family = "JetBrainsMono Nerd Font"
+family = "Maple Mono NF"
 style = "Regular"
 
-# [font.normal]
+# family = "MonoLisa"
+# style = "MonoLisa"
+
+# family = "JetBrainsMono Nerd Font"
+# style = "Regular"
+#
 # family = "CaskaydiaCove Nerd Font"
 # style = "Regular"
 
-# [font.normal]
 # family = "SauceCodePro Nerd Font"
 # style = "ExtraLight"
 
@@ -255,6 +257,11 @@ chars = "\u001bK"
 key = "L"
 mods = "Command|Shift"
 chars = "\u001bL"
+
+[[keyboard.bindings]]
+key = "Return"
+mods = "Shift"
+chars = "\u001b\r"
 
 # Outside of tmux, send '__SUPER_S__' to open sesh fzf
 [[keyboard.bindings]]
