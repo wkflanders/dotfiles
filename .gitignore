@@ -20,6 +20,10 @@ nvim/undo/
 *.swp
 *.swo
 
+# Backups
+*.bak
+*.bak/
+
 # Zsh
 .zsh_history
 .zsh/env.local.zsh

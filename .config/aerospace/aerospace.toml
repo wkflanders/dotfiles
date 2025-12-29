@@ -77,6 +77,8 @@ outer.right = 18
 # 'main' binding mode must be always presented
 # Fallback value (if you omit the key): mode.main.binding = {}
 [mode.main.binding]
+# cmd-h = []  # Disable "hide application"
+cmd-alt-h = []  # Disable "hide others"
 # All possible keys:
 # - Letters.        a, b, c, ..., z
 # - Numbers.        0, 1, 2, ..., 9
@@ -89,11 +91,8 @@ outer.right = 18
 # - Keypad special. keypadClear, keypadDecimalMark, keypadDivide, keypadEnter, keypadEqual,
 #                   keypadMinus, keypadMultiply, keypadPlus
 # - Arrows.         left, down, up, right
-
 # All possible modifiers: cmd, alt, ctrl, shift
-
 # All possible commands: https://nikitabobko.github.io/AeroSpace/commands
-
 # See: https://nikitabobko.github.io/AeroSpace/commands#exec-and-forget
 # You can uncomment the following lines to open up terminal with alt + enter shortcut
 # (like in i3)
@@ -103,7 +102,6 @@ outer.right = 18
 #     activate
 # end tell'
 # '''
-
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 # ctrl-alt-shift-slash = "layout tiles horizontal vertical"
 # ctrl-alt-shift-comma = "layout accordion horizontal vertical"

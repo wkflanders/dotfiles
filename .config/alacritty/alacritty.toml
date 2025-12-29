@@ -7,11 +7,11 @@ padding.x = 10
 padding.y = 10
 decorations = "buttonless"
 dynamic_title = true
-opacity = 0.85
+opacity = 0.75
 blur = true
 
 [font]
-size = 15.5
+size = 16
 # size = 10  # For ss's
 # offset = { x = 0, y = 10 }
 # glyph_offset = { x = 0, y = 0 }
@@ -40,8 +40,8 @@ style = "Regular"
 # family = "SauceCodePro Nerd Font"
 # style = "ExtraLight"
 
-# [colors.primary]
-# background = "#141415"
+[colors.primary]
+background = "#131316"
 
 [env]
 TERM = "xterm-256color"
