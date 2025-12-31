@@ -23,6 +23,7 @@
                     },
                     {
                         "description": "Navigate Skim with Vim Keys",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [

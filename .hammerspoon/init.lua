@@ -11,6 +11,14 @@ hs.window.animationDuration = 0
 -- 	hs.alert.show("SuperAppSwitcher.spoon not found")
 -- end
 
+-- -- Skim Vim Navigation Spoon
+local okSkim = pcall(hs.loadSpoon, "SkimVimNav")
+if okSkim and spoon.SkimVimNav then
+	spoon.SkimVimNav:start()
+else
+	hs.alert.show("SkimVimNav.spoon not found")
+end
+
 -- Simple reload hotkey
 local SUPER = { "shift", "ctrl", "alt" }
 hs.hotkey.bind(SUPER, "R", function()
