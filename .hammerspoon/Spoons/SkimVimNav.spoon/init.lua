@@ -1,11 +1,9 @@
 local obj = {}
 obj.__index = obj
-
 obj.name = "SkimVimNav"
 obj.version = "1.0"
 obj.author = "wkflanders"
 obj.license = "MIT"
-
 obj.appWatcher = nil
 obj.eventtap = nil
 obj.scrollAmount = 128
@@ -32,8 +30,12 @@ end
 
 function obj:createEventtap()
 	return hs.eventtap.new({ hs.eventtap.event.types.keyDown, hs.eventtap.event.types.keyRepeat }, function(event)
-		local flags = event:getFlags()
+		local frontApp = hs.application.frontmostApplication()
+		if not frontApp or frontApp:name() ~= "Skim" then
+			return false
+		end
 
+		local flags = event:getFlags()
 		if isTextField() then
 			return false
 		end
@@ -43,7 +45,6 @@ function obj:createEventtap()
 
 		local keycode = event:getKeyCode()
 		local keyMap = hs.keycodes.map
-
 		local actions = {
 			[keyMap["j"]] = function()
 				hs.eventtap.scrollWheel({ 0, -self.scrollAmount }, {}, "pixel")
@@ -89,7 +90,6 @@ function obj:createEventtap()
 		if action then
 			return action()
 		end
-
 		return false
 	end)
 end
@@ -118,11 +118,9 @@ function obj:start()
 		end
 	end)
 	self.appWatcher:start()
-
 	if hs.application.frontmostApplication():name() == "Skim" then
 		self:enableEventtap()
 	end
-
 	return self
 end
 
