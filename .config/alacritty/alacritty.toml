@@ -1,5 +1,6 @@
 [general]
-import = ["~/.config/alacritty/anysphere.toml"]
+# import = ["~/.config/alacritty/anysphere.toml"]
+import = ["~/.config/alacritty/mellow.toml"]
 live_config_reload = true
 
 [window]
@@ -7,15 +8,15 @@ padding.x = 10
 padding.y = 10
 decorations = "buttonless"
 dynamic_title = true
-opacity = 0.75
-blur = true
+# opacity = 0.75
+# blur = true
 
 [font]
-size = 16
+size = 18
 # size = 10  # For ss's
-# offset = { x = 0, y = 10 }
+offset = { x = 1, y = 13 }
 # glyph_offset = { x = 0, y = 0 }
-offset = { x = 1, y = 2 }
+# offset = { x = 2, y = 2 }
 
 [font.normal]
 # family = "BlexMono Nerd Font Propo"
@@ -23,10 +24,10 @@ offset = { x = 1, y = 2 }
 
 # family = "MesloLGL Nerd Font"
 
-# family = "Hack Nerd Font"
+family = "Hack Nerd Font"
 
-family = "Maple Mono NF"
-style = "Regular"
+# family = "Maple Mono NF"
+# style = "Regular"
 
 # family = "MonoLisa"
 # style = "MonoLisa"
@@ -38,7 +39,7 @@ style = "Regular"
 # style = "Regular"
 
 # family = "SauceCodePro Nerd Font"
-# style = "ExtraLight"
+# style = "Medium"
 
 [colors.primary]
 background = "#131316"
@@ -174,7 +175,7 @@ chars = "\u0015"  # C-u
 [[keyboard.bindings]]
 key = "D"
 mods = "Command"
-chars = "\u000C"  # C-d
+chars = "\u0004"  # C-d
 
 # Session tree / reload / command prompt / detach
 [[keyboard.bindings]]
