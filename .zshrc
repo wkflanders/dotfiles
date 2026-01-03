@@ -163,7 +163,7 @@ function sesh-sessions() {
     exec </dev/tty
     exec <&1
 
-    local list_cmd="LC_ALL=en_US.UTF-8 sesh list --icons -d -c -z"
+    local list_cmd="LC_ALL=en_US.UTF-8 sesh list --icons -t -d -c -z"
 
     local session
     session=$(
@@ -209,7 +209,7 @@ alias func='functions'                                                          
 alias cat='bat'                                                                                                          # Use bat instead of cat
 alias oldcat='cat'                                                                                                       # Use original cat
 alias l='eza --group-directories-first --icons=always'                                                                   # List with icons, directories first
-alias ls='eza --group-directories-first --icons=always'                                                                  # List with icons, directories first
+alias ls='eza -a --group-directories-first --icons=always'                                                                  # List with icons, directories first
 alias ll='eza -l --group-directories-first --icons=always'                                                               # Long format with icons
 alias la='eza -la --group-directories-first --icons=always'                                                              # List all (including hidden) with icons
 alias lt='eza --tree --icons=always'                                                                                     # Tree view with icons
@@ -274,6 +274,8 @@ function y() {
 # export VISUAL="nvim"
 
 # starship
+export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
+
 set_git_remote_icon() {
   local icon=""
   if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
