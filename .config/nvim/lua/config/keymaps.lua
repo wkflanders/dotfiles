@@ -20,12 +20,6 @@ vim.keymap.set({ "n", "t" }, "<C-l>", function()
   nav.move("l")
 end, opts)
 
--- Add 'CMD+d' key
-vim.keymap.set({ "n", "t" }, "<C-d>", function()
-  nav.move("j")
-end, opts)
+vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Scroll down and center" })
 
--- Add 'CMD+u' key
-vim.keymap.set({ "n", "t" }, "<C-u>", function()
-  nav.move("k")
-end, opts)
+vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Scroll up and center" })

@@ -2,21 +2,69 @@
 
 -- return {}
 
+-- return {
+--   dir = "~/Developer/anysphere-dark.nvim/",
+--   -- "wkflanders/anysphere-dark.nvim",
+--   name = "anysphere",
+--   lazy = false,
+--   priority = 1000,
+--   config = function()
+--     -- vim.api.nvim_set_hl(0, "NormalNC", { bg = "#1b1d2b" })
+--     -- vim.api.nvim_set_hl(0, "Normal", { bg = "#1f2233" })
+--     require("anysphere").setup({
+--       transparent = true,
+--     })
+--     vim.cmd.colorscheme("anysphere")
+--   end,
+-- }
+
 return {
-  dir = "~/Developer/anysphere-dark.nvim/",
-  -- "wkflanders/anysphere-dark.nvim",
-  name = "anysphere",
+  "mellow-theme/mellow.nvim",
+  name = "mellow",
   lazy = false,
-  priority = 1000,
+  priorty = 1000,
   config = function()
-    -- vim.api.nvim_set_hl(0, "NormalNC", { bg = "#1b1d2b" })
-    -- vim.api.nvim_set_hl(0, "Normal", { bg = "#1f2233" })
-    require("anysphere").setup({
-      transparent = true,
-    })
-    vim.cmd.colorscheme("anysphere")
+    vim.cmd.colorscheme("mellow")
   end,
 }
+
+-- return {
+--   "dgox16/oldworld.nvim",
+--   name = "oldworld",
+--   lazy = false,
+--   priority = 1000,
+--   config = function()
+--     require("oldworld").setup({
+--       variant = "cooler",
+--     })
+--     vim.cmd.colorscheme("oldworld")
+--   end,
+-- }
+--
+-- return {
+--   "ribru17/bamboo.nvim",
+--   lazy = false,
+--   priority = 1000,
+--   config = function()
+--     require("bamboo").setup({
+--       -- optional configuration here
+--     })
+--     require("bamboo").load()
+--   end,
+-- }
+
+-- return {
+--   "Mofiqul/vscode.nvim",
+--   name = "vscode",
+--   lazy = false,
+--   priorty = 1000,
+--   config = function()
+--     require("vscode").setup({
+--       -- transparent = true,
+--     })
+--     vim.cmd.colorscheme("vscode")
+--   end,
+-- }
 
 -- return {
 --   "anAcc22/sakura.nvim",
