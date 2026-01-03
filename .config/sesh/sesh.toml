@@ -10,71 +10,77 @@ preview_command = "eza --all --git --icons --color=always {}"
 # 󰣀
 
 [[session]]
-name = " HOME"
+name = "HOME"
 path = "~/"
 
 [[session]]
-name = "󰹡 RUST KILLER"
-startup_command = "ssh rust-killer tmux new-session -A -s main"
+name = "RUST KILLER"
+# startup_command = "ssh rust-killer tmux new-session -A -s main"
+startup_command = "ssh rust-killer"
 
 [[session]]
-name = "󰁰 LATTICA"
+name = "LATTICA"
 path = "~/Developer/lattica/core"
 # startup_command = "tmux rename-window core && nvim"
 # windows = ["frontend", "polymorph", "amm", "vy-ctf"]
 
 [[session]]
-name = "├── 󰈙 WHITEPAPER"
+name = "├── WHITEPAPER"
 path = "~/Developer/lattica/docs/"
-startup_command = "tmux rename-session '󰈙 WHITEPAPER'"
+startup_command = "tmux rename-session 'WHITEPAPER'"
 
 [[session]]
-name = "├──  CORE"
+name = "├── CORE"
 path = "~/Developer/lattica/core/"
-startup_command = "tmux rename-session ' CORE'"
+startup_command = "tmux rename-session 'CORE'"
 
 [[session]]
-name = "├──  FRONTEND"
+name = "├── ╰── EXPERIMENTS"
+path = "~/Developer/lattica/experiments/"
+startup_command = "tmux rename-session 'EXPERIMENTS'"
+
+[[session]]
+name = "├── FRONTEND"
 path = "~/Developer/lattica/frontend/"
-startup_command = "tmux rename-session ' FRONTEND'"
+startup_command = "tmux rename-session 'FRONTEND'"
 
 [[session]]
-name = "├── 󰟥 POLYMORPH"
-path = "~/Developer/lattica/polymorph/"
-startup_command = "tmux rename-session '󰟥 POLYMORPH'"
+name = "├── pm"
+path = "~/Developer/lattica/pm/"
+startup_command = "tmux rename-session 'pm'"
 
 [[session]]
-name = "├── 𝐀𝐯󰁕λ𝐯 AMM"
+name = "├── AMM"
 path = "~/Developer/lattica/amm/"
-startup_command = "tmux rename-session '𝐀𝐯󰁕λ𝐯 AMM'"
+startup_command = "tmux rename-session 'AMM'"
 
 [[session]]
-name = "╰──  CTF"
+name = "╰── CTF"
 path = "~/Developer/lattica/vy-ctf/"
 startup_command = "tmux rename-session ' CTF'"
 
 [[session]]
-name = " NEOVIM"
+name = "NEOVIM"
 path = "~/.config/nvim"
 # startup_command = "nvim"
 
 [[session]]
-name = "󰍩 PHYT.FUN"
+name = "PHYT.FUN"
 path = "~/Developer/phyt.fun"
 # startup_command = "nvim"
 
 [[session]]
-name = "󰢛 ANVIL"
+name = "ANVIL"
 path = "~/Developer/lattica/"
 startup_command = "anvil"
 
 [[session]]
-name = " LATEX"
+name = "LATEX"
 path = "~/Papers/"
 # startup_command = "nvim"
 
 [[session]]
-name = "󰣀 VOYAGER-1"
+name = "VOYAGER-1"
 startup_command = "ssh voyager-1 tmux new-session -A -s main"
 
 # [[session]]
