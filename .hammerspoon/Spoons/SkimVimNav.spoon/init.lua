@@ -8,6 +8,23 @@ obj.appWatcher = nil
 obj.eventtap = nil
 obj.scrollAmount = 128
 
+local function getSkimWindow()
+	local app = hs.application.find("net.sourceforge.skim-app.skim")
+	if app then
+		return app:focusedWindow()
+	end
+	return nil
+end
+
+local function getSkimCenter()
+	local win = getSkimWindow()
+	if win then
+		local frame = win:frame()
+		return { x = frame.x + frame.w / 2, y = frame.y + frame.h / 2 }
+	end
+	return nil
+end
+
 local function isTextField()
 	local focused = hs.uielement.focusedElement()
 	if focused then
@@ -30,8 +47,8 @@ end
 
 function obj:createEventtap()
 	return hs.eventtap.new({ hs.eventtap.event.types.keyDown, hs.eventtap.event.types.keyRepeat }, function(event)
-		local frontApp = hs.application.frontmostApplication()
-		if not frontApp or frontApp:name() ~= "Skim" then
+		local skimCenter = getSkimCenter()
+		if not skimCenter then
 			return false
 		end
 
@@ -47,11 +64,11 @@ function obj:createEventtap()
 		local keyMap = hs.keycodes.map
 		local actions = {
 			[keyMap["j"]] = function()
-				hs.eventtap.scrollWheel({ 0, -self.scrollAmount }, {}, "pixel")
+				hs.eventtap.scrollWheel({ 0, -self.scrollAmount }, skimCenter, "pixel")
 				return true
 			end,
 			[keyMap["k"]] = function()
-				hs.eventtap.scrollWheel({ 0, self.scrollAmount }, {}, "pixel")
+				hs.eventtap.scrollWheel({ 0, self.scrollAmount }, skimCenter, "pixel")
 				return true
 			end,
 			[keyMap["h"]] = function()
