@@ -67,10 +67,10 @@ preset = "qwerty"
 [gaps]
 inner.horizontal = 9
 inner.vertical = 9
-outer.left = 18
-outer.bottom = 15
-outer.top = 15
-outer.right = 18
+outer.left = 12
+outer.bottom = 9
+outer.top = 9
+outer.right = 12
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -226,6 +226,10 @@ run = "move-node-to-workspace 6"
 [[on-window-detected]]
 if.app-id = "com.apple.Stickies"
 run = ["move-node-to-workspace 9", "layout floating"]
+
+[[on-window-detected]]
+if.app-id = "com.apple.FaceTime"
+run = ["layout floating"]
 
 [[on-window-detected]]
 if.app-id = "org.zotero.zotero"
