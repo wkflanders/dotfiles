@@ -3,6 +3,7 @@ return {
   lazy = false,
   opts = {
     default_file_explorer = true,
+    delete_to_trash = true,
     view_options = {
       show_hidden = true,
     },
@@ -10,7 +11,7 @@ return {
       padding = 0,
       -- max_width = 1,
       -- max_height = 1,
-      border = "none",
+      -- border = "none",
       win_options = {
         winblend = 0,
       },

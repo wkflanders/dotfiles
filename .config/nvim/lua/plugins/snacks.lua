@@ -44,26 +44,26 @@ return {
       sources = {
         files = {
           hidden = true,
-          layout = {
-            layout = {
-              -- backdrop = false,
-              row = 1,
-              width = 0.5,
-              min_width = 60,
-              height = 0.9,
-              border = "none",
-              box = "vertical",
-              { win = "preview", title = "{preview}", height = 0.45, border = true },
-              {
-                box = "vertical",
-                border = true,
-                title = "{title} {live} {flags}",
-                title_pos = "center",
-                { win = "input", height = 1, border = "bottom" },
-                { win = "list", border = "none" },
-              },
-            },
-          },
+          -- layout = {
+          --   layout = {
+          --     -- backdrop = false,
+          --     row = 1,
+          --     width = 0.5,
+          --     min_width = 60,
+          --     height = 0.9,
+          --     border = "none",
+          --     box = "vertical",
+          --     { win = "preview", title = "{preview}", height = 0.45, border = true },
+          --     {
+          --       box = "vertical",
+          --       border = true,
+          --       title = "{title} {live} {flags}",
+          --       title_pos = "center",
+          --       { win = "input", height = 1, border = "bottom" },
+          --       { win = "list", border = "none" },
+          --     },
+          --   },
+          -- },
         },
         explorer = {
           enabled = false,

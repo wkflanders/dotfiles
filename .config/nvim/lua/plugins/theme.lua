@@ -18,29 +18,29 @@
 --   end,
 -- }
 
+-- return {
+--   "mellow-theme/mellow.nvim",
+--   name = "mellow",
+--   lazy = false,
+--   priorty = 1000,
+--   config = function()
+--     vim.cmd.colorscheme("mellow")
+--   end,
+-- }
+
 return {
-  "mellow-theme/mellow.nvim",
-  name = "mellow",
+  "dgox16/oldworld.nvim",
+  name = "oldworld",
   lazy = false,
-  priorty = 1000,
+  priority = 1000,
   config = function()
-    vim.cmd.colorscheme("mellow")
+    require("oldworld").setup({
+      variant = "cooler",
+    })
+    vim.cmd.colorscheme("oldworld")
   end,
 }
 
--- return {
---   "dgox16/oldworld.nvim",
---   name = "oldworld",
---   lazy = false,
---   priority = 1000,
---   config = function()
---     require("oldworld").setup({
---       variant = "cooler",
---     })
---     vim.cmd.colorscheme("oldworld")
---   end,
--- }
---
 -- return {
 --   "ribru17/bamboo.nvim",
 --   lazy = false,
