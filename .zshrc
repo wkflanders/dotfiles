@@ -167,7 +167,7 @@ function sesh-sessions() {
 
     local session
     session=$(
-      eval "$list_cmd" | fzf-tmux -p 80%,70% \
+      eval "$list_cmd" | fzf-tmux -p -w 10% -h 10% \
         --layout=reverse \
         --no-sort --ansi --border-label ' sesh ' --prompt '⚡  ' \
         --header '  ^a all ^t tmux ^g configs ^x zoxide ^d tmux kill ^f find' \
@@ -194,7 +194,6 @@ bindkey -M vicmd '__SUPER_S__' sesh-sessions
 bindkey -M viins '__SUPER_S__' sesh-sessions
 
 # aliases
-alias pm="polymorph"
 alias nv='nvim'                                                                                                          # Open neovim (alternative)
 alias z-='z -'                                                                                                           # Navigate to previous directory using zoxide
 alias cd..='z ..'                                                                                                        # Go up one directory using zoxide
