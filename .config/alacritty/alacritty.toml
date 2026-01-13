@@ -1,6 +1,11 @@
+#:tombi schema.strict = false
+
+# tombi complains about setting osc52
+# just make sure you don't allow "paste" unless you really know what you're doing
 [general]
 # import = ["~/.config/alacritty/anysphere.toml"]
 import = ["~/.config/alacritty/mellow.toml"]
+# import = ["~/.config/alacritty/oldworld.toml"]
 live_config_reload = true
 
 [window]
@@ -10,6 +15,9 @@ decorations = "buttonless"
 dynamic_title = true
 # opacity = 0.75
 # blur = true
+
+[terminal]
+osc52 = "OnlyCopy"
 
 [font]
 size = 18
