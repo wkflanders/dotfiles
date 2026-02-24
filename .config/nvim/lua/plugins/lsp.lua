@@ -1,10 +1,22 @@
+local customizations = {
+  { rule = "style/*", severity = "off", fixable = true },
+  { rule = "format/*", severity = "off", fixable = true },
+  { rule = "*-indent", severity = "off", fixable = true },
+  { rule = "*-spacing", severity = "off", fixable = true },
+  { rule = "*-spaces", severity = "off", fixable = true },
+  { rule = "*-order", severity = "off", fixable = true },
+  { rule = "*-dangle", severity = "off", fixable = true },
+  { rule = "*-newline", severity = "off", fixable = true },
+  { rule = "*quotes", severity = "off", fixable = true },
+  { rule = "*semi", severity = "off", fixable = true },
+}
+
 return {
   {
     "neovim/nvim-lspconfig",
     opts = function(_, opts)
       local configs = require("lspconfig.configs")
       local util = require("lspconfig.util")
-
       if not configs.vyper then
         configs.vyper = {
           default_config = {
@@ -14,20 +26,51 @@ return {
           },
         }
       end
-
       opts = opts or {}
       opts.servers = vim.tbl_deep_extend("force", opts.servers or {}, {
         bashls = {},
         cssls = {},
         dockerls = {},
         docker_compose_language_service = {},
+        eslint = {
+          filetypes = {
+            "javascript",
+            "javascriptreact",
+            "javascript.jsx",
+            "typescript",
+            "typescriptreact",
+            "typescript.tsx",
+            "vue",
+            "html",
+            "markdown",
+            "json",
+            "jsonc",
+            "yaml",
+            "toml",
+            "xml",
+            "gql",
+            "graphql",
+            "astro",
+            "svelte",
+            "css",
+            "less",
+            "scss",
+            "pcss",
+            "postcss",
+          },
+          settings = {
+            rulesCustomizations = customizations,
+          },
+        },
         gopls = {},
         html = {},
         jsonls = {},
         lua_ls = {
           settings = {
             Lua = {
-              diagnostics = { globals = { "vim" } },
+              diagnostics = {
+                globals = { "vim", "ls", "s", "t", "i", "f", "d", "fmt", "rep", "fmta", "line_begin" },
+              },
               workspace = { checkThirdParty = false },
               telemetry = { enable = false },
             },
@@ -35,17 +78,13 @@ return {
         },
         marksman = {},
         pyright = { single_file_support = true, filetypes = { "python" } },
-        rnix = {},
         tailwindcss = {},
-        terraformls = {},
-        tflint = {},
         yamlls = {},
         ts_ls = {},
         ruff = { filetypes = { "python" } },
         vyper = { mason = false, filetypes = { "vyper", "vy" } },
-        custom_elements_ls = false, -- EDIT: disable crashing custom_elements_ls client
+        custom_elements_ls = false,
       })
-
       opts.setup = opts.setup or {}
       opts.setup.vyper = function(_, server_opts)
         local venv = vim.env.VIRTUAL_ENV
@@ -57,7 +96,6 @@ return {
         server_opts.filetypes = { "vyper", "vy" }
         return false
       end
-
       return opts
     end,
   },
@@ -69,15 +107,16 @@ return {
         "cssls",
         "dockerls",
         "docker_compose_language_service",
+        "eslint",
         "gopls",
         "html",
         "jsonls",
         "lua_ls",
-        "rnix",
+        -- "rnix",
         "solidity_ls_nomicfoundation",
         "tailwindcss",
-        "terraformls",
-        "tflint",
+        -- "terraformls",
+        -- "tflint",
         "yamlls",
         "ts_ls",
         "pyright",

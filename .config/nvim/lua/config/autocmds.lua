@@ -60,21 +60,3 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
   end,
 })
-
--- -- LaTeX format on save
--- vim.api.nvim_create_autocmd("BufWritePre", {
---   pattern = "*.tex",
---   callback = function()
---     -- Only run if VimtexFormat exists
---     if vim.fn.exists(":VimtexFormat") == 2 then
---       vim.cmd("silent VimtexFormat")
---     end
---   end,
--- })
---
--- vim.api.nvim_create_autocmd("FileType", {
---   pattern = "snacks_layout_box",
---   callback = function()
---     vim.opt_local.statusline = ""
---   end,
--- })

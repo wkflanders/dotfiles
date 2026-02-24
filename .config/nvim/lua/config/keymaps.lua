@@ -20,6 +20,21 @@ vim.keymap.set({ "n", "t" }, "<C-l>", function()
   nav.move("l")
 end, opts)
 
-vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Scroll down and center" })
+local function halfpage_then_center(key) -- key = "<C-d>" or "<C-u>"
+  local before = vim.api.nvim_win_get_cursor(0)[1]
+  local tc = vim.api.nvim_replace_termcodes(key, true, false, true)
+  vim.api.nvim_feedkeys(tc, "n", false)
+  local after = vim.api.nvim_win_get_cursor(0)[1]
 
-vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Scroll up and center" })
+  if after ~= before then
+    vim.cmd("normal! zz")
+  end
+end
+
+vim.keymap.set("n", "<C-d>", function()
+  halfpage_then_center("<C-d>")
+end, { noremap = true, silent = true, desc = "Half-page down then center" })
+
+vim.keymap.set("n", "<C-u>", function()
+  halfpage_then_center("<C-u>")
+end, { noremap = true, silent = true, desc = "Half-page up then center" })

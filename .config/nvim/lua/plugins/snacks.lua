@@ -1,5 +1,109 @@
 return {
   "folke/snacks.nvim",
+  keys = {
+    {
+      "<leader>sL",
+      function()
+        local Snacks = require("snacks")
+        local ls = require("luasnip")
+        local util = require("luasnip.util.util")
+
+        local fts = util.get_snippet_filetypes()
+        if not fts or #fts == 0 then
+          fts = { vim.bo.filetype }
+        end
+
+        local items = {}
+
+        local function doc_lines_for(snip, trig, desc, ft, kind)
+          if type(snip.get_docstring) == "function" then
+            local ok, lines = pcall(snip.get_docstring, snip)
+            if ok and type(lines) == "table" and #lines > 0 then
+              return lines
+            end
+          end
+
+          local lines = {
+            ("trigger: %s"):format(trig),
+            ("type:    %s"):format(kind),
+            ("ft:      %s"):format(ft),
+          }
+          if desc and desc ~= "" and desc ~= trig then
+            table.insert(lines, "")
+            table.insert(lines, desc)
+          end
+          return lines
+        end
+
+        local function add(ft, snip, is_auto)
+          local trig = snip.trigger or snip.trig
+          if type(trig) ~= "string" or trig == "" then
+            return
+          end
+
+          local desc = snip.name or snip.dscr or ""
+          if type(desc) ~= "string" then
+            desc = ""
+          end
+
+          local kind = is_auto and "autosnippet" or "snippet"
+          local lines = doc_lines_for(snip, trig, desc, ft, kind)
+
+          local tmp = vim.fn.tempname() .. ".snip"
+          vim.fn.writefile(lines, tmp)
+
+          items[#items + 1] = {
+            trig = trig,
+            desc = desc,
+            ft = ft,
+            auto = is_auto,
+            file = tmp,
+            lnum = 1,
+            col = 1,
+            text = trig .. " " .. desc .. " " .. ft,
+          }
+        end
+
+        for _, ft in ipairs(fts) do
+          for _, snip in ipairs(ls.get_snippets(ft) or {}) do
+            add(ft, snip, false)
+          end
+          for _, snip in ipairs(ls.get_snippets(ft, { type = "autosnippets" }) or {}) do
+            add(ft, snip, true)
+          end
+        end
+
+        table.sort(items, function(a, b)
+          if a.trig == b.trig then
+            return (a.ft or "") < (b.ft or "")
+          end
+          return a.trig < b.trig
+        end)
+
+        Snacks.picker.pick({
+          title = "LuaSnip Snippets",
+          items = items,
+          format = function(item)
+            local badge = item.auto and "A" or "S"
+            local desc = (item.desc ~= "" and item.desc ~= item.trig) and item.desc or nil
+            return {
+              { badge .. " ", "Comment" },
+              { item.trig, "Identifier" },
+              desc and { "  " .. desc, "Comment" } or nil,
+              { "  [" .. (item.ft or "?") .. "]", "Comment" },
+            }
+          end,
+          confirm = function(picker, item)
+            picker:close()
+            if item and item.trig then
+              vim.api.nvim_put({ item.trig }, "c", true, true)
+            end
+          end,
+        })
+      end,
+      desc = "Snippets (LuaSnip list)",
+    },
+  },
   opts = {
     explorer = { enabled = false },
     dashboard = { enabled = true },
@@ -44,26 +148,31 @@ return {
       sources = {
         files = {
           hidden = true,
-          -- layout = {
-          --   layout = {
-          --     -- backdrop = false,
-          --     row = 1,
-          --     width = 0.5,
-          --     min_width = 60,
-          --     height = 0.9,
-          --     border = "none",
-          --     box = "vertical",
-          --     { win = "preview", title = "{preview}", height = 0.45, border = true },
-          --     {
-          --       box = "vertical",
-          --       border = true,
-          --       title = "{title} {live} {flags}",
-          --       title_pos = "center",
-          --       { win = "input", height = 1, border = "bottom" },
-          --       { win = "list", border = "none" },
-          --     },
-          --   },
-          -- },
+          layout = {
+            preset = "telescope",
+            preview = { enabled = false },
+            layout = {
+              width = 0.8,
+              -- layout = {
+              --   layout = {
+              --     -- backdrop = false,
+              --     row = 1,
+              --     width = 0.5,
+              --     min_width = 60,
+              --     height = 0.9,
+              --     border = "none",
+              --     box = "vertical",
+              --     { win = "preview", title = "{preview}", height = 0.45, border = true },
+              --     {
+              --       box = "vertical",
+              --       border = true,
+              --       title = "{title} {live} {flags}",
+              --       title_pos = "center",
+              --       { win = "input", height = 1, border = "bottom" },
+              --       { win = "list", border = "none" },
+              --     },
+            },
+          },
         },
         explorer = {
           enabled = false,
@@ -111,8 +220,8 @@ return {
                   return
                 end
                 local result = values[i]
-                vim.fn.setreg('"', result) -- Neovim unnamed register
-                vim.fn.setreg("+", result) -- System clipboard
+                vim.fn.setreg('"', result)
+                vim.fn.setreg("+", result)
                 vim.notify("Copied: " .. result)
               end)
             end,
