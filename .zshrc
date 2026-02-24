@@ -11,6 +11,9 @@ fi
 
 export GPG_TTY=$(tty)
 
+# scripts
+export PATH="$HOME/bin:$PATH"
+
 # pnpm
 export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
@@ -109,6 +112,8 @@ alias cloc-phyt='cloc "$HOME/Developer/phyt.fun" --vcs=git --exclude-dir=dist,co
 alias vim="nvim"
 # alias vi="nvim"
 # alias nvim="nvim ."
+
+alias sshr="ssh ryzen9-7950x"
 
 # Tmux auto setup
 # alias ta="~/.tmux/auto-setup.sh"
@@ -219,7 +224,7 @@ alias lsf='eza -1  --icons=always | wc -l'                                      
 alias lss='eza -la --group-directories-first --sort=size --icons=always'                                                 # Sort by size
 alias cls='clear'                                                                                                        # Clear the terminal screen
 alias oldtop="/usr/bin/top"                                                                                              # Run the original top command
-alias nf="neofetch"                                                                                                      # Display system information using neofetch
+alias nf="fastfetch"                                                                                                      # Display system information using neofetch
 alias of='onefetch --no-color-palette --include-hidden -E --no-title --ascii-input "$(cat ~/dotfiles/logos/logo.txt)"'   # Display git repository information using onefetch with logo
 alias ep="echo $PATH"                                                                                                    # Print the PATH environment variable
 alias resh="source ~/.config/fish/config.fish"                                                                           # Reload the fish configuration
@@ -301,3 +306,7 @@ eval "$(starship init zsh)"
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # source "$HOME/.config/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
+# opencode
+export PATH=/Users/williamflanders/.opencode/bin:$PATH
+
+pfetch
