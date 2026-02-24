@@ -149,12 +149,13 @@ chars = "\u001b0"
 # mods = "Command|Shift"
 # chars = "\u001bn"
 
+# NOTE: This is mapping ⌘ [ -> M-p (ESC-p)
 [[keyboard.bindings]]
 key = "["
 mods = "Command"
 chars = "\u001bp"
 
-# ⌘H/J/K/L + U/D -> vim-aware navigation
+# ⌘ H/J/K/L + U/D -> vim-aware navigation
 [[keyboard.bindings]]
 key = "H"
 mods = "Command"
@@ -216,6 +217,12 @@ key = "Semicolon"
 mods = "Command"
 chars = "\u001b:"
 
+# Map ⌘ ⇧ ctrl TAB -> M -
+[[keyboard.bindings]]
+key = "Tab"
+mods = "Control|Alt|Shift"
+chars = "\u001b,"  # M-,
+
 # Deprecated tmux detach keybind
 # [[keyboard.bindings]]
 # key = "D"
@@ -234,7 +241,7 @@ key = "Backslash"
 mods = "Command"
 chars = "\u001b|"  # ESC + |
 
-# Meta + MINUS for ⌘ -
+# Meta + MINUS + MINUS for ⌘ -
 [[keyboard.bindings]]
 key = "Minus"
 mods = "Command"
@@ -246,7 +253,7 @@ key = "Minus"
 mods = "Command|Shift"
 chars = "\u001b_"
 
-# Resizing with ⌘⇧H/J/K/L (send M-H/J/K/L)
+# Resizing with ⌘ ⇧ H/J/K/L (send M-H/J/K/L)
 [[keyboard.bindings]]
 key = "H"
 mods = "Command|Shift"
