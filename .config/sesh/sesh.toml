@@ -14,20 +14,30 @@ name = "HOME"
 path = "~/"
 
 [[session]]
-name = "RUST KILLER"
+name = "RYZEN9-7950X"
 # startup_command = "ssh rust-killer tmux new-session -A -s main"
-startup_command = "ssh rust-killer"
+startup_command = "ssh ryzen9-7950x"
+
+[[session]]
+name = "PORTFOLIO"
+path = "~/Developer/portfolio/"
+# startup_command = "nvim"
 
 [[session]]
 name = "LATTICA"
-path = "~/Developer/lattica/core"
+path = "~/Developer/lattica/"
 # startup_command = "tmux rename-window core && nvim"
 # windows = ["frontend", "polymorph", "amm", "vy-ctf"]
 
 [[session]]
-name = "├── WHITEPAPER"
-path = "~/Developer/lattica/docs/"
-startup_command = "tmux rename-session 'WHITEPAPER'"
+name = "├── WHITEPAPER-1"
+path = "~/Developer/lattica/docs/lending-on-pm/"
+startup_command = "tmux rename-session 'WHITEPAPER-1'"
+
+[[session]]
+name = "├── WHITEPAPER-2"
+path = "~/Developer/lattica/docs/lattica-protocol/"
+startup_command = "tmux rename-session 'WHITEPAPER-2'"
 
 [[session]]
 name = "├── CORE"
@@ -35,14 +45,24 @@ path = "~/Developer/lattica/core/"
 startup_command = "tmux rename-session 'CORE'"
 
 [[session]]
-name = "├── ╰── EXPERIMENTS"
+name = "│   ╰── EXPERIMENTS"
 path = "~/Developer/lattica/experiments/"
 startup_command = "tmux rename-session 'EXPERIMENTS'"
 
 [[session]]
-name = "├── FRONTEND"
-path = "~/Developer/lattica/frontend/"
+name = "├── dapp"
+path = "~/Developer/lattica/dapp/"
+startup_command = "tmux rename-session 'dapp'"
+
+[[session]]
+name = "│   ├── FRONTEND"
+path = "~/Developer/lattica/dapp/frontend/"
 startup_command = "tmux rename-session 'FRONTEND'"
+
+[[session]]
+name = "│   ╰── REST-API"
+path = "~/Developer/lattica/dapp/rest-api/"
+startup_command = "tmux rename-session 'REST-API'"
 
 [[session]]
 name = "├── pm"
@@ -60,8 +80,8 @@ path = "~/Developer/lattica/vy-ctf/"
 startup_command = "tmux rename-session ' CTF'"
 
 [[session]]
-name = "NEOVIM"
-path = "~/.config/nvim"
+name = "UBERTRAGEN"
+path = "~/Ubertragen/"
 # startup_command = "nvim"
 
 [[session]]
@@ -70,14 +90,14 @@ path = "~/Developer/phyt.fun"
 # startup_command = "nvim"
 
 [[session]]
+name = "NEOVIM"
+path = "~/.config/nvim"
+# startup_command = "nvim"
+
+[[session]]
 name = "ANVIL"
 path = "~/Developer/lattica/"
 startup_command = "anvil"
-
-[[session]]
-name = "LATEX"
-path = "~/Papers/"
-# startup_command = "nvim"
 
 [[session]]
 name = "VOYAGER-1"
