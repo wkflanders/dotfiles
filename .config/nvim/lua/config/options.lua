@@ -5,6 +5,8 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+vim.opt.listchars = { tab = "  " }
+
 vim.api.nvim_create_user_command("HighlightHex", function()
   local highlights = vim.api.nvim_exec2("highlight", { output = true })
   for line in highlights.output:gmatch("[^\r\n]+") do
