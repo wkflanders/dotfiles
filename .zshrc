@@ -89,7 +89,7 @@ alias cd="z"
 # eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/themes/rose-pine-mock.omp.json)"
 
 # claude
-alias claude="${CLAUDE_BIN:-$HOME/.claude/local/claude}"
+alias claude="${CLAUDE_BIN:-$HOME/.local/bin/claude}"
 
 # vault (VAULT_ADDR in env file)
 alias envdev='envconsul -once -pristine -no-prefix -secret="kv/data/dev" --'
