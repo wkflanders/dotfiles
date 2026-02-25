@@ -32,6 +32,7 @@ return {
         cssls = {},
         dockerls = {},
         docker_compose_language_service = {},
+        biome = {},
         eslint = {
           filetypes = {
             "javascript",
@@ -98,29 +99,5 @@ return {
       end
       return opts
     end,
-  },
-  {
-    "mason-org/mason-lspconfig.nvim",
-    opts = {
-      ensure_installed = {
-        "bashls",
-        "cssls",
-        "dockerls",
-        "docker_compose_language_service",
-        "eslint",
-        "gopls",
-        "html",
-        "jsonls",
-        "lua_ls",
-        -- "rnix",
-        "solidity_ls_nomicfoundation",
-        "tailwindcss",
-        -- "terraformls",
-        -- "tflint",
-        "yamlls",
-        "ts_ls",
-        "pyright",
-      },
-    },
   },
 }

@@ -3,16 +3,24 @@ return {
     "stevearc/conform.nvim",
     opts = {
       notify_on_error = true,
+      formatters = {
+        biome = {
+          condition = function(_, ctx)
+            return vim.fs.find("biome.json", { path = ctx.dirname, upward = true })[1] ~= nil
+          end,
+          args = { "check", "--write", "--stdin-file-path", "$FILENAME" },
+        },
+      },
       formatters_by_ft = {
-        javascript = { "prettier" },
-        typescript = { "prettier" },
-        typescriptreact = { "prettier" },
-        javascriptreact = { "prettier" },
-        json = { "prettier" },
-        jsonc = { "prettier" },
+        javascript = { "biome", "prettier", stop_after_first = true },
+        typescript = { "biome", "prettier", stop_after_first = true },
+        typescriptreact = { "biome", "prettier", stop_after_first = true },
+        javascriptreact = { "biome", "prettier", stop_after_first = true },
+        json = { "biome", "prettier", stop_after_first = true },
+        jsonc = { "biome", "prettier", stop_after_first = true },
+        html = { "biome", "prettier", stop_after_first = true },
+        css = { "biome", "prettier", stop_after_first = true },
         yaml = { "prettier" },
-        html = { "prettier" },
-        css = { "prettier" },
         scss = { "prettier" },
         less = { "prettier" },
         markdown = { "prettier" },
