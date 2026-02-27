@@ -29,6 +29,7 @@ return {
         lua = { "stylua" },
         python = { "black" },
         sh = { "shfmt" },
+        vyper = { "mamushi" },
       },
     },
   },

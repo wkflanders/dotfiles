@@ -17,12 +17,20 @@ return {
     opts = function(_, opts)
       local configs = require("lspconfig.configs")
       local util = require("lspconfig.util")
-      if not configs.vyper then
-        configs.vyper = {
+
+      local vyper_cmd = { "vyper-lsp" }
+      local venv = vim.env.VIRTUAL_ENV
+      if venv and vim.fn.executable(venv .. "/bin/vyper-lsp") == 1 then
+        vyper_cmd = { venv .. "/bin/vyper-lsp" }
+      end
+
+      if not configs.vyper_lsp then
+        configs.vyper_lsp = {
           default_config = {
-            cmd = { "vyper-lsp" },
-            filetypes = { "vyper", "vy" },
+            cmd = vyper_cmd,
+            filetypes = { "vyper" },
             root_dir = util.root_pattern("pyproject.toml", ".git"),
+            single_file_support = true,
           },
         }
       end
@@ -83,20 +91,23 @@ return {
         yamlls = {},
         ts_ls = {},
         ruff = { filetypes = { "python" } },
-        vyper = { mason = false, filetypes = { "vyper", "vy" } },
+        vyper_lsp = {
+          mason = false,
+          filetypes = { "vyper" },
+          single_file_support = true,
+        },
         custom_elements_ls = false,
       })
       opts.setup = opts.setup or {}
-      opts.setup.vyper = function(_, server_opts)
+      opts.setup.vyper_lsp = function(_, server_opts)
         local venv = vim.env.VIRTUAL_ENV
         if venv and vim.fn.executable(venv .. "/bin/vyper-lsp") == 1 then
           server_opts.cmd = { venv .. "/bin/vyper-lsp" }
-        elseif vim.fn.executable("vyper-lsp") == 1 then
-          server_opts.cmd = { "vyper-lsp" }
         end
-        server_opts.filetypes = { "vyper", "vy" }
+        server_opts.root_dir = util.root_pattern("pyproject.toml", ".git")
         return false
       end
+
       return opts
     end,
   },
