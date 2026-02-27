@@ -7,6 +7,7 @@ vim.filetype.add({
   extension = {
     ctmpl = "gotmpl",
     vy = "vyper",
+    vyi = "vyper",
   },
 })
 
