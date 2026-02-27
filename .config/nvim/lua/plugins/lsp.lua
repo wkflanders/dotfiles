@@ -15,25 +15,6 @@ return {
   {
     "neovim/nvim-lspconfig",
     opts = function(_, opts)
-      local configs = require("lspconfig.configs")
-      local util = require("lspconfig.util")
-
-      local vyper_cmd = { "vyper-lsp" }
-      local venv = vim.env.VIRTUAL_ENV
-      if venv and vim.fn.executable(venv .. "/bin/vyper-lsp") == 1 then
-        vyper_cmd = { venv .. "/bin/vyper-lsp" }
-      end
-
-      if not configs.vyper_lsp then
-        configs.vyper_lsp = {
-          default_config = {
-            cmd = vyper_cmd,
-            filetypes = { "vyper" },
-            root_dir = util.root_pattern("pyproject.toml", ".git"),
-            single_file_support = true,
-          },
-        }
-      end
       opts = opts or {}
       opts.servers = vim.tbl_deep_extend("force", opts.servers or {}, {
         bashls = {},
@@ -91,23 +72,9 @@ return {
         yamlls = {},
         ts_ls = {},
         ruff = { filetypes = { "python" } },
-        vyper_lsp = {
-          mason = false,
-          filetypes = { "vyper" },
-          single_file_support = true,
-        },
         custom_elements_ls = false,
       })
       opts.setup = opts.setup or {}
-      opts.setup.vyper_lsp = function(_, server_opts)
-        local venv = vim.env.VIRTUAL_ENV
-        if venv and vim.fn.executable(venv .. "/bin/vyper-lsp") == 1 then
-          server_opts.cmd = { venv .. "/bin/vyper-lsp" }
-        end
-        server_opts.root_dir = util.root_pattern("pyproject.toml", ".git")
-        return false
-      end
-
       return opts
     end,
   },
