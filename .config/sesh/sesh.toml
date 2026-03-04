@@ -40,17 +40,17 @@ path = "~/Developer/lattica/docs/lattica-protocol/"
 startup_command = "tmux rename-session 'WHITEPAPER-2'"
 
 [[session]]
+name = "├── VYPER LS"
+path = "~/Developer/lattica/vyper-language-server/"
+startup_command = "tmux rename-session 'VY-LS'"
+
+[[session]]
 name = "├── CORE"
 path = "~/Developer/lattica/core/"
 startup_command = "tmux rename-session 'CORE'"
 
 [[session]]
-name = "│   ╰── EXPERIMENTS"
-path = "~/Developer/lattica/experiments/"
-startup_command = "tmux rename-session 'EXPERIMENTS'"
-
-[[session]]
-name = "├── dapp"
+name = "├── DAPP"
 path = "~/Developer/lattica/dapp/"
 startup_command = "tmux rename-session 'dapp'"
 
