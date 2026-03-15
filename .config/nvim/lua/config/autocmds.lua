@@ -28,6 +28,37 @@ vim.filetype.add({
   extension = { sol = "solidity" },
 })
 
+local group = vim.api.nvim_create_augroup("bufferline_visibility", { clear = true })
+
+local function has_named_file_buffers()
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    if
+      vim.api.nvim_buf_is_loaded(buf)
+      and vim.bo[buf].buflisted
+      and vim.bo[buf].buftype == ""
+      and vim.api.nvim_buf_get_name(buf) ~= ""
+    then
+      return true
+    end
+  end
+  return false
+end
+
+local function update_showtabline()
+  vim.o.showtabline = has_named_file_buffers() and 2 or 0
+end
+
+vim.api.nvim_create_autocmd({
+  "BufAdd",
+  "BufDelete",
+  "BufEnter",
+  "BufFilePost",
+  "VimEnter",
+}, {
+  group = group,
+  callback = update_showtabline,
+})
+
 -- Override diagnostic handler to filter ModuleNotFound
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)

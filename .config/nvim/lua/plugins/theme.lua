@@ -18,6 +18,9 @@
 --   end,
 -- }
 
+---------------------------------------
+-- THE HOLY TRINITY OF VISUAL HEAT
+---------------------------------------
 -- return {
 --   "mellow-theme/mellow.nvim",
 --   name = "mellow",
@@ -28,16 +31,42 @@
 --   end,
 -- }
 
+-- return {
+--   "dgox16/oldworld.nvim",
+--   name = "oldworld",
+--   lazy = false,
+--   priority = 1000,
+--   config = function()
+--     require("oldworld").setup({
+--       variant = "cool",
+--     })
+--     vim.cmd.colorscheme("oldworld")
+--   end,
+-- }
+
 return {
-  "dgox16/oldworld.nvim",
-  name = "oldworld",
+  "topazape/oldtale.nvim",
+  name = "oldtale",
   lazy = false,
-  priority = 1000,
+  priorty = 1000,
   config = function()
-    require("oldworld").setup({
-      variant = "cooler",
+    require("oldtale").setup({
+      terminal_colors = false,
+      integrations = {
+        cmp = true,
+        gitsigns = true,
+        lazy = true,
+        lsp = true,
+        markdown = true,
+        mason = true,
+        noice = true,
+        notify = true,
+        rainbow_delimiters = true,
+        snacks = true,
+        treesitter = true,
+      },
     })
-    vim.cmd.colorscheme("oldworld")
+    vim.cmd.colorscheme("oldtale")
   end,
 }
 

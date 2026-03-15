@@ -4,8 +4,10 @@ return {
     opts.options = opts.options or {}
     opts.options.globalstatus = false
     opts.options.disabled_filetypes = opts.options.disabled_filetypes or {}
+
     local df = opts.options.disabled_filetypes
     df.statusline = df.statusline or {}
+
     local function ensure(ft)
       for _, v in ipairs(df.statusline) do
         if v == ft then
@@ -14,7 +16,9 @@ return {
       end
       table.insert(df.statusline, ft)
     end
+
     ensure("snacks_layout_box")
+
     opts.inactive_sections = {
       lualine_a = {},
       lualine_b = {},
@@ -23,7 +27,24 @@ return {
       lualine_y = {},
       lualine_z = {},
     }
+
     opts.sections = opts.sections or {}
+
+    opts.sections.lualine_c = {
+      {
+        "filename",
+        path = 0, -- 0 filename only, 1 relative path, 2 absolute path
+        symbols = {
+          modified = " ●",
+          readonly = " ",
+          unnamed = "",
+          newfile = "",
+        },
+      },
+    }
+
     opts.sections.lualine_z = {}
+
+    return opts
   end,
 }

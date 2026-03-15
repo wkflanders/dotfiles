@@ -6,6 +6,7 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 vim.opt.listchars = { tab = "  " }
+vim.opt.cursorline = false
 
 vim.api.nvim_create_user_command("HighlightHex", function()
   local highlights = vim.api.nvim_exec2("highlight", { output = true })
@@ -20,3 +21,9 @@ vim.api.nvim_create_user_command("HighlightHex", function()
     end
   end
 end, {})
+
+vim.api.nvim_create_autocmd("VimLeavePre", {
+  callback = function()
+    vim.lsp.stop_client(vim.lsp.get_clients(), true) -- true = force kill
+  end,
+})

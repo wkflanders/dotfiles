@@ -152,7 +152,10 @@ return {
             preset = "telescope",
             preview = { enabled = false },
             layout = {
-              width = 0.8,
+              width = 0.65,
+              min_width = 60,
+              max_width = 100,
+              height = 0.9,
               -- layout = {
               --   layout = {
               --     -- backdrop = false,
