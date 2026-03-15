@@ -1,9 +1,3 @@
-# yes I don't use oh my zsh
-# I'm stuck, I think
-# "well if it works right now, it works"
-# but like most things I build,
-# my configs are a house of cards
-
 # Load per-machine / private env vars
 if [ -f "$HOME/.zsh/env.local.zsh" ]; then
   source "$HOME/.zsh/env.local.zsh"
@@ -13,6 +7,9 @@ export GPG_TTY=$(tty)
 
 # scripts
 export PATH="$HOME/bin:$PATH"
+
+# update curl (macOS comes with antique native version)
+export PATH="/opt/homebrew/opt/curl/bin:$PATH"
 
 # pnpm
 export PNPM_HOME="$HOME/Library/pnpm"
@@ -91,9 +88,6 @@ alias cd="z"
 # claude
 alias claude="${CLAUDE_BIN:-$HOME/.local/bin/claude}"
 
-# vault (VAULT_ADDR in env file)
-alias envdev='envconsul -once -pristine -no-prefix -secret="kv/data/dev" --'
-
 # bun completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
@@ -159,44 +153,44 @@ lazydot() {
 }
 
 # sesh (outside of tmux) picker
-function sesh-sessions() {
-  {
-    if [[ -n "$TMUX" || -n "$NVIM_LISTEN_ADDRESS" ]]; then
-      return
-    fi
+# function sesh-sessions() {
+#   {
+#     if [[ -n "$TMUX" || -n "$NVIM_LISTEN_ADDRESS" ]]; then
+#       return
+#     fi
+#
+#     exec </dev/tty
+#     exec <&1
+#
+#     local list_cmd="LC_ALL=en_US.UTF-8 sesh list --icons -t -d -c -z"
+#
+#     local session
+#     session=$(
+#       eval "$list_cmd" | fzf-tmux -p -w 10% -h 10% \
+#         --layout=reverse \
+#         --no-sort --ansi --border-label ' sesh ' --prompt '⚡  ' \
+#         --header '  ^a all ^t tmux ^g configs ^x zoxide ^d tmux kill ^f find' \
+#         --bind 'tab:down,btab:up' \
+#         --bind 'ctrl-a:change-prompt(⚡  )+reload(sesh list --icons)' \
+#         --bind 'ctrl-t:change-prompt(🪟  )+reload(sesh list -t --icons)' \
+#         --bind 'ctrl-g:change-prompt(⚙️  )+reload(sesh list -c --icons)' \
+#         --bind 'ctrl-x:change-prompt(📁  )+reload(sesh list -z --icons)' \
+#         --bind 'ctrl-f:change-prompt(🔎  )+reload(fd -H -d 2 -t d -E .Trash . ~)' \
+#         --bind 'ctrl-d:execute(tmux kill-session -t {2..})+change-prompt(⚡  )+reload(sesh list --icons)' \
+#         --preview-window 'right:55%' \
+#         --preview 'sesh preview {}'
+#     )
+#
+#     zle reset-prompt >/dev/null 2>&1 || true
+#     [[ -z "$session" ]] && return
+#     sesh connect "$session"
+#   }
+# }
 
-    exec </dev/tty
-    exec <&1
-
-    local list_cmd="LC_ALL=en_US.UTF-8 sesh list --icons -t -d -c -z"
-
-    local session
-    session=$(
-      eval "$list_cmd" | fzf-tmux -p -w 10% -h 10% \
-        --layout=reverse \
-        --no-sort --ansi --border-label ' sesh ' --prompt '⚡  ' \
-        --header '  ^a all ^t tmux ^g configs ^x zoxide ^d tmux kill ^f find' \
-        --bind 'tab:down,btab:up' \
-        --bind 'ctrl-a:change-prompt(⚡  )+reload(sesh list --icons)' \
-        --bind 'ctrl-t:change-prompt(🪟  )+reload(sesh list -t --icons)' \
-        --bind 'ctrl-g:change-prompt(⚙️  )+reload(sesh list -c --icons)' \
-        --bind 'ctrl-x:change-prompt(📁  )+reload(sesh list -z --icons)' \
-        --bind 'ctrl-f:change-prompt(🔎  )+reload(fd -H -d 2 -t d -E .Trash . ~)' \
-        --bind 'ctrl-d:execute(tmux kill-session -t {2..})+change-prompt(⚡  )+reload(sesh list --icons)' \
-        --preview-window 'right:55%' \
-        --preview 'sesh preview {}'
-    )
-
-    zle reset-prompt >/dev/null 2>&1 || true
-    [[ -z "$session" ]] && return
-    sesh connect "$session"
-  }
-}
-
-zle     -N             sesh-sessions
-bindkey -M emacs '__SUPER_S__' sesh-sessions
-bindkey -M vicmd '__SUPER_S__' sesh-sessions
-bindkey -M viins '__SUPER_S__' sesh-sessions
+# zle     -N             sesh-sessions
+# bindkey -M emacs '__SUPER_S__' sesh-sessions
+# bindkey -M vicmd '__SUPER_S__' sesh-sessions
+# bindkey -M viins '__SUPER_S__' sesh-sessions
 
 # aliases
 alias nv='nvim'                                                                                                          # Open neovim (alternative)
@@ -234,6 +228,8 @@ alias ftl='find . -type f -name "*.*" -exec basename {} \; | sed "s/.*\.//" | so
 alias ga='git add'                      # Stage changes
 alias gaa='git add .'                   # Stage all changes in current directory
 alias gaaa='git add -A'                 # Stage all changes
+alias gr="git restore"                  # Restore file
+alias grs="git restore --staged"        # Restore staged (files)
 alias gc='git commit'                   # Commit changes
 alias gcm='git commit -m'               # Commit changes with a message
 alias gbr='git branch -M'               # Rename current branch
@@ -309,4 +305,11 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # opencode
 export PATH=/Users/williamflanders/.opencode/bin:$PATH
 
-pfetch
+# Auto-attach/create HOME tmux session in Alacritty
+if [[ -o interactive ]] \
+  && [[ -z "$TMUX" ]] \
+  && [[ "${TERM_PROGRAM:-}" == "alacritty" ]] \
+  && [[ -z "${SSH_CONNECTION:-}" ]] \
+  && [[ -z "${NVIM:-}" ]]; then
+  exec sesh connect HOME
+fi
