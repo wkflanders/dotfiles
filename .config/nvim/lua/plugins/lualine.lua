@@ -33,13 +33,21 @@ return {
     opts.sections.lualine_c = {
       {
         "filename",
-        path = 0, -- 0 filename only, 1 relative path, 2 absolute path
+        path = 0,
         symbols = {
           modified = " ●",
           readonly = " ",
           unnamed = "",
           newfile = "",
         },
+      },
+    }
+
+    opts.sections.lualine_x = {
+      {
+        "filetype",
+        colored = false,
+        icon_only = false,
       },
     }
 

@@ -26,7 +26,7 @@ return {
       local comment = vim.api.nvim_get_hl(0, { name = "Comment" })
 
       local normal_bg = normal.bg and string.format("#%06x", normal.bg) or "NONE"
-      local comment_fg = comment.fg and string.format("#%06x", comment.fg) or "#6c7086"
+      local comment_fg = comment.fg and string.format("#7a849c", comment.fg) or "#7a849c"
 
       vim.api.nvim_set_hl(0, "WinBar", {
         fg = comment_fg,

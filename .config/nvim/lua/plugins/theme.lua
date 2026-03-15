@@ -18,6 +18,18 @@
 --   end,
 -- }
 
+-- return {
+--   "dapovich/anysphere.nvim",
+--   name = "anysphere",
+--   lazy = false,
+--   priority = 1000,
+--   config = function()
+--     require("anysphere").setup({})
+--
+--     vim.cmd.colorscheme("anysphere")
+--   end,
+-- }
+
 ---------------------------------------
 -- THE HOLY TRINITY OF VISUAL HEAT
 ---------------------------------------
@@ -31,29 +43,18 @@
 --   end,
 -- }
 
--- return {
---   "dgox16/oldworld.nvim",
---   name = "oldworld",
---   lazy = false,
---   priority = 1000,
---   config = function()
---     require("oldworld").setup({
---       variant = "cool",
---     })
---     vim.cmd.colorscheme("oldworld")
---   end,
--- }
-
 return {
-  "topazape/oldtale.nvim",
-  name = "oldtale",
+  "dgox16/oldworld.nvim",
+  name = "oldworld",
   lazy = false,
-  priorty = 1000,
+  priority = 1000,
   config = function()
-    require("oldtale").setup({
-      terminal_colors = false,
+    require("oldworld").setup({
+      variant = "default",
+      terminal_colors = true,
       integrations = {
         cmp = true,
+        flash = true,
         gitsigns = true,
         lazy = true,
         lsp = true,
@@ -66,10 +67,56 @@ return {
         treesitter = true,
       },
     })
-    vim.cmd.colorscheme("oldtale")
+    vim.cmd.colorscheme("oldworld")
   end,
 }
 
+-- return {
+--   "topazape/oldtale.nvim",
+--   name = "oldtale",
+--   lazy = false,
+--   priority = 1000,
+--   config = function()
+--     require("oldtale").setup({
+--       terminal_colors = true,
+--       integrations = {
+--         cmp = true,
+--         gitsigns = true,
+--         lazy = true,
+--         lsp = true,
+--         markdown = true,
+--         mason = true,
+--         noice = true,
+--         notify = true,
+--         rainbow_delimiters = true,
+--         snacks = true,
+--         treesitter = true,
+--       },
+--     })
+--
+--     vim.cmd.colorscheme("oldtale")
+--
+--     local bit = bit
+--     local replacement = "#7aa7a3"
+--
+--     local function is_greenish(color)
+--       local r = bit.band(bit.rshift(color, 16), 0xFF)
+--       local g = bit.band(bit.rshift(color, 8), 0xFF)
+--       local b = bit.band(color, 0xFF)
+--       return g > r + 20 and g > b + 20
+--     end
+--
+--     for _, group in ipairs(vim.fn.getcompletion("", "highlight")) do
+--       local ok, hl = pcall(vim.api.nvim_get_hl, 0, { name = group, link = false })
+--       if ok and hl and hl.fg and is_greenish(hl.fg) then
+--         vim.api.nvim_set_hl(0, group, vim.tbl_extend("force", hl, { fg = replacement }))
+--       end
+--     end
+--
+--     vim.g.terminal_color_2 = replacement
+--     vim.g.terminal_color_10 = replacement
+--   end,
+-- }
 -- return {
 --   "ribru17/bamboo.nvim",
 --   lazy = false,

@@ -1,6 +1,7 @@
 return {
   {
     "nvim-mini/mini.icons",
+    enabled = true,
     opts = function(_, opts)
       vim.api.nvim_set_hl(0, "MiniIconsVyper", { fg = "#62688F" })
       opts = opts or {}
@@ -19,10 +20,11 @@ return {
   },
   {
     "nvim-tree/nvim-web-devicons",
+    enabled = false,
     opts = {
       override_by_extension = {
         vy = { icon = "\u{E8DF}", color = "#62688F", name = "Vyper" },
-        vyi = { icon = "\u{E8DF}", color = "#62688F", name = "Vyper Interface" },
+        vyi = { icon = "\u{E8DF}", color = "#62688F", name = "VyperInterface" },
       },
     },
   },
