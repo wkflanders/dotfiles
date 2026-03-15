@@ -99,6 +99,13 @@ $character"""
 # success_symbol = "[❯](#ffafc0)"
 # # success_symbol = "[❯](#e567dc)"
 
+[custom.vault]
+command = "vlt-status"
+when = "test -f ~/.vault-token"
+symbol = ""
+format = "[$symbol $output]($style) "
+shell = ["bash", "--nologin"]
+
 [aws]
 symbol = " "
 
