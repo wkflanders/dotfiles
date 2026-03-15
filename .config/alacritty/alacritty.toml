@@ -4,35 +4,53 @@
 # just make sure you don't allow "paste" unless you really know what you're doing
 [general]
 # import = ["~/.config/alacritty/anysphere.toml"]
-import = ["~/.config/alacritty/mellow.toml"]
+import = ["~/.config/alacritty/oldworld.toml"]
 # import = ["~/.config/alacritty/oldworld.toml"]
 live_config_reload = true
 
 [window]
-padding.x = 10
-padding.y = 10
+padding.x = 8
+padding.y = 8
 decorations = "buttonless"
 dynamic_title = true
 # opacity = 0.75
 # blur = true
 
-[terminal]
-osc52 = "OnlyCopy"
-
 [font]
-size = 18
-# size = 10  # For ss's
-offset = { x = 1, y = 13 }
+# For ss's
+# size = 10
+
+# MesloLGL typography
+# size = 18
+# offset = { x = 0, y = 6 }
 # glyph_offset = { x = 0, y = 0 }
-# offset = { x = 2, y = 2 }
+
+# DankMono typography
+# size = 20
+# offset = { x = 0, y = 8 }
+# glyph_offset = { x = 0, y = 2 }
+
+# Hack typography
+# size = 18
+# offset = { x = 1, y = 13 }
+
+# IoskeleyMono typography
+size = 18
+offset = { x = 0, y = 8 }
+glyph_offset = { x = 0, y = 0 }
 
 [font.normal]
+# family = "DankMono Nerd Font"
+
 # family = "BlexMono Nerd Font Propo"
 # style = "Regular"
 
 # family = "MesloLGL Nerd Font"
 
-family = "Hack Nerd Font"
+family = "IoskeleyMono Nerd Font"
+style = "Regular"
+
+# family = "Hack Nerd Font"
 
 # family = "Maple Mono NF"
 # style = "Regular"
@@ -49,11 +67,12 @@ family = "Hack Nerd Font"
 # family = "SauceCodePro Nerd Font"
 # style = "Medium"
 
-[colors.primary]
-background = "#131316"
+# [colors.primary]
+# background = "#131316"
 
 [env]
 TERM = "xterm-256color"
+TERM_PROGRAM = "alacritty"
 option_as_alt = "both"
 
 [[keyboard.bindings]]
@@ -280,7 +299,7 @@ mods = "Shift"
 chars = "\u001b\r"
 
 # Outside of tmux, send '__SUPER_S__' to open sesh fzf
-[[keyboard.bindings]]
-key = "S"
-mods = "Shift|Control|Alt"
-chars = "__SUPER_S__"
+# [[keyboard.bindings]]
+# key = "S"
+# mods = "Shift|Control|Alt"
+# chars = "__SUPER_S__"
