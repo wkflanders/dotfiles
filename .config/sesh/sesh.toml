@@ -40,9 +40,24 @@ path = "~/Developer/lattica/docs/lattica-protocol/"
 startup_command = "tmux rename-session 'WHITEPAPER-2'"
 
 [[session]]
-name = "├── VYPER LS"
-path = "~/Developer/lattica/vyper-language-server/"
-startup_command = "tmux rename-session 'VY-LS'"
+name = "├── vlt"
+path = "~/Developer/lattica/vlt/"
+startup_command = "tmux rename-session 'vlt'"
+
+[[session]]
+name = "├── RISK-ENGINE"
+path = "~/Developer/lattica/risk-engine/"
+startup_command = "tmux rename-session 'RISK-ENGINE'"
+
+[[session]]
+name = "│   ├── WARHORSE"
+path = "~/Developer/lattica/risk-engine/warhorse/"
+startup_command = "tmux rename-session 'WARHORSE'"
+
+[[session]]
+name = "│   ╰── QUOTE-ENGINE"
+path = "~/Developer/lattica/risk-engine/quote-engine/"
+startup_command = "tmux rename-session 'QUOTE-ENGINE'"
 
 [[session]]
 name = "├── CORE"
@@ -65,6 +80,11 @@ path = "~/Developer/lattica/dapp/rest-api/"
 startup_command = "tmux rename-session 'REST-API'"
 
 [[session]]
+name = "├── VYPER LS"
+path = "~/Developer/lattica/vyper-language-server/"
+startup_command = "tmux rename-session 'VY-LS'"
+
+[[session]]
 name = "├── pm"
 path = "~/Developer/lattica/pm/"
 startup_command = "tmux rename-session 'pm'"
@@ -78,6 +98,11 @@ startup_command = "tmux rename-session 'AMM'"
 name = "╰── CTF"
 path = "~/Developer/lattica/vy-ctf/"
 startup_command = "tmux rename-session ' CTF'"
+
+[[session]]
+name = "TSPROXY"
+# startup_command = "ssh rust-killer tmux new-session -A -s main"
+startup_command = "ssh tsproxy"
 
 [[session]]
 name = "UBERTRAGEN"
