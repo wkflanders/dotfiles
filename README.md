@@ -1,6 +1,6 @@
 # dotfiles
 
-![preview](assets/preview-blexmono.png)
+![preview](assets/preview-latest.png)
 
 Configs and dotfiles for neovim (lazyvim), alacritty,
 tmux + sesh, hammerspoon, and whatever other
