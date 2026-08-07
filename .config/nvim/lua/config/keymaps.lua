@@ -31,6 +31,14 @@ local function halfpage_then_center(key) -- key = "<C-d>" or "<C-u>"
   end
 end
 
+vim.keymap.set("i", "<M-n>", function()
+  vim.notify("got M-n")
+end)
+
+vim.keymap.set("i", "<M-e>", function()
+  vim.notify("got M-e")
+end)
+
 vim.keymap.set("n", "<C-d>", function()
   halfpage_then_center("<C-d>")
 end, { noremap = true, silent = true, desc = "Half-page down then center" })
@@ -38,3 +46,8 @@ end, { noremap = true, silent = true, desc = "Half-page down then center" })
 vim.keymap.set("n", "<C-u>", function()
   halfpage_then_center("<C-u>")
 end, { noremap = true, silent = true, desc = "Half-page up then center" })
+
+vim.keymap.set("n", "<M-H>", "<Cmd>vertical resize -5<CR>", { silent = true })
+vim.keymap.set("n", "<M-J>", "<Cmd>resize +5<CR>", { silent = true })
+vim.keymap.set("n", "<M-K>", "<Cmd>resize -5<CR>", { silent = true })
+vim.keymap.set("n", "<M-L>", "<Cmd>vertical resize +5<CR>", { silent = true })

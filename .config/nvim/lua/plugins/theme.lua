@@ -33,90 +33,67 @@
 ---------------------------------------
 -- THE HOLY TRINITY OF VISUAL HEAT
 ---------------------------------------
--- return {
---   "mellow-theme/mellow.nvim",
---   name = "mellow",
---   lazy = false,
---   priorty = 1000,
---   config = function()
---     vim.cmd.colorscheme("mellow")
---   end,
--- }
 
 return {
-  "dgox16/oldworld.nvim",
-  name = "oldworld",
+  "topazape/oldtale.nvim",
+  name = "oldtale",
   lazy = false,
   priority = 1000,
   config = function()
-    require("oldworld").setup({
-      variant = "default",
+    require("oldtale").setup({
       terminal_colors = true,
+      styles = {
+        comments = {},
+        keywords = {},
+        identifiers = {},
+        functions = {},
+        variables = {},
+        booleans = {},
+      },
       integrations = {
+        blink = false,
         cmp = true,
-        flash = true,
         gitsigns = true,
         lazy = true,
         lsp = true,
         markdown = true,
         mason = true,
         noice = true,
-        notify = true,
+        notify = false,
+        octo = false,
         rainbow_delimiters = true,
+        saga = false,
         snacks = true,
+        telescope = false,
         treesitter = true,
       },
+      highlight_overrides = {},
     })
-    vim.cmd.colorscheme("oldworld")
+
+    vim.cmd.colorscheme("oldtale")
   end,
 }
 
 -- return {
---   "topazape/oldtale.nvim",
---   name = "oldtale",
+--   "mellow-theme/mellow.nvim",
+--   name = "mellow",
 --   lazy = false,
---   priority = 1000,
+--   priorty = 1000,
 --   config = function()
---     require("oldtale").setup({
---       terminal_colors = true,
---       integrations = {
---         cmp = true,
---         gitsigns = true,
---         lazy = true,
---         lsp = true,
---         markdown = true,
---         mason = true,
---         noice = true,
---         notify = true,
---         rainbow_delimiters = true,
---         snacks = true,
---         treesitter = true,
---       },
---     })
---
---     vim.cmd.colorscheme("oldtale")
---
---     local bit = bit
---     local replacement = "#7aa7a3"
---
---     local function is_greenish(color)
---       local r = bit.band(bit.rshift(color, 16), 0xFF)
---       local g = bit.band(bit.rshift(color, 8), 0xFF)
---       local b = bit.band(color, 0xFF)
---       return g > r + 20 and g > b + 20
---     end
---
---     for _, group in ipairs(vim.fn.getcompletion("", "highlight")) do
---       local ok, hl = pcall(vim.api.nvim_get_hl, 0, { name = group, link = false })
---       if ok and hl and hl.fg and is_greenish(hl.fg) then
---         vim.api.nvim_set_hl(0, group, vim.tbl_extend("force", hl, { fg = replacement }))
---       end
---     end
---
---     vim.g.terminal_color_2 = replacement
---     vim.g.terminal_color_10 = replacement
+--     -- rainbow delimeters fix
+--     vim.g.mellow_highlight_overrides = {
+--       RainbowDelimiterRed = { fg = "#ea83a5", bg = "#161617" },
+--       RainbowDelimiterYellow = { fg = "#e6b99d", bg = "#161617" },
+--       RainbowDelimiterBlue = { fg = "#92a2d5", bg = "#161617" },
+--       RainbowDelimiterOrange = { fg = "#f5a191", bg = "#161617" },
+--       RainbowDelimiterGreen = { fg = "#90b99f", bg = "#161617" },
+--       RainbowDelimiterViolet = { fg = "#aca1cf", bg = "#161617" },
+--       RainbowDelimiterCyan = { fg = "#85b5ba", bg = "#161617" },
+--     }
+--     vim.cmd.colorscheme("mellow")
 --   end,
 -- }
+
 -- return {
 --   "ribru17/bamboo.nvim",
 --   lazy = false,

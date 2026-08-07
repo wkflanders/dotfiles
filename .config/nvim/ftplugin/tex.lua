@@ -163,7 +163,7 @@ vim.keymap.set("n", "<localleader>pm", edit_main, { buffer = true, desc = "Proje
 vim.keymap.set("n", "<localleader>bb", pick_bib, { buffer = true, desc = "Bib: open .bib" })
 vim.keymap.set("n", "<localleader>ff", latexindent_format, { buffer = true, desc = "Format: latexindent" })
 
--- which-key labels ------------------------------------------------------------
+-- which-key labels
 do
   local ok, wk = pcall(require, "which-key")
   if ok then

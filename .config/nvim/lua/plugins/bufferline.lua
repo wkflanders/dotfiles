@@ -3,18 +3,20 @@ return {
     "akinsho/bufferline.nvim",
     opts = function(_, opts)
       opts.options = opts.options or {}
+
       opts.options.always_show_bufferline = true
       opts.options.custom_filter = function(bufnr, _)
         local name = vim.api.nvim_buf_get_name(bufnr)
-        if name == nil or name == "" then
-          return false
-        end
-        return true
+        return name ~= nil and name ~= ""
       end
 
       opts.options.show_buffer_close_icons = false
       opts.options.show_close_icon = false
+      opts.options.modified_icon = "● "
       opts.options.separator_style = "thin"
+
+      -- optional: bring back lsp diagnostic markers too
+      opts.options.diagnostics = "nvim_lsp"
 
       opts.options.indicator = {
         style = "none",
@@ -34,8 +36,9 @@ return {
       opts.highlights.buffer_visible = {
         bg = normal_bg,
       }
-      opts.highlights.close_button_visible = {
+      opts.highlights.buffer_selected = {
         bg = normal_bg,
+        italic = false,
       }
 
       opts.highlights.separator = {

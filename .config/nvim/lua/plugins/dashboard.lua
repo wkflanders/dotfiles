@@ -1,4 +1,3 @@
--- lua/plugins/dashboard.lua
 return {
   {
     "folke/snacks.nvim",
@@ -18,8 +17,8 @@ return {
         vim.api.nvim_set_hl(0, "Dash9", { fg = "#e29fd2", bold = true })
         vim.api.nvim_set_hl(0, "Dash10", { fg = "#f099bf", bold = true })
 
-        vim.api.nvim_set_hl(0, "SnacksDashboardIcon", { fg = "#a9bdf5" })
-        vim.api.nvim_set_hl(0, "SnacksDashboardDesc", { fg = "#e29fd2" })
+        vim.api.nvim_set_hl(0, "SnacksDashboardIcon", { fg = "#e29fd2" })
+        vim.api.nvim_set_hl(0, "SnacksDashboardDesc", { fg = "#a9bdf5" })
         vim.api.nvim_set_hl(0, "SnacksDashboardKey", { fg = "#e5a1a1" })
       end
 
@@ -28,10 +27,23 @@ return {
         callback = set_hl,
       })
 
-      opts.dashboard.preset.keys = {
-        { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
-        { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
-        { icon = " ", key = "q", desc = "Quit", action = ":qa" },
+      opts.dashboard.preset = {
+        keys = {
+          { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
+          { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+          { icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
+          { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
+          {
+            icon = " ",
+            key = "c",
+            desc = "Config",
+            action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
+          },
+          { icon = " ", key = "s", desc = "Restore Session", section = "session" },
+          { icon = " ", key = "x", desc = "Lazy Extras", action = ":LazyExtras" },
+          { icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy" },
+          { icon = " ", key = "q", desc = "Quit", action = ":qa" },
+        },
       }
 
       opts.dashboard.sections = {

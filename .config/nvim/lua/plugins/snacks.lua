@@ -126,8 +126,7 @@ return {
     --     enabled = false,
     --   },
     --   chunk = {
-    --     -- enabled = true,
-    --     enabled = false,
+    --     enabled = true,
     --     char = {
     --       horizontal = "─",
     --       vertical = "│",
@@ -139,13 +138,23 @@ return {
     -- },
     picker = {
       win = {
+        -- keys = {
+        --   ["<Esc>"] = { "close", mode = { "n", "i" } },
+        -- },
         input = {
-          keys = {
-            ["<Esc>"] = { "close", mode = { "n", "i" } },
-          },
+          wo = { winblend = 0 },
+        },
+        preview = {
+          wo = { winblend = 0 },
+        },
+        list = {
+          wo = { winblend = 0 },
         },
       },
       sources = {
+        grep = {
+          cmd_args = { "--smart-case" },
+        },
         files = {
           hidden = true,
           layout = {

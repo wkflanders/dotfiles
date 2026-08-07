@@ -72,10 +72,49 @@ return {
         yamlls = {},
         ts_ls = {},
         ruff = { filetypes = { "python" } },
+
+        texlab = {
+          settings = {
+            texlab = {
+              inlayHints = {
+                labelReferences = false,
+                labelDefinitions = false,
+              },
+              experimental = {
+                labelDefinitionCommands = {
+                  "label",
+                  "thlabel",
+                },
+                labelReferenceCommands = {
+                  "ref",
+                  "eqref",
+                  "pageref",
+                  "autoref",
+                  "cref",
+                  "Cref",
+                  "vref",
+                  "Vref",
+                  "nameref",
+                  "thref",
+                },
+                labelDefinitionPrefixes = {
+                  { "thlabel", "th:" },
+                },
+                labelReferencePrefixes = {
+                  { "thref", "th:" },
+                },
+              },
+            },
+          },
+        },
+
         custom_elements_ls = false,
       })
       opts.setup = opts.setup or {}
       return opts
     end,
+    keys = {
+      { "<leader>rn", vim.lsp.buf.rename, desc = "LSP Rename" },
+    },
   },
 }

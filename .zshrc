@@ -23,6 +23,9 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
+# aws
+export AWS_PROFILE=wkflanders
+
 # direnv
 export DIRENV_LOG_FORMAT=""
 eval "$(direnv hook zsh)"
@@ -72,6 +75,8 @@ export FZF_DEFAULT_OPTS="
   --color=pointer:#e567dc,marker:#f14c4c,prompt:#228df2
 "
 
+# mellow fzf coloring
+
 # Created by `pipx` on 2025-06-08 14:04:57
 export PATH="$PATH:$HOME/.local/bin"
 
@@ -87,6 +92,9 @@ alias cd="z"
 
 # claude
 alias claude="${CLAUDE_BIN:-$HOME/.local/bin/claude}"
+alias ccode='headroom wrap claude --dangerously-skip-permissions'
+alias cpsh="claude-sync push"
+alias cpull="claude-sync pull"
 
 # bun completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
@@ -244,8 +252,8 @@ alias gss='git status'                  # Show the working tree status
 alias gwho='git shortlog -s -n | head'  # Show top contributors
 alias gcnt='git ls-files | wc -l'       # Count number of files in the repository
 alias lg='lazygit'                      # Open Lazygit interface
-alias grl='gh repo ls 956MB'            # List my repos on GitHub
-alias grlf='gh repo ls 956MB --fork'    # List my forked repos on GitHub
+alias grl='gh repo ls wkflanders'            # List my repos on GitHub
+alias grlf='gh repo ls wkflanders --fork'    # List my forked repos on GitHub
 
 # GitHub Copilot CLI function aliases
 exp() {
@@ -311,5 +319,20 @@ if [[ -o interactive ]] \
   && [[ "${TERM_PROGRAM:-}" == "alacritty" ]] \
   && [[ -z "${SSH_CONNECTION:-}" ]] \
   && [[ -z "${NVIM:-}" ]]; then
-  exec sesh connect HOME
+  if tmux has-session -t HOME 2>/dev/null; then
+    exec tmux attach-session -t HOME
+  else
+    exec sesh connect HOME
+  fi
 fi
+
+# pnpm
+export PNPM_HOME="/Users/williamflanders/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+esac
+# pnpm end
+
+export TELEGRAM_BOT_TOKEN="8277427884:AAElPnMcCGmuchgqbW95CUwu-mJ3bOGM8rU"
+export TELEGRAM_CHAT_ID="7245053068"

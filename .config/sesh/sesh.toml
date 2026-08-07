@@ -1,13 +1,9 @@
+#:schema https://github.com/joshmedeski/sesh/raw/main/sesh.schema.json
+
+dir_length = 1
+
 [default_session]
 preview_command = "eza --all --git --icons --color=always {}"
-# 
-# 󰹡
-# 󰍩
-# 󰒠
-# 
-# 󰢛
-# 
-# 󰣀
 
 [[session]]
 name = "HOME"
@@ -15,149 +11,49 @@ path = "~/"
 
 [[session]]
 name = "RYZEN9-7950X"
-# startup_command = "ssh rust-killer tmux new-session -A -s main"
-startup_command = "ssh ryzen9-7950x"
+startup_command = "sshr"
+
+[[session]]
+name = "TSPROXY"
+startup_command = "ssh tsproxy"
+
+[[session]]
+name = "VOYAGER-1"
+startup_command = "ssh voyager-1 tmux new-session -A -s main"
 
 [[session]]
 name = "PORTFOLIO"
 path = "~/Developer/portfolio/"
-# startup_command = "nvim"
 
 [[session]]
 name = "LATTICA"
 path = "~/Developer/lattica/"
-# startup_command = "tmux rename-window core && nvim"
-# windows = ["frontend", "polymorph", "amm", "vy-ctf"]
 
 [[session]]
-name = "├── WHITEPAPER-1"
-path = "~/Developer/lattica/docs/lending-on-pm/"
-startup_command = "tmux rename-session 'WHITEPAPER-1'"
-
-[[session]]
-name = "├── WHITEPAPER-2"
-path = "~/Developer/lattica/docs/lattica-protocol/"
-startup_command = "tmux rename-session 'WHITEPAPER-2'"
-
-[[session]]
-name = "├── vlt"
-path = "~/Developer/lattica/vlt/"
-startup_command = "tmux rename-session 'vlt'"
-
-[[session]]
-name = "├── RISK-ENGINE"
-path = "~/Developer/lattica/risk-engine/"
-startup_command = "tmux rename-session 'RISK-ENGINE'"
-
-[[session]]
-name = "│   ├── WARHORSE"
-path = "~/Developer/lattica/risk-engine/warhorse/"
-startup_command = "tmux rename-session 'WARHORSE'"
-
-[[session]]
-name = "│   ╰── QUOTE-ENGINE"
-path = "~/Developer/lattica/risk-engine/quote-engine/"
-startup_command = "tmux rename-session 'QUOTE-ENGINE'"
-
-[[session]]
-name = "├── CORE"
-path = "~/Developer/lattica/core/"
-startup_command = "tmux rename-session 'CORE'"
-
-[[session]]
-name = "├── DAPP"
-path = "~/Developer/lattica/dapp/"
-startup_command = "tmux rename-session 'dapp'"
-
-[[session]]
-name = "│   ├── FRONTEND"
-path = "~/Developer/lattica/dapp/frontend/"
-startup_command = "tmux rename-session 'FRONTEND'"
-
-[[session]]
-name = "│   ╰── REST-API"
-path = "~/Developer/lattica/dapp/rest-api/"
-startup_command = "tmux rename-session 'REST-API'"
-
-[[session]]
-name = "├── VYPER LS"
-path = "~/Developer/lattica/vyper-language-server/"
-startup_command = "tmux rename-session 'VY-LS'"
-
-[[session]]
-name = "├── pm"
-path = "~/Developer/lattica/pm/"
-startup_command = "tmux rename-session 'pm'"
-
-[[session]]
-name = "├── AMM"
-path = "~/Developer/lattica/amm/"
-startup_command = "tmux rename-session 'AMM'"
-
-[[session]]
-name = "╰── CTF"
-path = "~/Developer/lattica/vy-ctf/"
-startup_command = "tmux rename-session ' CTF'"
-
-[[session]]
-name = "TSPROXY"
-# startup_command = "ssh rust-killer tmux new-session -A -s main"
-startup_command = "ssh tsproxy"
+name = "HARVESTLOG"
+path = "~/Developer/harvestlog/"
 
 [[session]]
 name = "UBERTRAGEN"
 path = "~/Ubertragen/"
-# startup_command = "nvim"
 
 [[session]]
 name = "PHYT.FUN"
 path = "~/Developer/phyt.fun"
-# startup_command = "nvim"
 
 [[session]]
 name = "NEOVIM"
 path = "~/.config/nvim"
-# startup_command = "nvim"
 
 [[session]]
 name = "ANVIL"
 path = "~/Developer/lattica/"
 startup_command = "anvil"
 
-[[session]]
-name = "VOYAGER-1"
-startup_command = "ssh voyager-1 tmux new-session -A -s main"
+[[wildcard]]
+pattern = "~/Developer/lattica/**"
+startup_command = "sh -c 'tmux rename-session \"$(basename \"{}\" | tr \"[:lower:]\" \"[:upper:]\")\" >/dev/null 2>&1; clear; exec ${SHELL:-/bin/bash} -l'"
 
-# [[session]]
-# name = "󰣀 PM-PROM-GRAF"
-# startup_command = "ssh polymorph-pm-gr tmux new-session -A -s main"
-
-[[window]]
-name = "frontend"
-path = "~/Developer/lattica/frontend"
-startup_script = "nvim"
-
-[[window]]
-name = "polymorph"
-path = "~/Developer/lattica/polymorph"
-startup_script = "nvim"
-
-[[window]]
-name = "amm"
-path = "~/Developer/lattica/amm"
-startup_script = "nvim"
-
-[[window]]
-name = "vy-ctf"
-path = "~/Developer/lattica/vy-ctf/"
-startup_script = "nvim"
-
-[[window]]
-name = "anysphere"
-path = "~/Developer/anysphere-dark.nvim"
-startup_script = "nvim"
-
-[[window]]
-name = "nvim"
-path = "~/.config/nvim"
-startup_script = "nvim"
+[[wildcard]]
+pattern = "~/Developer/*"
+disable_startup_command = true

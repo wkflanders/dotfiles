@@ -1,13 +1,3 @@
---   t : text-only (not in math)
---   m : math-only (inline or display)
---   M : block math-only (display)
---   n : inline math-only
---   A : autosnippet
---   r : regex trigger
---   v : visual-only (selection)
---   w : word boundary (best-effort via wordTrig=true)
---   c : code block (best-effort)
-
 local ls = require("luasnip")
 local s = ls.snippet
 local sn = ls.snippet_node
@@ -18,9 +8,6 @@ local f = ls.function_node
 
 local unpack = table.unpack
 
--- -------------------------
--- Context helpers (math/text)
--- -------------------------
 local function has_vimtex()
   return vim.fn.exists("*vimtex#syntax#in_mathzone") == 1
 end
@@ -37,7 +24,6 @@ local function in_display_math()
     return false
   end
 
-  -- Heuristic for $$...$$ fences
   local line = vim.api.nvim_get_current_line()
   local row, col0 = unpack(vim.api.nvim_win_get_cursor(0))
   local col = col0 + 1
@@ -52,7 +38,6 @@ local function in_display_math()
     return true
   end
 
-  -- Search above/below for $$ fence (best-effort)
   local start = vim.fn.search("\\$\\$", "bnW")
   local finish = vim.fn.search("\\$\\$", "nW")
   if start > 0 and finish > 0 and start ~= finish then
@@ -71,7 +56,6 @@ local function in_text()
   return not in_math()
 end
 
--- Best-effort "code block" detector (mostly for markdown; harmless in tex)
 local function in_fenced_codeblock()
   local ft = vim.bo.filetype
   if ft ~= "markdown" and ft ~= "md" and ft ~= "vimwiki" and ft ~= "tex" and ft ~= "latex" then
@@ -88,7 +72,6 @@ local function in_fenced_codeblock()
   return (fence % 2 == 1)
 end
 
--- Selected text (VISUAL)
 local function get_visual(_, parent)
   local raw = parent and parent.snippet and parent.snippet.env and parent.snippet.env.SELECT_RAW
   if raw and raw ~= "" then
@@ -97,9 +80,7 @@ local function get_visual(_, parent)
   return sn(nil, i(1))
 end
 
--- visual-only condition
 local function has_visual_selection()
-  -- LuaSnip sets SELECT_RAW when expanded from visual selection
   local ok = pcall(function()
     return ls.session.current_nodes and true or true
   end)
@@ -109,9 +90,10 @@ local function has_visual_selection()
   return vim.fn.mode():match("[vV\22]") ~= nil
 end
 
--- -------------------------
--- Tiny DSL: build snippet from "options" flags
--- -------------------------
+local function escape_lua_pattern(str)
+  return str:gsub("([%(%)%.%%%+%-%*%?%[%]%^%$])", "%%%1")
+end
+
 local function make_snip(spec)
   local trig = spec.trig
   local dscr = spec.dscr or spec.name or trig
@@ -139,7 +121,6 @@ local function make_snip(spec)
     end
   end
 
-  -- visual-only gate if 'v' flag used
   if spec.opts and spec.opts:find("v", 1, true) then
     local prev = condition
     condition = function()
@@ -147,8 +128,10 @@ local function make_snip(spec)
     end
   end
 
+  local actual_trig = regTrig and trig or escape_lua_pattern(trig)
+
   local sopts = {
-    trig = trig,
+    trig = actual_trig,
     name = dscr,
     dscr = dscr,
     regTrig = regTrig,
@@ -172,65 +155,12 @@ local function push(spec)
   end
 end
 
--- helper: repeat the text of insert node idx
 local function rep(idx)
   return f(function(args)
     return args[1][1] or ""
   end, { idx })
 end
 
--- -------------------------
--- “Variables” (for ${GREEK} etc.)
--- -------------------------
-local GREEK = table.concat({
-  "alpha",
-  "beta",
-  "gamma",
-  "Gamma",
-  "delta",
-  "Delta",
-  "epsilon",
-  "varepsilon",
-  "zeta",
-  "theta",
-  "Theta",
-  "vartheta",
-  "iota",
-  "kappa",
-  "lambda",
-  "Lambda",
-  "sigma",
-  "Sigma",
-  "upsilon",
-  "Upsilon",
-  "omega",
-  "Omega",
-}, "|")
-
-local TRIG_FUNCS = table.concat({
-  "arcsin",
-  "sin",
-  "arccos",
-  "cos",
-  "arctan",
-  "tan",
-  "csc",
-  "sec",
-  "cot",
-}, "|")
-
-local HYP_FUNCS = table.concat({
-  "sinh",
-  "cosh",
-  "tanh",
-  "coth",
-}, "|")
-
--- -------------------------
--- Snippets (ported; no fmt/fmta anywhere)
--- -------------------------
-
--- Math mode helpers (text-only triggers)
 push({
   trig = "mk",
   opts = "tA",
@@ -261,13 +191,13 @@ push({
   },
 })
 
--- Text inside math
 push({
   trig = "text",
   opts = "mA",
   dscr = "\\text{...}",
   body = { t("\\text{"), i(1), t("}"), i(0) },
 })
+
 push({
   trig = '"',
   opts = "mA",
@@ -275,7 +205,6 @@ push({
   body = { t("\\text{"), i(1), t("}"), i(0) },
 })
 
--- Greek letters (math autos)
 local greek_map = {
   ["@a"] = "\\alpha",
   ["@b"] = "\\beta",
@@ -299,14 +228,13 @@ local greek_map = {
   ["@U"] = "\\Upsilon",
   ["@o"] = "\\omega",
   ["@O"] = "\\Omega",
-  ["ome"] = "\\omega",
-  ["Ome"] = "\\Omega",
+  ome = "\\omega",
+  Ome = "\\Omega",
 }
 for trig, repv in pairs(greek_map) do
   push({ trig = trig, opts = "mA", dscr = repv, body = { t(repv) } })
 end
 
--- Basic operations
 push({ trig = "sr", opts = "mA", body = { t("^{2}") } })
 push({ trig = "cb", opts = "mA", body = { t("^{3}") } })
 push({ trig = "rd", opts = "mA", body = { t("^{"), i(1), t("}"), i(0) } })
@@ -318,7 +246,7 @@ push({ trig = "ee", opts = "mA", body = { t("e^{ "), i(1), t(" }"), i(0) } })
 push({ trig = "invs", opts = "mA", body = { t("^{-1}") } })
 
 push({
-  trig = "([A-Za-z])(\\d)",
+  trig = "(%a)(%d)",
   opts = "rmA",
   regTrig = true,
   dscr = "Auto letter subscript: x2 -> x_{2}",
@@ -328,15 +256,17 @@ push({
   end),
 })
 
-push({
-  trig = "([^\\\\])(exp|log|ln)",
-  opts = "rmA",
-  regTrig = true,
-  dscr = "Auto add backslash: exp/log/ln",
-  body = f(function(_, snip)
-    return snip.captures[1] .. "\\" .. snip.captures[2]
-  end),
-})
+for _, fn_name in ipairs({ "exp", "log", "ln" }) do
+  push({
+    trig = "([^\\])(" .. fn_name .. ")",
+    opts = "rmA",
+    regTrig = true,
+    dscr = "Auto add backslash: " .. fn_name,
+    body = f(function(_, snip)
+      return snip.captures[1] .. "\\" .. snip.captures[2]
+    end),
+  })
+end
 
 push({ trig = "conj", opts = "mA", body = { t("^{*}") } })
 push({ trig = "Re", opts = "mA", body = { t("\\mathrm{Re}") } })
@@ -344,32 +274,30 @@ push({ trig = "Im", opts = "mA", body = { t("\\mathrm{Im}") } })
 push({ trig = "bf", opts = "mA", body = { t("\\mathbf{"), i(1), t("}"), i(0) } })
 push({ trig = "rm", opts = "mA", body = { t("\\mathrm{"), i(1), t("}"), i(0) } })
 
--- Linear algebra
 push({
-  trig = "([^\\\\])(det)",
+  trig = "([^\\])(det)",
   opts = "rmA",
   regTrig = true,
   body = f(function(_, snip)
     return snip.captures[1] .. "\\det"
   end),
 })
+
 push({ trig = "trace", opts = "mA", body = { t("\\mathrm{Tr}") } })
 
--- Accents / vectors (regex)
 local function oneletter_wrap(cmd)
   return f(function(_, snip)
     return ("\\" .. cmd .. "{" .. snip.captures[1] .. "}")
   end)
 end
-push({ trig = "([a-zA-Z])hat", opts = "rmA", regTrig = true, body = oneletter_wrap("hat") })
-push({ trig = "([a-zA-Z])bar", opts = "rmA", regTrig = true, body = oneletter_wrap("bar") })
-push({ trig = "([a-zA-Z])dot", opts = "rmA", regTrig = true, priority = -1, body = oneletter_wrap("dot") })
-push({ trig = "([a-zA-Z])ddot", opts = "rmA", regTrig = true, priority = 1, body = oneletter_wrap("ddot") })
-push({ trig = "([a-zA-Z])tilde", opts = "rmA", regTrig = true, body = oneletter_wrap("tilde") })
-push({ trig = "([a-zA-Z])und", opts = "rmA", regTrig = true, body = oneletter_wrap("underline") })
-push({ trig = "([a-zA-Z])vec", opts = "rmA", regTrig = true, body = oneletter_wrap("vec") })
+push({ trig = "([A-Za-z])hat", opts = "rmA", regTrig = true, body = oneletter_wrap("hat") })
+push({ trig = "([A-Za-z])bar", opts = "rmA", regTrig = true, body = oneletter_wrap("bar") })
+push({ trig = "([A-Za-z])dot", opts = "rmA", regTrig = true, priority = -1, body = oneletter_wrap("dot") })
+push({ trig = "([A-Za-z])ddot", opts = "rmA", regTrig = true, priority = 1, body = oneletter_wrap("ddot") })
+push({ trig = "([A-Za-z])tilde", opts = "rmA", regTrig = true, body = oneletter_wrap("tilde") })
+push({ trig = "([A-Za-z])und", opts = "rmA", regTrig = true, body = oneletter_wrap("underline") })
+push({ trig = "([A-Za-z])vec", opts = "rmA", regTrig = true, body = oneletter_wrap("vec") })
 
--- Non-regex versions
 push({ trig = "hat", opts = "mA", body = { t("\\hat{"), i(1), t("}"), i(0) } })
 push({ trig = "bar", opts = "mA", body = { t("\\bar{"), i(1), t("}"), i(0) } })
 push({ trig = "dot", opts = "mA", priority = -1, body = { t("\\dot{"), i(1), t("}"), i(0) } })
@@ -379,9 +307,8 @@ push({ trig = "tilde", opts = "mA", body = { t("\\tilde{"), i(1), t("}"), i(0) }
 push({ trig = "und", opts = "mA", body = { t("\\underline{"), i(1), t("}"), i(0) } })
 push({ trig = "vec", opts = "mA", body = { t("\\vec{"), i(1), t("}"), i(0) } })
 
--- More auto letter subscripts
 push({
-  trig = "([A-Za-z])_(\\d\\d)",
+  trig = "(%a)_(%d%d)",
   opts = "rmA",
   regTrig = true,
   body = f(function(_, snip)
@@ -390,7 +317,7 @@ push({
 })
 
 push({
-  trig = "\\\\hat{([A-Za-z])}(\\d)",
+  trig = "\\hat{([A-Za-z])}(%d)",
   opts = "rmA",
   regTrig = true,
   body = f(function(_, snip)
@@ -398,7 +325,7 @@ push({
   end),
 })
 push({
-  trig = "\\\\vec{([A-Za-z])}(\\d)",
+  trig = "\\vec{([A-Za-z])}(%d)",
   opts = "rmA",
   regTrig = true,
   body = f(function(_, snip)
@@ -406,7 +333,7 @@ push({
   end),
 })
 push({
-  trig = "\\\\mathbf{([A-Za-z])}(\\d)",
+  trig = "\\mathbf{([A-Za-z])}(%d)",
   opts = "rmA",
   regTrig = true,
   body = f(function(_, snip)
@@ -414,7 +341,6 @@ push({
   end),
 })
 
--- Common subscripts
 push({ trig = "xnn", opts = "mA", body = { t("x_{n}") } })
 push({ trig = "\\xii", opts = "mA", priority = 1, body = { t("x_{i}") } })
 push({ trig = "xjj", opts = "mA", body = { t("x_{j}") } })
@@ -423,7 +349,6 @@ push({ trig = "ynn", opts = "mA", body = { t("y_{n}") } })
 push({ trig = "yii", opts = "mA", body = { t("y_{i}") } })
 push({ trig = "yjj", opts = "mA", body = { t("y_{j}") } })
 
--- Symbols / relations
 local simple_math = {
   ooo = "\\infty",
   sum = "\\sum",
@@ -450,8 +375,8 @@ local simple_math = {
   ["=>"] = "\\implies",
   ["=<"] = "\\impliedby",
   ["and"] = "\\cap",
-  ["orr"] = "\\cup",
-  ["inn"] = "\\in",
+  orr = "\\cup",
+  inn = "\\in",
   notin = "\\not\\in",
   ["\\\\\\"] = "\\setminus",
   ["sub="] = "\\subseteq",
@@ -468,7 +393,6 @@ for trig, repv in pairs(simple_math) do
   push({ trig = trig, opts = "mA", dscr = repv, body = { t(repv) } })
 end
 
--- Structured versions of \sum and \prod (non-auto, options "m")
 push({
   trig = "\\sum",
   opts = "m",
@@ -519,49 +443,77 @@ push({
   body = { t("\\{ "), i(1), t(" \\}"), i(0) },
 })
 
--- Add backslash before Greek letters when typed bare
-push({
-  trig = "([^\\\\])(" .. GREEK .. ")",
-  opts = "rmA",
-  regTrig = true,
-  dscr = "Add backslash before Greek letters",
-  body = f(function(_, snip)
-    return snip.captures[1] .. "\\" .. snip.captures[2]
-  end),
-})
+for _, g in ipairs({
+  "alpha",
+  "beta",
+  "gamma",
+  "Gamma",
+  "delta",
+  "Delta",
+  "epsilon",
+  "varepsilon",
+  "zeta",
+  "theta",
+  "Theta",
+  "vartheta",
+  "iota",
+  "kappa",
+  "lambda",
+  "Lambda",
+  "sigma",
+  "Sigma",
+  "upsilon",
+  "Upsilon",
+  "omega",
+  "Omega",
+}) do
+  push({
+    trig = "([^\\])(" .. g .. ")",
+    opts = "rmA",
+    regTrig = true,
+    dscr = "Add backslash before Greek letters",
+    body = f(function(_, snip)
+      return snip.captures[1] .. "\\" .. snip.captures[2]
+    end),
+  })
+end
 
--- Trig funcs backslash + spacing
-push({
-  trig = "([^\\\\])(" .. TRIG_FUNCS .. ")",
-  opts = "rmA",
-  regTrig = true,
-  dscr = "Add backslash before trig funcs",
-  body = f(function(_, snip)
-    return snip.captures[1] .. "\\" .. snip.captures[2]
-  end),
-})
+for _, fn_name in ipairs({ "arcsin", "sin", "arccos", "cos", "arctan", "tan", "csc", "sec", "cot" }) do
+  push({
+    trig = "([^\\])(" .. fn_name .. ")",
+    opts = "rmA",
+    regTrig = true,
+    dscr = "Add backslash before trig funcs",
+    body = f(function(_, snip)
+      return snip.captures[1] .. "\\" .. snip.captures[2]
+    end),
+  })
+end
 
-push({
-  trig = "\\\\(" .. TRIG_FUNCS .. ")([A-Za-gi-z])",
-  opts = "rmA",
-  regTrig = true,
-  dscr = "Space after trig funcs (skips h for sinh/cosh)",
-  body = f(function(_, snip)
-    return "\\" .. snip.captures[1] .. " " .. snip.captures[2]
-  end),
-})
+for _, fn_name in ipairs({ "arcsin", "sin", "arccos", "cos", "arctan", "tan", "csc", "sec", "cot" }) do
+  push({
+    trig = "\\(" .. fn_name .. ")(%a)",
+    opts = "rmA",
+    regTrig = true,
+    dscr = "Space after trig funcs",
+    body = f(function(_, snip)
+      return "\\" .. snip.captures[1] .. " " .. snip.captures[2]
+    end),
+  })
+end
 
-push({
-  trig = "\\\\(" .. HYP_FUNCS .. ")([A-Za-z])",
-  opts = "rmA",
-  regTrig = true,
-  dscr = "Space after hyperbolic trig funcs",
-  body = f(function(_, snip)
-    return "\\" .. snip.captures[1] .. " " .. snip.captures[2]
-  end),
-})
+for _, fn_name in ipairs({ "sinh", "cosh", "tanh", "coth" }) do
+  push({
+    trig = "\\(" .. fn_name .. ")(%a)",
+    opts = "rmA",
+    regTrig = true,
+    dscr = "Space after hyperbolic trig funcs",
+    body = f(function(_, snip)
+      return "\\" .. snip.captures[1] .. " " .. snip.captures[2]
+    end),
+  })
+end
 
--- Derivatives & integrals
 push({
   trig = "par",
   opts = "m",
@@ -576,7 +528,7 @@ push({
 })
 
 push({
-  trig = "pa([A-Za-z])([A-Za-z])",
+  trig = "pa(%a)(%a)",
   opts = "rm",
   regTrig = true,
   body = f(function(_, snip)
@@ -587,7 +539,7 @@ push({
 push({ trig = "ddt", opts = "mA", body = { t("\\frac{d}{dt} ") } })
 
 push({
-  trig = "([^\\\\])int",
+  trig = "([^\\])int",
   opts = "rmA",
   regTrig = true,
   priority = -1,
@@ -635,7 +587,6 @@ push({
   body = { t("\\int_{-\\infty}^{\\infty} "), i(1), t(" \\, d"), i(2, "x"), t(" "), i(0) },
 })
 
--- Visual operations (VISUAL)
 push({
   trig = "U",
   opts = "mAv",
@@ -678,7 +629,6 @@ push({
   body = { t("\\sqrt{ "), d(1, get_visual), t(" }"), i(0) },
 })
 
--- Physics / QM / Chem
 push({ trig = "kbt", opts = "mA", body = { t("k_{B}T") } })
 push({ trig = "msun", opts = "mA", body = { t("M_{\\odot}") } })
 push({ trig = "dag", opts = "mA", body = { t("^{\\dagger}") } })
@@ -703,7 +653,6 @@ push({ trig = "cee", opts = "mA", body = { t("\\ce{ "), i(1), t(" }"), i(0) } })
 push({ trig = "he4", opts = "mA", body = { t("{}^{4}_{2}He ") } })
 push({ trig = "he3", opts = "mA", body = { t("{}^{3}_{2}He ") } })
 
--- FIXED: isotope snippet (no formatter)
 push({
   trig = "iso",
   opts = "mA",
@@ -719,7 +668,6 @@ push({
   },
 })
 
--- Environments (matrices etc.) - block math only (M) like your original "MA"
 local function env_snip(env)
   return {
     t("\\begin{"),
@@ -744,7 +692,6 @@ push({ trig = "cases", opts = "mA", body = env_snip("cases") })
 push({ trig = "align", opts = "mA", body = env_snip("align") })
 push({ trig = "array", opts = "mA", body = env_snip("array") })
 
--- Brackets
 push({ trig = "avg", opts = "mA", body = { t("\\langle "), i(1), t(" \\rangle "), i(0) } })
 push({ trig = "norm", opts = "mA", priority = 1, body = { t("\\lvert "), i(1), t(" \\rvert "), i(0) } })
 push({ trig = "Norm", opts = "mA", priority = 1, body = { t("\\lVert "), i(1), t(" \\rVert "), i(0) } })
@@ -758,7 +705,6 @@ push({ trig = "lr[", opts = "mA", body = { t("\\left[ "), i(1), t(" \\right] "),
 push({ trig = "lr|", opts = "mA", body = { t("\\left| "), i(1), t(" \\right| "), i(0) } })
 push({ trig = "lra", opts = "mA", body = { t("\\left< "), i(1), t(" \\right> "), i(0) } })
 
--- Taylor expansion (ported; repeats via rep helper)
 push({
   trig = "tayl",
   opts = "mA",
@@ -790,9 +736,8 @@ push({
   },
 })
 
--- Identity matrix generator: idenN
 push({
-  trig = "iden(\\d)",
+  trig = "iden(%d)",
   opts = "rmA",
   regTrig = true,
   dscr = "N x N identity matrix",

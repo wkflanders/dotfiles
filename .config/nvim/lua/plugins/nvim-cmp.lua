@@ -26,13 +26,15 @@ return {
         return true
       end
 
-      opts.mapping = vim.tbl_extend("force", opts.mapping, {
+      opts.mapping = vim.tbl_extend("force", opts.mapping or {}, {
         ["<CR>"] = cmp.mapping(function(fallback)
           fallback()
         end, { "i", "s" }),
+
         ["<S-CR>"] = cmp.mapping(function(fallback)
           fallback()
         end, { "i", "s" }),
+
         ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.confirm({ select = true })
@@ -45,16 +47,11 @@ return {
           end
         end, { "i", "s" }),
 
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_prev_item()
-          elseif luasnip.locally_jumpable(-1) then
-            luasnip.jump(-1)
-          else
-            fallback()
-          end
-        end, { "i", "s" }),
+        ["<M-n>"] = cmp.mapping.select_next_item(),
+        ["<M-e>"] = cmp.mapping.select_prev_item(),
       })
+
+      return opts
     end,
   },
 }
