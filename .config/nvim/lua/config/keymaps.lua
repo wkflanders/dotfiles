@@ -3,22 +3,13 @@
 -- Add any additional keymaps here
 vim.keymap.set("n", "<leader>q", "<cmd>qa<cr>", { desc = "Quit all" })
 
-local nav = require("utils.tmux-nav")
 local opts = { silent = true }
 
 -- Works in normal *and* terminal buffers
-vim.keymap.set({ "n", "t" }, "<C-h>", function()
-  nav.move("h")
-end, opts)
-vim.keymap.set({ "n", "t" }, "<C-j>", function()
-  nav.move("j")
-end, opts)
-vim.keymap.set({ "n", "t" }, "<C-k>", function()
-  nav.move("k")
-end, opts)
-vim.keymap.set({ "n", "t" }, "<C-l>", function()
-  nav.move("l")
-end, opts)
+vim.keymap.set({ "n", "t" }, "<C-h>", "<cmd>TmuxNavigateLeft<cr>", opts)
+vim.keymap.set({ "n", "t" }, "<C-j>", "<cmd>TmuxNavigateDown<cr>", opts)
+vim.keymap.set({ "n", "t" }, "<C-k>", "<cmd>TmuxNavigateUp<cr>", opts)
+vim.keymap.set({ "n", "t" }, "<C-l>", "<cmd>TmuxNavigateRight<cr>", opts)
 
 local function halfpage_then_center(key) -- key = "<C-d>" or "<C-u>"
   local before = vim.api.nvim_win_get_cursor(0)[1]
@@ -47,7 +38,20 @@ vim.keymap.set("n", "<C-u>", function()
   halfpage_then_center("<C-u>")
 end, { noremap = true, silent = true, desc = "Half-page up then center" })
 
-vim.keymap.set("n", "<M-H>", "<Cmd>vertical resize -5<CR>", { silent = true })
-vim.keymap.set("n", "<M-J>", "<Cmd>resize +5<CR>", { silent = true })
-vim.keymap.set("n", "<M-K>", "<Cmd>resize -5<CR>", { silent = true })
-vim.keymap.set("n", "<M-L>", "<Cmd>vertical resize +5<CR>", { silent = true })
+local function move_divider(dir)
+  local vertical = dir == "h" or dir == "l"
+  local after, before = vertical and "l" or "j", vertical and "h" or "k"
+  local cur = vim.fn.winnr()
+  local side = vim.fn.winnr(after) ~= cur and after or vim.fn.winnr(before) ~= cur and before
+  if side then
+    vim.cmd((vertical and "vertical " or "") .. "resize " .. (side == dir and "+5" or "-5"))
+  elseif vim.env.TMUX then
+    vim.fn.system({ "tmux", "resize-pane", "-" .. ({ h = "L", j = "D", k = "U", l = "R" })[dir], "5" })
+  end
+end
+
+for _, dir in ipairs({ "h", "j", "k", "l" }) do
+  vim.keymap.set({ "n", "t" }, "<M-" .. dir:upper() .. ">", function()
+    move_divider(dir)
+  end, { silent = true })
+end

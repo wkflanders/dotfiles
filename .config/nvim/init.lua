@@ -6,6 +6,7 @@ vim.g.python3_host_prog = vim.fn.expand("~/.config/nvim/python/env/bin/python3")
 vim.filetype.add({
   extension = {
     ctmpl = "gotmpl",
+    tf = "terraform",
     vy = "vyper",
     vyi = "vyper",
   },

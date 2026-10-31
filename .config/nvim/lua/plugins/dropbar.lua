@@ -20,6 +20,10 @@ return {
       },
     },
     config = function(_, opts)
+      local default_enable = require("dropbar.configs").opts.bar.enable
+      opts.bar.enable = function(buf, win, info)
+        return default_enable(buf, win, info) and vim.bo[buf].buftype ~= "terminal"
+      end
       require("dropbar").setup(opts)
 
       local normal = vim.api.nvim_get_hl(0, { name = "Normal" })

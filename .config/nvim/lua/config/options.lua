@@ -37,3 +37,7 @@ vim.api.nvim_create_autocmd("VimLeavePre", {
     vim.lsp.stop_client(vim.lsp.get_clients(), true)
   end,
 })
+
+if vim.fn.argc() == 1 and vim.fn.isdirectory(vim.fn.argv(0)) == 1 then
+  vim.fn.chdir(vim.fn.argv(0))
+end

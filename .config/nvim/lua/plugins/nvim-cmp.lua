@@ -1,6 +1,7 @@
 return {
   {
     "hrsh7th/nvim-cmp",
+    enabled = false,
     opts = function(_, opts)
       local has_words_before = function()
         local cursor = vim.api.nvim_win_get_cursor(0)

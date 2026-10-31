@@ -109,6 +109,11 @@ on-window-detected = [
     "layout h_accordion",
   ] },
 
+  { if = "test %{app-bundle-id} = com.anysphere.sand", run = [
+    "move-node-to-workspace C",
+    "layout h_accordion",
+  ] },
+
   { if = "test %{app-bundle-id} = com.openai.codex", run = [
     "move-node-to-workspace C",
     "layout h_accordion",

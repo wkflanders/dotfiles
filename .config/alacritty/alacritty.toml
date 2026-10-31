@@ -4,9 +4,9 @@
 # just make sure you don't allow "paste" unless you really know what you're doing
 [general]
 # import = ["~/.config/alacritty/anysphere.toml"]
-import = ["~/.config/alacritty/mellow.toml"]
+# import = ["~/.config/alacritty/mellow.toml"]
 # import = ["~/.config/alacritty/oldworld.toml"]
-# import = ["~/.config/alacritty/oldtale.toml"]
+import = ["~/.config/alacritty/oldtale.toml"]
 live_config_reload = true
 
 [window]
@@ -31,8 +31,8 @@ dynamic_title = true
 # glyph_offset = { x = 0, y = 2 }
 
 # Hack typography
-# size = 18
-# offset = { x = 1, y = 13 }
+# size = 14
+# offset = { x = 1, y = 14 }
 
 # IoskeleyMono typography
 # size = 18
@@ -40,24 +40,22 @@ dynamic_title = true
 # glyph_offset = { x = 0, y = 0 }
 
 # JetBrainsMono typography
-size = 14
-offset = { x = 0, y = 2 }
-glyph_offset = { x = 0, y = 0 }
+# size = 14
+# offset = { x = 0, y = 2 }
+# glyph_offset = { x = 0, y = 0 }
 
 # FiraCode typography
-# size = 16
-# offset = { x = 1, y = 4 }
-# glyph_offset = { x = 0, y = 0 }
+size = 16
+offset = { x = 0, y = 10 }
 
 # Suisse Int'l Mono
 # size = 17
 # offset = { x = 1, y = 2 }
 # glyph_offset = { x = 0, y = 0 }
 
-# GeistMono typography
+# SauceCodePro typography
 # size = 16
-# offset = { x = 0, y = 6 }
-# glyph_offset = { x = 0, y = 0 }
+# offset = { x = 2, y = 8 }
 
 # Space Mono typography
 # size = 18
@@ -65,8 +63,8 @@ glyph_offset = { x = 0, y = 0 }
 # glyph_offset = { x = 0, y = 0 }
 
 # BlexMono Typography
-# size = 16
-# offset = { x = 0, y = 3 }
+# size = 14
+# offset = { x = 0, y = 2 }
 # glyph_offset = { x = 0, y = 0 }
 
 # GeistMono typography
@@ -78,6 +76,9 @@ glyph_offset = { x = 0, y = 0 }
 # style = "Regular"
 
 # family = "DankMono Nerd Font"
+
+# family = "SFMono Nerd Font"
+# style = "Regular"
 
 # family = "BlexMono Nerd Font"
 # style = "Regular"
@@ -98,7 +99,7 @@ glyph_offset = { x = 0, y = 0 }
 # family = "IoskeleyMono Nerd Font"
 # style = "Regular"
 
-# family = "Hack Nerd Font"
+family = "Hack Nerd Font"
 
 # family = "Maple Mono NF"
 # style = "Regular"
@@ -106,8 +107,8 @@ glyph_offset = { x = 0, y = 0 }
 # family = "MonoLisa"
 # style = "MonoLisa"
 
-family = "JetBrainsMono Nerd Font"
-style = "Light"
+# family = "JetBrainsMono Nerd Font"
+# style = "Light"
 
 # family = "CommitMono Nerd Font"
 # style = "Regular"
@@ -116,7 +117,7 @@ style = "Light"
 # style = "Regular"
 
 # family = "SauceCodePro Nerd Font"
-# style = "Medium"
+# style = "Light"
 
 # [colors.primary]
 # background = "#131316"

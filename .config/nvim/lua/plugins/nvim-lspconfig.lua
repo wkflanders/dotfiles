@@ -69,10 +69,14 @@ return {
         marksman = {},
         pyright = { single_file_support = true, filetypes = { "python" } },
         tailwindcss = {},
+        terraformls = {
+          on_init = function(client)
+            client.server_capabilities.semanticTokensProvider = nil
+          end,
+        },
         yamlls = {},
         ts_ls = {},
         ruff = { filetypes = { "python" } },
-
         texlab = {
           settings = {
             texlab = {

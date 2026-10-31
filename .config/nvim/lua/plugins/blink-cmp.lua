@@ -1,6 +1,62 @@
+local has_words_before = function()
+  local cursor = vim.api.nvim_win_get_cursor(0)
+  local line, col = cursor[1], cursor[2]
+  if col == 0 then
+    return false
+  end
+  local text = vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]
+  return text:sub(col, col):match("%s") == nil
+end
+
 return {
   "saghen/blink.cmp",
-  enabled = false,
+  opts = {
+    enabled = function()
+      local bt = vim.api.nvim_get_option_value("buftype", { buf = 0 })
+      if bt == "prompt" or bt == "nofile" then
+        return false
+      end
+      if vim.bo.filetype == "oil" then
+        return false
+      end
+      return true
+    end,
+    keymap = {
+      ["<CR>"] = false,
+      ["<Tab>"] = {
+        "select_and_accept",
+        "snippet_forward",
+        function(cmp)
+          if has_words_before() then
+            return cmp.show()
+          end
+        end,
+        "fallback",
+      },
+      ["<M-n>"] = { "select_next" },
+      ["<M-e>"] = { "select_prev" },
+    },
+    completion = {
+      menu = {
+        border = "none",
+        winblend = 0,
+        draw = {
+          columns = { { "kind_icon" }, { "label" }, { "label_description" } },
+        },
+      },
+    },
+    fuzzy = {
+      max_typos = function(keyword)
+        return vim.bo.filetype == "solidity" and 0 or math.floor(#keyword / 4)
+      end,
+    },
+    sources = {
+      per_filetype = {
+        solidity = { "lsp", "path", "snippets" },
+      },
+    },
+    cmdline = { enabled = false },
+  },
   -- dependencies = {
   --   "krissen/blink-cmp-bibtex",
   -- },

@@ -2,7 +2,8 @@ return {
   "nvim-lualine/lualine.nvim",
   opts = function(_, opts)
     opts.options = opts.options or {}
-    opts.options.globalstatus = false
+    opts.options.globalstatus = true
+    opts.options.ignore_focus = { "oil" }
     opts.options.disabled_filetypes = opts.options.disabled_filetypes or {}
 
     local df = opts.options.disabled_filetypes

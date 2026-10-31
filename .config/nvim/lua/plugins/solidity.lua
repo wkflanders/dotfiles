@@ -19,6 +19,7 @@ return {
       opts.ensure_installed = opts.ensure_installed or {}
       local want = {
         "nomicfoundation-solidity-language-server",
+        "vscode-solidity-server",
       }
       for _, pkg in ipairs(want) do
         if not vim.tbl_contains(opts.ensure_installed, pkg) then
@@ -42,7 +43,6 @@ return {
         return true
       end
       opts.servers.solidity = false
-      opts.servers.solidity_ls = false
       opts.servers.vscode_solidity_server = false
 
       local roots = util.root_pattern(
@@ -54,12 +54,62 @@ return {
         ".git"
       )
 
+      local root_dir = function(bufnr, on_dir)
+        local fname = vim.api.nvim_buf_get_name(bufnr)
+        on_dir(roots(fname) or vim.fs.dirname(fname))
+      end
+
       opts.servers.solidity_ls_nomicfoundation = {
         cmd = { "nomicfoundation-solidity-language-server", "--stdio" },
         filetypes = { "solidity" },
-        root_dir = function(fname)
-          return roots(fname) or vim.fs.dirname(fname)
+        root_dir = root_dir,
+        on_init = function(client)
+          client.server_capabilities.completionProvider = nil
         end,
+      }
+
+      local compiler_cache = vim.fn.stdpath("cache") .. "/solidity"
+      vim.fn.mkdir(compiler_cache, "p")
+
+      -- Nomic handles diagnostics/navigation; this server supplies completions for unfinished code.
+      opts.servers.solidity_ls = {
+        root_dir = root_dir,
+        init_options = compiler_cache,
+        settings = {
+          solidity = {
+            defaultCompiler = "embedded",
+            enabledAsYouTypeCompilationErrorCheck = false,
+            linter = "",
+          },
+        },
+        on_init = function(client)
+          local capabilities = client.server_capabilities
+          client.server_capabilities = {
+            completionProvider = capabilities.completionProvider,
+            textDocumentSync = capabilities.textDocumentSync,
+            positionEncoding = capabilities.positionEncoding,
+            workspace = capabilities.workspace,
+          }
+
+          -- These completion lists must refresh as unfinished expressions change.
+          local request = client.request
+          client.request = function(self, method, params, handler, bufnr)
+            if method == "textDocument/completion" and type(handler) == "function" then
+              local callback = handler
+              handler = function(err, result, ctx, config)
+                if result then
+                  result = result.items and result or { items = result }
+                  result.isIncomplete = true
+                end
+                return callback(err, result, ctx, config)
+              end
+            end
+            return request(self, method, params, handler, bufnr)
+          end
+        end,
+        handlers = {
+          ["textDocument/publishDiagnostics"] = function() end,
+        },
       }
 
       -- ensure *.sol gets the right filetype
@@ -73,7 +123,6 @@ return {
         end,
       })
 
-      -- force-start if not attached (Neovim 0.10+ APIs)
       vim.api.nvim_create_autocmd("FileType", {
         group = vim.api.nvim_create_augroup("SolidityForceLsp", { clear = true }),
         pattern = "solidity",
@@ -87,8 +136,7 @@ return {
             end
           end
           if not attached then
-            -- use the user-facing command; works across LazyVim setups
-            vim.cmd("LspStart solidity_ls_nomicfoundation")
+            vim.lsp.enable("solidity_ls_nomicfoundation")
           end
         end,
       })

@@ -1,6 +1,6 @@
 -- Yes its cancer how I did this - will rewrite some other day
 
--- return {}
+return {}
 
 -- return {
 --   dir = "~/Developer/anysphere-dark.nvim/",
@@ -29,50 +29,132 @@
 --     vim.cmd.colorscheme("anysphere")
 --   end,
 -- }
+--
 
+-- return {
+--   "wtfox/jellybeans.nvim",
+--   name = "jellybeans",
+--   lazy = false,
+--   priority = 1000,
+--   config = function()
+--     vim.cmd.colorscheme("jellybeans")
+--   end,
+-- }
+
+-- return {
+--   -- "twerth/ir_black",
+--   -- "kemiller/vim-ir_black",
+--   "promisedlandt/vim-colors-ir_black",
+--   lazy = false,
+--   priority = 1000,
+--   config = function()
+--     vim.cmd.colorscheme("ir_black")
+--   end,
+-- }
+
+-- return {
+--   "tanmaymanojgandhi/circadia",
+--   lazy = false,
+--   priority = 1000,
+--   init = function(plugin)
+--     local port_path = vim.fs.joinpath(plugin.dir, "ports", "neovim")
+--     local lua_path = vim.fs.joinpath(port_path, "lua", "?.lua")
+--     local lua_init = vim.fs.joinpath(port_path, "lua", "?", "init.lua")
+--
+--     package.path = package.path .. ";" .. lua_path .. ";" .. lua_init
+--
+--     local colors_dir = vim.fs.joinpath(vim.fn.stdpath("data"), "circadia_colors", "colors")
+--     vim.fn.mkdir(colors_dir, "p")
+--
+--     local variants = {
+--       ["circadia-dark"] = [[
+--         vim.o.background = "dark"
+--         require("circadia").setup()
+--       ]],
+--       ["circadia-light"] = [[
+--         vim.o.background = "light"
+--         require("circadia").setup()
+--       ]],
+--     }
+--
+--     for name, code in pairs(variants) do
+--       local file = vim.fs.joinpath(colors_dir, name .. ".lua")
+--       local f = io.open(file, "w")
+--       if f then
+--         f:write(code)
+--         f:close()
+--       end
+--     end
+--
+--     vim.opt.rtp:prepend(vim.fs.joinpath(vim.fn.stdpath("data"), "circadia_colors"))
+--   end,
+--   config = function()
+--     vim.cmd.colorscheme("circadia-dark") -- or "circadia-light"
+--   end,
+-- }
+
+-- return {
+--   "wtfox/jellybeans.nvim",
+--   name = "jellybeans",
+--   lazy = false,
+--   priority = 1000,
+--   config = function()
+--     vim.cmd.colorscheme("jellybeans")
+--   end,
+-- }
+
+-- return {
+--   "bluz71/vim-moonfly-colors",
+--   name = "moonfly",
+--   lazy = false,
+--   priority = 1000,
+--   config = function()
+--     vim.cmd.colorscheme("moonfly")
+--   end,
+-- }
 ---------------------------------------
 -- THE HOLY TRINITY OF VISUAL HEAT
 ---------------------------------------
 
-return {
-  "topazape/oldtale.nvim",
-  name = "oldtale",
-  lazy = false,
-  priority = 1000,
-  config = function()
-    require("oldtale").setup({
-      terminal_colors = true,
-      styles = {
-        comments = {},
-        keywords = {},
-        identifiers = {},
-        functions = {},
-        variables = {},
-        booleans = {},
-      },
-      integrations = {
-        blink = false,
-        cmp = true,
-        gitsigns = true,
-        lazy = true,
-        lsp = true,
-        markdown = true,
-        mason = true,
-        noice = true,
-        notify = false,
-        octo = false,
-        rainbow_delimiters = true,
-        saga = false,
-        snacks = true,
-        telescope = false,
-        treesitter = true,
-      },
-      highlight_overrides = {},
-    })
-
-    vim.cmd.colorscheme("oldtale")
-  end,
-}
+-- return {
+--   "topazape/oldtale.nvim",
+--   name = "oldtale",
+--   lazy = false,
+--   priority = 1000,
+--   config = function()
+--     require("oldtale").setup({
+--       terminal_colors = true,
+--       styles = {
+--         comments = {},
+--         keywords = {},
+--         identifiers = {},
+--         functions = {},
+--         variables = {},
+--         booleans = {},
+--       },
+--       integrations = {
+--         blink = false,
+--         cmp = true,
+--         gitsigns = true,
+--         lazy = true,
+--         lsp = true,
+--         markdown = true,
+--         mason = true,
+--         noice = true,
+--         notify = false,
+--         octo = false,
+--         rainbow_delimiters = true,
+--         saga = false,
+--         snacks = true,
+--         telescope = false,
+--         treesitter = true,
+--       },
+--       highlight_overrides = {},
+--     })
+--
+--     vim.cmd.colorscheme("oldtale")
+--   end,
+-- }
 
 -- return {
 --   "mellow-theme/mellow.nvim",

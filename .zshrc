@@ -23,9 +23,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
-# aws
-export AWS_PROFILE=wkflanders
-
 # direnv
 export DIRENV_LOG_FORMAT=""
 eval "$(direnv hook zsh)"
@@ -326,13 +323,15 @@ if [[ -o interactive ]] \
   fi
 fi
 
+export TELEGRAM_BOT_TOKEN="8277427884:AAElPnMcCGmuchgqbW95CUwu-mJ3bOGM8rU"
+export TELEGRAM_CHAT_ID="7245053068"
+alias update-lattica="bash ~/Developer/lattica/update-lattica.sh"
+export NODE_AUTH_TOKEN=$(gh auth token) 
+
 # pnpm
-export PNPM_HOME="/Users/williamflanders/Library/pnpm"
+export PNPM_HOME='/Users/williamflanders/Library/pnpm'
 case ":$PATH:" in
-  *":$PNPM_HOME/bin:"*) ;;
+  ":$PNPM_HOME/bin:"*) ;;
   *) export PATH="$PNPM_HOME/bin:$PATH" ;;
 esac
 # pnpm end
-
-export TELEGRAM_BOT_TOKEN="8277427884:AAElPnMcCGmuchgqbW95CUwu-mJ3bOGM8rU"
-export TELEGRAM_CHAT_ID="7245053068"

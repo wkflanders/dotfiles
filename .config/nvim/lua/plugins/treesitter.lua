@@ -18,7 +18,6 @@ return {
       "lua",
       "markdown",
       "markdown_inline",
-      "nix",
       "nginx",
       "python",
       "regex",

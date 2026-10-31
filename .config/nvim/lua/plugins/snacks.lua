@@ -1,5 +1,27 @@
+local function term_nav(key, cmd)
+  return {
+    key,
+    function(self)
+      return self:is_floating() and key or "<cmd>" .. cmd .. "<cr>"
+    end,
+    expr = true,
+    mode = "t",
+  }
+end
+
 return {
   "folke/snacks.nvim",
+  init = function()
+    vim.api.nvim_create_autocmd("ColorScheme", {
+      callback = function()
+        local util = require("snacks.util")
+        local fg, bg = util.color("Normal"), util.color("Normal", "bg")
+        if fg and bg then
+          vim.api.nvim_set_hl(0, "SnacksIndentScope", { fg = util.blend(fg, bg, 0.6) })
+        end
+      end,
+    })
+  end,
   keys = {
     {
       "<leader>sL",
@@ -107,6 +129,17 @@ return {
   opts = {
     explorer = { enabled = false },
     dashboard = { enabled = true },
+    terminal = {
+      win = {
+        wo = { winbar = "" },
+        keys = {
+          nav_h = term_nav("<C-h>", "TmuxNavigateLeft"),
+          nav_j = term_nav("<C-j>", "TmuxNavigateDown"),
+          nav_k = term_nav("<C-k>", "TmuxNavigateUp"),
+          nav_l = term_nav("<C-l>", "TmuxNavigateRight"),
+        },
+      },
+    },
     indent = {
       indent = { enabled = false },
       chunk = { enabled = false },
@@ -125,16 +158,16 @@ return {
     --   indent = {
     --     enabled = false,
     --   },
-    --   chunk = {
-    --     enabled = true,
-    --     char = {
-    --       horizontal = "─",
-    --       vertical = "│",
-    --       corner_top = "╭",
-    --       corner_bottom = "╰",
-    --       arrow = "─",
-    --     },
+    -- chunk = {
+    --   enabled = true,
+    --   char = {
+    --     horizontal = "─",
+    --     vertical = "│",
+    --     corner_top = "╭",
+    --     corner_bottom = "╰",
+    --     arrow = "─",
     --   },
+    -- },
     -- },
     picker = {
       win = {

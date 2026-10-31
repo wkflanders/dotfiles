@@ -1,15 +1,26 @@
 return {
   "vague2k/vague.nvim",
   name = "vague",
-  -- lazy = false,
-  -- priority = 1000,
-  lazy = true,
+  lazy = false,
+  priority = 1000,
   config = function()
     require("vague").setup({
-      -- transparent = true, -- don't set background
+      transparent = true, -- don't set background
       -- disable bold/italic globally in `style`
       -- bold = true,
-      -- italic = false,
+      italic = false,
+      on_highlights = function(hl)
+        hl.BlinkCmpMenu = { fg = "#cccccc", bg = "#202020" }
+        hl.BlinkCmpMenuSelection = { bg = "#2c2c2c" }
+        hl.BlinkCmpLabel = { fg = "#cccccc" }
+        hl.BlinkCmpLabelMatch = { fg = "#00a6c0" }
+        hl.BlinkCmpLabelDetail = { fg = "#a0a0a0" }
+        hl.BlinkCmpLabelDescription = { fg = "#a0a0a0" }
+        hl.BlinkCmpScrollBarGutter = { bg = "#202020" }
+        hl.BlinkCmpScrollBarThumb = { bg = "#505050" }
+        hl["@lsp.type.variable"] = {}
+        hl["@lsp.type.property"] = {}
+      end,
       -- style = {
       --   -- "none" is the same thing as default. But "italic" and "bold" are also valid options
       --   boolean = "bold",
@@ -44,24 +55,24 @@ return {
       --       match = "bold",
       --       match_fuzzy = "bold",
       --     },
-      --     dashboard = {
-      --       footer = "italic",
-      --     },
-      --     lsp = {
-      --       diagnostic_error = "bold",
-      --       diagnostic_hint = "none",
-      --       diagnostic_info = "italic",
-      --       diagnostic_ok = "none",
-      --       diagnostic_warn = "bold",
-      --     },
-      --     neotest = {
-      --       focused = "bold",
-      --       adapter_name = "bold",
-      --     },
-      --     telescope = {
-      --       match = "bold",
-      --     },
-      --   },
+      -- dashboard = {
+      --   footer = "italic",
+      -- },
+      -- lsp = {
+      --   diagnostic_error = "bold",
+      --   diagnostic_hint = "none",
+      --   diagnostic_info = "italic",
+      --   diagnostic_ok = "none",
+      --   diagnostic_warn = "bold",
+      -- },
+      -- neotest = {
+      --   focused = "bold",
+      --   adapter_name = "bold",
+      -- },
+      -- telescope = {
+      --   match = "bold",
+      -- },
+      -- },
       --
       --   -- Override highlights or add new highlights
       --   on_highlights = function(highlights, colors) end,
@@ -93,16 +104,16 @@ return {
       --   delta = "#f3be7c",
       -- },
     })
-    -- vim.api.nvim_set_hl(0, "Normal", { bg = "#141415" })
-    -- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#141415" })
-    -- vim.api.nvim_set_hl(0, "NormalNC", { bg = "#141415" })
-    -- vim.cmd.colorscheme("vague")
-    -- vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#141415", bg = "#141415" })
-    -- vim.api.nvim_set_hl(0, "SnacksNormal", { bg = "#141415" })
-    -- vim.api.nvim_set_hl(0, "SnacksNormalNC", { bg = "#141415" })
-    -- vim.api.nvim_set_hl(0, "SnacksBorder", { bg = "#141415", fg = "#141415" })
-    -- vim.api.nvim_set_hl(0, "SnacksPanelBorder", { bg = "#141415", fg = "#141415" })
-    -- vim.opt.signcolumn = "no"
-    -- vim.opt.foldcolumn = "0"
+    vim.api.nvim_set_hl(0, "Normal", { bg = "#141415" })
+    vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#141415" })
+    vim.api.nvim_set_hl(0, "NormalNC", { bg = "#141415" })
+    vim.cmd.colorscheme("vague")
+    vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#141415", bg = "#141415" })
+    vim.api.nvim_set_hl(0, "SnacksNormal", { bg = "#141415" })
+    vim.api.nvim_set_hl(0, "SnacksNormalNC", { bg = "#141415" })
+    vim.api.nvim_set_hl(0, "SnacksBorder", { bg = "#141415", fg = "#141415" })
+    vim.api.nvim_set_hl(0, "SnacksPanelBorder", { bg = "#141415", fg = "#141415" })
+    vim.opt.signcolumn = "no"
+    vim.opt.foldcolumn = "0"
   end,
 }
